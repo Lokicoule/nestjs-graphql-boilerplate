@@ -1,0 +1,93 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/fdo-gateway/src",
+  "monorepo": true,
+  "root": "apps/fdo-gateway",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/fdo-gateway/tsconfig.app.json"
+  },
+  "projects": {
+    "fdo-gateway": {
+      "type": "application",
+      "root": "apps/fdo-gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/fdo-gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fdo-gateway/tsconfig.app.json"
+      }
+    },
+    "fdo-customer": {
+      "type": "application",
+      "root": "apps/fdo-customer",
+      "entryFile": "main",
+      "sourceRoot": "apps/fdo-customer/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fdo-customer/tsconfig.app.json"
+      }
+    },
+    "fdo-order": {
+      "type": "application",
+      "root": "apps/fdo-order",
+      "entryFile": "main",
+      "sourceRoot": "apps/fdo-order/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fdo-order/tsconfig.app.json"
+      }
+    },
+    "fdo-product": {
+      "type": "application",
+      "root": "apps/fdo-product",
+      "entryFile": "main",
+      "sourceRoot": "apps/fdo-product/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fdo-product/tsconfig.app.json"
+      }
+    },
+    "fdo-db": {
+      "type": "library",
+      "root": "libs/fdo-db",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-db/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-db/tsconfig.lib.json"
+      }
+    },
+    "fdo-database": {
+      "type": "library",
+      "root": "libs/fdo-database",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-database/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-database/tsconfig.lib.json"
+      }
+    },
+    "fdo-graphql": {
+      "type": "library",
+      "root": "libs/fdo-graphql",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-graphql/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-graphql/tsconfig.lib.json"
+      }
+    },
+    "fdo-logger": {
+      "type": "library",
+      "root": "libs/fdo-logger",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-logger/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-logger/tsconfig.lib.json"
+      }
+    },
+    "fdo-service": {
+      "type": "library",
+      "root": "libs/fdo-service",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-service/tsconfig.lib.json"
+      }
+    }
+  }
+}

@@ -1,10 +1,7 @@
 import { Module } from '@nestjs/common';
-import { FdoCustomerController } from './fdo-customer.controller';
-import { FdoCustomerService } from './fdo-customer.service';
+import { PresentationModule } from './presentation/presentation.module';
 
 @Module({
-  imports: [],
-  controllers: [FdoCustomerController],
-  providers: [FdoCustomerService],
+  imports: [PresentationModule],
 })
 export class FdoCustomerModule {}

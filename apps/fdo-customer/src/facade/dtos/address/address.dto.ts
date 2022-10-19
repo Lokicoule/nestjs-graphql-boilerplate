@@ -1,16 +1,9 @@
-import { Dto, DtoProps } from '@lib/fdo-graphql';
+import { DtoModel } from '@lib/fdo-graphql';
 import { Field, ObjectType } from '@nestjs/graphql';
-
-type AddressDtoProps = {
-  street?: string;
-  city: string;
-  state: string;
-  zip: string;
-  country: string;
-} & DtoProps;
+import { AddressDtoBuilder } from './address.dto.builder';
 
 @ObjectType()
-export class AddressDto extends Dto {
+export class AddressDto extends DtoModel {
   @Field(() => String, { name: 'street', nullable: true })
   private _street?: string;
 
@@ -20,20 +13,19 @@ export class AddressDto extends Dto {
   @Field(() => String, { name: 'state' })
   private _state: string;
 
-  @Field(() => String, { name: 'zip' })
-  private _zip: string;
+  @Field(() => String, { name: 'zipCode' })
+  private _zipCode: string;
 
   @Field(() => String, { name: 'country' })
   private _country: string;
 
-  constructor(props: AddressDtoProps) {
-    super(props);
-    const { city, state, zip, country, street } = props;
-    if (Boolean(street)) this._street = street;
-    this._city = city;
-    this._state = state;
-    this._zip = zip;
-    this._country = country;
+  constructor(builder: AddressDtoBuilder) {
+    super(builder);
+    this._street = builder.street;
+    this._city = builder.city;
+    this._state = builder.state;
+    this._zipCode = builder.zipCode;
+    this._country = builder.country;
   }
 
   public get street(): string {
@@ -48,8 +40,8 @@ export class AddressDto extends Dto {
     return this._state;
   }
 
-  public get zip(): string {
-    return this._zip;
+  public get zipCode(): string {
+    return this._zipCode;
   }
 
   public get country(): string {

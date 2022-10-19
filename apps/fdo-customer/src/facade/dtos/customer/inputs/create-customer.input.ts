@@ -1,5 +1,5 @@
 import { Field, InputType } from '@nestjs/graphql';
-import { CreateAddressInput } from './create-address.input';
+import { CreateAddressInput } from '../../address/inputs/create-address.input';
 
 @InputType()
 export class CreateCustomerInput {

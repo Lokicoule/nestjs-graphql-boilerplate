@@ -1,9 +1,9 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { CustomerDto } from '../../../facade/dtos/inputs/customer.dto';
-import { CreateCustomerAddressInput } from '../../../facade/dtos/inputs/inputs/create-customer-address.input';
-import { CreateCustomerInput } from '../../../facade/dtos/inputs/inputs/create-customer.input';
-import { UpdateCustomerAddressInput } from '../../../facade/dtos/inputs/inputs/update-customer-address.input';
-import { UpdateCustomerInput } from '../../../facade/dtos/inputs/inputs/update-customer.input';
+import { CustomerDto } from '../../../facade/dtos/customer/customer.dto';
+import { CreateCustomerAddressInput } from '../../../facade/dtos/customer/inputs/create-customer-address.input';
+import { CreateCustomerInput } from '../../../facade/dtos/customer/inputs/create-customer.input';
+import { UpdateCustomerAddressInput } from '../../../facade/dtos/customer/inputs/update-customer-address.input';
+import { UpdateCustomerInput } from '../../../facade/dtos/customer/inputs/update-customer.input';
 
 import { Observable } from 'rxjs';
 import { CustomersManagementFacade } from '../../../facade/frontoffice/customers-management.facade';

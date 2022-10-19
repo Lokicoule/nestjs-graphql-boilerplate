@@ -1,13 +1,8 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-
-export type DtoProps = {
-  id?: string;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
+import { DtoBuilder } from './dto.builder';
 
 @ObjectType()
-export class Dto {
+export class DtoModel {
   @Field(() => ID, { name: 'id' })
   protected readonly _id: string;
 
@@ -17,11 +12,10 @@ export class Dto {
   @Field(() => Date, { name: 'updatedAt', nullable: true })
   protected readonly _updatedAt: Date;
 
-  constructor(props: DtoProps) {
-    const { id, createdAt, updatedAt } = props;
-    if (Boolean(id)) this._id = id;
-    if (Boolean(createdAt)) this._createdAt = createdAt;
-    if (Boolean(updatedAt)) this._updatedAt = updatedAt;
+  constructor(builder: DtoBuilder) {
+    this._id = builder.id;
+    this._createdAt = builder.createdAt;
+    this._updatedAt = builder.updatedAt;
   }
 
   public get id(): string {

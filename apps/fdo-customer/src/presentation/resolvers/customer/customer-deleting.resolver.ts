@@ -1,5 +1,5 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { CustomerDto } from '../../../facade/dtos/inputs/customer.dto';
+import { CustomerDto } from '../../../facade/dtos/customer/customer.dto';
 import { Observable } from 'rxjs';
 
 @Resolver(() => CustomerDto)

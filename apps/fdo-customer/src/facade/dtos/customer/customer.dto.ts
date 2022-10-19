@@ -1,15 +1,16 @@
-import { Dto, DtoProps } from '@lib/fdo-graphql';
+import { DtoModel } from '@lib/fdo-graphql';
 import { Field, ObjectType } from '@nestjs/graphql';
-import { AddressDto } from './address.dto';
+import { AddressDto } from '../address/address.dto';
+import { CustomerDtoBuilder } from './customer.dto.builder';
 
 type CustomerDtoProps = {
   code: string;
   name: string;
   addresses: AddressDto[];
-} & DtoProps;
+};
 
 @ObjectType()
-export class CustomerDto extends Dto {
+export class CustomerDto extends DtoModel {
   @Field(() => String, { name: 'code' })
   private _code: string;
 
@@ -19,12 +20,11 @@ export class CustomerDto extends Dto {
   @Field(() => [AddressDto], { name: 'addresses', nullable: true })
   private _addresses: AddressDto[];
 
-  constructor(props: CustomerDtoProps) {
-    super(props);
-    const { code, name, addresses } = props;
-    this._code = code;
-    this._name = name;
-    this._addresses = addresses;
+  constructor(builder: CustomerDtoBuilder) {
+    super(builder);
+    this._code = builder.code;
+    this._name = builder.name;
+    this._addresses = builder.addresses;
   }
 
   public get code(): string {

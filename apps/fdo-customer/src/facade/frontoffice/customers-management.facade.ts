@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { CustomerDto } from '../dtos/inputs/customer.dto';
-import { CreateAddressInput } from '../dtos/inputs/inputs/create-address.input';
-import { CreateCustomerInput } from '../dtos/inputs/inputs/create-customer.input';
-import { UpdateAddressInput } from '../dtos/inputs/inputs/update-address.input';
-import { UpdateCustomerInput } from '../dtos/inputs/inputs/update-customer.input';
+import { CustomerDto } from '../dtos/customer/customer.dto';
+import { CreateAddressInput } from '../dtos/address/inputs/create-address.input';
+import { CreateCustomerInput } from '../dtos/customer/inputs/create-customer.input';
+import { UpdateAddressInput } from '../dtos/address/inputs/update-address.input';
+import { UpdateCustomerInput } from '../dtos/customer/inputs/update-customer.input';
 
 @Injectable()
 export class CustomersManagementFacade {

@@ -1,6 +1,6 @@
 import { Field, InputType, OmitType, PartialType } from '@nestjs/graphql';
+import { UpdateAddressInput } from '../../address/inputs/update-address.input';
 import { CreateCustomerAddressInput } from './create-customer-address.input';
-import { UpdateAddressInput } from './update-address.input';
 
 @InputType()
 export class UpdateCustomerAddressInput extends PartialType(

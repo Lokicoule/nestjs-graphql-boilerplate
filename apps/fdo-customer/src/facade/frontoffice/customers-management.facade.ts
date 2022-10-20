@@ -8,7 +8,6 @@ import { CustomerInput } from '../dtos/customer/customer.input';
 @Injectable()
 export class CustomersManagementFacade {
   public createCustomer(input: CustomerInput): Observable<CustomerDto> {
-    console.log(JSON.stringify(input));
     throw new Error('Method not implemented.');
   }
 
@@ -16,7 +15,6 @@ export class CustomersManagementFacade {
     customerId: string,
     input: CustomerInput,
   ): Observable<CustomerDto> {
-    console.log(JSON.stringify(input));
     if (!Boolean(customerId)) {
       throw new Error('The customer id is required');
     }
@@ -45,7 +43,6 @@ export class CustomersManagementFacade {
     customerId: string,
     input: AddressInput,
   ): Observable<CustomerDto> {
-    console.log(JSON.stringify(input));
     if (!Boolean(customerId)) {
       throw new Error('The customer id is required');
     }
@@ -71,7 +68,6 @@ export class CustomersManagementFacade {
     customerId: string,
     input: AddressInput,
   ): Observable<CustomerDto> {
-    console.log(JSON.stringify(input));
     if (!Boolean(customerId)) {
       throw new Error('The customer id is required');
     }

@@ -1,5 +1,5 @@
 import { DtoModel } from '@lib/fdo-graphql';
-import { Field, InputType, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
 import { AddressDto } from '../address/address.dto';
 import { CustomerDtoBuilder } from './customer.dto.builder';
 

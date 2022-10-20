@@ -1,5 +1,5 @@
 import { DtoModel } from '@lib/fdo-graphql';
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, ObjectType } from '@nestjs/graphql';
 import { AddressDtoBuilder } from './address.dto.builder';
 
 @ObjectType()
@@ -21,11 +21,13 @@ export class AddressDto extends DtoModel {
 
   constructor(builder: AddressDtoBuilder) {
     super(builder);
-    this._street = builder.street;
-    this._city = builder.city;
-    this._state = builder.state;
-    this._zipCode = builder.zipCode;
-    this._country = builder.country;
+    if (Boolean(builder)) {
+      this._street = builder.street;
+      this._city = builder.city;
+      this._state = builder.state;
+      this._zipCode = builder.zipCode;
+      this._country = builder.country;
+    }
   }
 
   public get street(): string {

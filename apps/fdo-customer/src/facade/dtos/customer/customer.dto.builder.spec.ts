@@ -24,13 +24,14 @@ describe('CustomerDtoBuilder', () => {
 
   it('successfully set inherited fields', () => {
     const sharedDate = new Date();
-    const customerBuilder: CustomerDtoBuilder = new CustomerDtoBuilder()
+    const customer: CustomerDto = new CustomerDtoBuilder()
       .setId('id')
       .setCreatedAt(sharedDate)
-      .setUpdatedAt(sharedDate);
+      .setUpdatedAt(sharedDate)
+      .build();
 
-    expect(customerBuilder.id).toEqual('id');
-    expect(customerBuilder.createdAt).toEqual(sharedDate);
-    expect(customerBuilder.updatedAt).toEqual(sharedDate);
+    expect(customer.id).toEqual('id');
+    expect(customer.createdAt).toEqual(sharedDate);
+    expect(customer.updatedAt).toEqual(sharedDate);
   });
 });

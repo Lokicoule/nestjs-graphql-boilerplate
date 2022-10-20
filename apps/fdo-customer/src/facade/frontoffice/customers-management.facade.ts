@@ -1,30 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
+import { AddressDto } from '../dtos/address/address.dto';
+import { AddressInput } from '../dtos/address/address.input';
 import { CustomerDto } from '../dtos/customer/customer.dto';
-import { CreateAddressInput } from '../dtos/address/inputs/create-address.input';
-import { CreateCustomerInput } from '../dtos/customer/inputs/create-customer.input';
-import { UpdateAddressInput } from '../dtos/address/inputs/update-address.input';
-import { UpdateCustomerInput } from '../dtos/customer/inputs/update-customer.input';
+import { CustomerInput } from '../dtos/customer/customer.input';
 
 @Injectable()
 export class CustomersManagementFacade {
-  public createCustomer(
-    createCustomerInput: CreateCustomerInput,
-  ): Observable<CustomerDto> {
+  public createCustomer(input: CustomerInput): Observable<CustomerDto> {
+    console.log(JSON.stringify(input));
     throw new Error('Method not implemented.');
   }
 
   public updateCustomerById(
-    updateCustomerInput: UpdateCustomerInput,
+    customerId: string,
+    input: CustomerInput,
   ): Observable<CustomerDto> {
+    console.log(JSON.stringify(input));
+    if (!Boolean(customerId)) {
+      throw new Error('The customer id is required');
+    }
     throw new Error('Method not implemented.');
   }
 
-  public removeCustomerById(id: string): Observable<CustomerDto> {
+  public removeCustomerById(customerId: string): Observable<CustomerDto> {
+    if (!Boolean(customerId)) {
+      throw new Error('The customer id is required');
+    }
     throw new Error('Method not implemented.');
   }
 
-  public findCustomerById(id: string): Observable<CustomerDto> {
+  public findCustomerById(customerId: string): Observable<CustomerDto> {
+    if (!Boolean(customerId)) {
+      throw new Error('The customer id is required');
+    }
     throw new Error('Method not implemented.');
   }
 
@@ -32,19 +41,41 @@ export class CustomersManagementFacade {
     throw new Error('Method not implemented.');
   }
 
-  public addCustomerAddress(
-    address: CreateAddressInput,
+  public addAddress(
+    customerId: string,
+    input: AddressInput,
   ): Observable<CustomerDto> {
+    console.log(JSON.stringify(input));
+    if (!Boolean(customerId)) {
+      throw new Error('The customer id is required');
+    }
+
     throw new Error('Method not implemented.');
   }
 
-  public removeCustomerAddressById(id: string): Observable<CustomerDto> {
+  public removeAddressById(
+    customerId: string,
+    addressId: string,
+  ): Observable<CustomerDto> {
+    if (!Boolean(customerId)) {
+      throw new Error('The customer id is required');
+    }
+    if (!Boolean(addressId)) {
+      throw new Error('The address id is required');
+    }
+
     throw new Error('Method not implemented.');
   }
 
-  public updateCustomerAddress(
-    address: UpdateAddressInput,
+  public updateAddress(
+    customerId: string,
+    input: AddressInput,
   ): Observable<CustomerDto> {
+    console.log(JSON.stringify(input));
+    if (!Boolean(customerId)) {
+      throw new Error('The customer id is required');
+    }
+
     throw new Error('Method not implemented.');
   }
 }

@@ -1,48 +1,49 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { CustomerDto } from '../../../facade/dtos/customer/customer.dto';
-import { CreateCustomerAddressInput } from '../../../facade/dtos/customer/inputs/create-customer-address.input';
-import { CreateCustomerInput } from '../../../facade/dtos/customer/inputs/create-customer.input';
-import { UpdateCustomerAddressInput } from '../../../facade/dtos/customer/inputs/update-customer-address.input';
-import { UpdateCustomerInput } from '../../../facade/dtos/customer/inputs/update-customer.input';
-
+import { AddressInput } from 'apps/fdo-customer/src/facade/dtos/address/address.input';
+import { CustomerInput } from 'apps/fdo-customer/src/facade/dtos/customer/customer.input';
 import { Observable } from 'rxjs';
+import { AddressDto } from '../../../facade/dtos/address/address.dto';
+import { CustomerDto } from '../../../facade/dtos/customer/customer.dto';
 import { CustomersManagementFacade } from '../../../facade/frontoffice/customers-management.facade';
 
 @Resolver(() => CustomerDto)
 export class CustomerWritingResolver {
   constructor(
-    private readonly _customersManagementFacade: CustomersManagementFacade,
+    private readonly customersManagementFacade: CustomersManagementFacade,
   ) {}
 
   @Mutation(() => CustomerDto, { name: `createCustomer`, nullable: true })
   create(
     @Args('createCustomerInput')
-    payload: CreateCustomerInput,
+    payload: CustomerInput,
   ): Observable<CustomerDto> {
-    return this._customersManagementFacade.createCustomer(payload);
+    return this.customersManagementFacade.createCustomer(payload);
   }
 
-  @Mutation(() => CustomerDto)
+  @Mutation(() => CustomerDto, { name: `updateCustomer` })
   update(
+    @Args('id', { type: () => String }) id: string,
     @Args('updateCustomerInput')
-    payload: UpdateCustomerInput,
+    payload: CustomerInput,
   ): Observable<CustomerDto> {
-    throw new Error('Method not implemented.');
+    return this.customersManagementFacade.updateCustomerById(id, payload);
   }
 
   @Mutation(() => CustomerDto)
   addAddress(
+    @Args('id', { type: () => String }) id: string,
     @Args('createCustomerAddressInput')
-    payload: CreateCustomerAddressInput,
+    payload: AddressInput,
   ): Observable<CustomerDto> {
-    throw new Error('Method not implemented.');
+    return this.customersManagementFacade.addAddress(id, payload);
   }
 
   @Mutation(() => CustomerDto)
   updateAddress(
+    @Args('id', { type: () => String }) id: string,
     @Args('updateCustomerAddressInput')
-    payload: UpdateCustomerAddressInput,
+    payload: AddressInput,
   ): Observable<CustomerDto> {
-    throw new Error('Method not implemented.');
+    return this.customersManagementFacade.updateAddress(id, payload);
   }
 }

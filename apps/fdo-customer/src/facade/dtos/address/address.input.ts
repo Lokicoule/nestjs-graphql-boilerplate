@@ -1,5 +1,4 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql';
-import { AddressDto } from './address.dto';
+import { Field, InputType } from '@nestjs/graphql';
 
 @InputType()
 export class AddressInput {
@@ -17,4 +16,24 @@ export class AddressInput {
 
   @Field(() => String, { name: 'country' })
   private _country: string;
+
+  public get street(): string {
+    return this._street;
+  }
+
+  public get city(): string {
+    return this._city;
+  }
+
+  public get state(): string {
+    return this._state;
+  }
+
+  public get zipCode(): string {
+    return this._zipCode;
+  }
+
+  public get country(): string {
+    return this._country;
+  }
 }

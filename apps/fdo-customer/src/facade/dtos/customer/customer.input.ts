@@ -11,4 +11,16 @@ export class CustomerInput {
 
   @Field(() => [AddressInput], { name: 'addresses', nullable: true })
   private _addresses: AddressInput[];
+
+  public get code(): string {
+    return this._code;
+  }
+
+  public get name(): string {
+    return this._name;
+  }
+
+  public get addresses(): AddressInput[] {
+    return this._addresses;
+  }
 }

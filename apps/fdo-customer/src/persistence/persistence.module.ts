@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Customer, CustomerSchema } from '../domain/entities/customer.entity';
-import { PersistenceProvidersModule } from './providers/persistence.providers.module';
+import { MongoDBProviderModule } from './providers/mongodb/mongodb.provider.module';
 import { CustomerRepository } from './repositories/customer/customer.repository';
 
 @Module({
   imports: [
-    PersistenceProvidersModule,
+    MongoDBProviderModule,
     MongooseModule.forFeature([
       { name: Customer.name, schema: CustomerSchema },
     ]),

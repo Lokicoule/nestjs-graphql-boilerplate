@@ -1,5 +1,10 @@
 import { Field, InputType } from '@nestjs/graphql';
 
+/**
+ * @class AddressInput
+ * @description Input Type for Address
+ * @see AddressDto
+ */
 @InputType()
 export class AddressInput {
   @Field(() => String, { name: 'street', nullable: true })

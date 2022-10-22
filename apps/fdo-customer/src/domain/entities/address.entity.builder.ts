@@ -1,12 +1,15 @@
-import { DtoBuilder } from '@lib/fdo-graphql/dto/dto.builder';
-import { AddressDto } from './address.dto';
+import { EntityBuilder } from '@lib/fdo-database/mongodb/types/entity.builder';
+import { Address } from './address.entity';
 
 /**
- * @class AddressDtoBuilder
- * @description This class is used to build a AddressDto object.
- * @see AddressDto
+ * @class CustomerBuilder
+ * @description CustomerBuilder class is used to build Customer objects.
+ * @extends EntityBuilder
+ * @property {string} code - The customer code.
+ * @property {string} name - The customer name.
+ * @property {Address[]} addresses - The customer addresses.
  */
-export class AddressDtoBuilder extends DtoBuilder {
+export class AddressBuilder extends EntityBuilder {
   private _street: string;
   private _city: string;
   private _state: string;
@@ -58,7 +61,7 @@ export class AddressDtoBuilder extends DtoBuilder {
     return this;
   }
 
-  build(): AddressDto {
-    return new AddressDto(this);
+  public build(): Address {
+    return new Address(this);
   }
 }

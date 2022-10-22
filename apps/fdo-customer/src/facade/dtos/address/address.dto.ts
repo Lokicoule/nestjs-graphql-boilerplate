@@ -2,6 +2,12 @@ import { DtoModel } from '@lib/fdo-graphql';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { AddressDtoBuilder } from './address.dto.builder';
 
+/**
+ * @class AddressDto
+ * @description Data Transfer Object for Address
+ * @see AddressDtoBuilder
+ * @see DtoModel
+ */
 @ObjectType()
 export class AddressDto extends DtoModel {
   @Field(() => String, { name: 'street', nullable: true })

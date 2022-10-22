@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { AddressDto } from '../dtos/address/address.dto';
+import { map, Observable } from 'rxjs';
+import { CustomerService } from '../../business/services/customer/customer.service';
 import { AddressInput } from '../dtos/address/address.input';
 import { CustomerDto } from '../dtos/customer/customer.dto';
 import { CustomerInput } from '../dtos/customer/customer.input';
+import { CustomerMapper } from '../mapping/customer.mapper';
 
 @Injectable()
 export class CustomersManagementFacade {
+  constructor(private readonly _customerService: CustomerService) {}
+
   public createCustomer(input: CustomerInput): Observable<CustomerDto> {
-    throw new Error('Method not implemented.');
+    return this._customerService
+      .createCustomer(CustomerMapper.mapToEntity(input))
+      .pipe(map(CustomerMapper.mapToDto));
   }
 
   public updateCustomerById(

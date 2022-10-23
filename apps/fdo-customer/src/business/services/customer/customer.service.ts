@@ -9,11 +9,7 @@ export class CustomerService {
   constructor(private readonly _customerRepository: CustomerRepository) {}
 
   createCustomer(customer: Customer): Observable<Customer> {
-    return this._customerRepository.createCustomer(customer).pipe(
-      throwIfEmpty(() => {
-        throw new Error('Customer could not be created');
-      }),
-    );
+    return this._customerRepository.create(customer);
   }
 
   updateCustomer(customer: Customer): Observable<Customer> {

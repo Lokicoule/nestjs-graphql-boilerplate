@@ -3,7 +3,7 @@ import { Types } from 'mongoose';
 import { EntityBuilder } from './entity.builder';
 
 export class EntityModel {
-  private readonly _id: Types.ObjectId;
+  public readonly _id: Types.ObjectId;
 
   @Prop()
   public readonly createdAt: Date;

@@ -1,6 +1,6 @@
-import { Address } from '../../domain/entities/address.entity';
+import { Address } from '../../domain/entities/address/address.entity';
 import { AddressInput } from '../dtos/address/address.input';
-import { AddressBuilder } from '../../domain/entities/address.entity.builder';
+import { AddressBuilder } from '../../domain/entities/address/address.entity.builder';
 import { AddressDto } from '../dtos/address/address.dto';
 import { AddressDtoBuilder } from '../dtos/address/address.dto.builder';
 

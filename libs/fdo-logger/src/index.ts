@@ -1,2 +1,1 @@
-export * from './fdo-logger.module';
-export * from './fdo-logger.service';
+export * from './fdo.logger';

@@ -1,8 +1,6 @@
-import { EntityBuilder } from '@lib/fdo-database/mongodb/types/entity.builder';
-import { Document, Types } from 'mongoose';
-import { Observable } from 'rxjs';
-import { Address } from './address.entity';
-import { Customer, CustomerDocument } from './customer.entity';
+import { EntityBuilder } from '@lib/fdo-database/mongodb/entity/entity.builder';
+import { Address } from '../address/address.entity';
+import { Customer } from './customer.entity';
 
 /**
  * @class CustomerBuilder

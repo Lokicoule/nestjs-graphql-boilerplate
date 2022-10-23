@@ -1,6 +1,6 @@
-import { EntityModel } from '@lib/fdo-database/mongodb/types/entity.model';
+import { EntityModel } from '@lib/fdo-database/mongodb/entity/entity.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Address, AddressSchema } from './address.entity';
+import { Address, AddressSchema } from '../address/address.entity';
 import { CustomerBuilder } from './customer.entity.builder';
 
 /**

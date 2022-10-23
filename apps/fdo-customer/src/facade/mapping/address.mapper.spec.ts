@@ -1,4 +1,4 @@
-import { AddressBuilder } from '../../domain/entities/address.entity.builder';
+import { AddressBuilder } from '../../domain/entities/address/address.entity.builder';
 import { AddressDto } from '../dtos/address/address.dto';
 import { AddressDtoBuilder } from '../dtos/address/address.dto.builder';
 import { AddressInput } from '../dtos/address/address.input';
@@ -69,20 +69,6 @@ describe('AddressMapper', () => {
       expect(addressEntity.zipCode).toEqual(addressDto.zipCode);
     });
 
-    it('successfully maps a DTO to an entity with inherited fields', () => {
-      const sharedDate = new Date();
-      const addressDto: AddressDto = new AddressDtoBuilder()
-        .setUpdatedAt(sharedDate)
-        .setCreatedAt(sharedDate)
-        .setId('ef0e0e0e0e0e0e0e0e0e0e0e')
-        .build();
-
-      const addressEntity = AddressMapper.mapToEntity(addressDto);
-      expect(addressEntity.city).toEqual(addressDto.city);
-      expect(addressEntity.country).toEqual(addressDto.country);
-      expect(addressEntity.zipCode).toEqual(addressDto.zipCode);
-    });
-
     it('successfully maps an Input to an entity', () => {
       const addressInput: AddressInput = {
         street: 'street',
@@ -96,6 +82,8 @@ describe('AddressMapper', () => {
       expect(addressEntity.city).toEqual(addressInput.city);
       expect(addressEntity.country).toEqual(addressInput.country);
       expect(addressEntity.zipCode).toEqual(addressInput.zipCode);
+      expect(addressEntity.state).toEqual(addressInput.state);
+      expect(addressEntity.street).toEqual(addressInput.street);
     });
   });
 });

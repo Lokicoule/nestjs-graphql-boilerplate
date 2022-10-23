@@ -1,8 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { Customer } from 'apps/fdo-customer/src/domain/entities/customer.entity';
+import { Injectable, Logger } from '@nestjs/common';
+import { Customer } from 'apps/fdo-customer/src/domain/entities/customer/customer.entity';
 import { CustomerRepository } from 'apps/fdo-customer/src/persistence/repositories/customer/customer.repository';
 import { Address } from 'cluster';
-import { map, Observable, throwIfEmpty } from 'rxjs';
+import { Observable, throwIfEmpty } from 'rxjs';
 
 @Injectable()
 export class CustomerService {

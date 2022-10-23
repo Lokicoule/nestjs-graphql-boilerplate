@@ -1,4 +1,4 @@
-import { EntityBuilder } from '@lib/fdo-database/mongodb/types/entity.builder';
+import { EntityBuilder } from '@lib/fdo-database/mongodb/entity/entity.builder';
 import { Address } from './address.entity';
 
 /**

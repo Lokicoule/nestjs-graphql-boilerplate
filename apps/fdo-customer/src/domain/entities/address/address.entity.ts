@@ -1,4 +1,4 @@
-import { EntityModel } from '@lib/fdo-database/mongodb/types/entity.model';
+import { EntityModel } from '@lib/fdo-database/mongodb/entity/entity.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AddressBuilder } from './address.entity.builder';
 

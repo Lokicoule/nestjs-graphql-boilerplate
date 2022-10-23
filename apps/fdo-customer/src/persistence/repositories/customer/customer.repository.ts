@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Customer } from 'apps/fdo-customer/src/domain/entities/customer.entity';
+import { Customer } from 'apps/fdo-customer/src/domain/entities/customer/customer.entity';
 import { Address } from 'cluster';
 import { Model } from 'mongoose';
 import { from, Observable } from 'rxjs';

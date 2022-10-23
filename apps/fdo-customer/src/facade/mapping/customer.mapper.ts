@@ -1,5 +1,5 @@
-import { Customer } from '../../domain/entities/customer.entity';
-import { CustomerBuilder } from '../../domain/entities/customer.entity.builder';
+import { Customer } from '../../domain/entities/customer/customer.entity';
+import { CustomerBuilder } from '../../domain/entities/customer/customer.entity.builder';
 import { CustomerDto } from '../dtos/customer/customer.dto';
 import { CustomerDtoBuilder } from '../dtos/customer/customer.dto.builder';
 import { CustomerInput } from '../dtos/customer/customer.input';
@@ -24,7 +24,7 @@ export class CustomerMapper {
       .setCode(customer.code)
       .setName(customer.name)
       .setAddresses(
-        customer.addresses.map((address) => AddressMapper.mapToDto(address)),
+        customer.addresses?.map((address) => AddressMapper.mapToDto(address)),
       )
       .build();
     return customerDto;
@@ -43,7 +43,7 @@ export class CustomerMapper {
       .setCode(customerDto.code)
       .setName(customerDto.name)
       .setAddresses(
-        customerDto.addresses.map((addressDto) =>
+        customerDto.addresses?.map((addressDto) =>
           AddressMapper.mapToEntity(addressDto),
         ),
       )

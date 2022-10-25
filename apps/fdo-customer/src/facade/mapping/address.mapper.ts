@@ -17,7 +17,7 @@ export class AddressMapper {
    */
   public static mapToDto(address: Address): AddressDto {
     const addressDto = new AddressDtoBuilder()
-      .setId(address.id?.toString())
+      .setId(address._id?.toString())
       .setCreatedAt(address.createdAt)
       .setUpdatedAt(address.updatedAt)
       .setStreet(address.street)

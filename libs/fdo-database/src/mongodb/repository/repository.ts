@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { FilterQuery, Model } from 'mongoose';
-import { from, Observable, of, switchMap, throwIfEmpty } from 'rxjs';
+import { from, Observable, of, switchMap } from 'rxjs';
 import { Populate } from './populate/populate';
 import { IRepository } from './repository.interface';
 
@@ -11,9 +11,7 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
   }
 
   public create(entity: Partial<T>): Observable<T> {
-    return from(this.model.create(entity)).pipe(
-      throwIfEmpty(() => new Error('Entity not created')),
-    );
+    return from(this.model.create(entity));
   }
 
   public find(conditions?: FilterQuery<T>): Observable<T[]> {
@@ -21,8 +19,6 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
   }
 
   public findById(id: any): Observable<T> {
-    if (!Boolean(id)) return;
-
     return from(this.model.findById(id));
   }
 
@@ -47,26 +43,28 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
   }
 
   public updateById(id: any, entity: Partial<T>): Observable<T> {
-    if (!Boolean(id)) return;
-
     return from(this.model.findByIdAndUpdate(id, entity));
   }
 
   public createOrUpdate(
-    filter: FilterQuery<T>,
+    conditions: FilterQuery<T>,
     entity: Partial<T>,
   ): Observable<T> {
-    if (!Boolean(filter)) return;
+    if (!Boolean(conditions)) return;
 
     return from(
-      this.model.findOneAndUpdate(filter, entity, {
+      this.model.findOneAndUpdate(conditions, entity, {
         new: true,
         upsert: true,
       }),
     );
   }
 
-  public removeById(id: string): Observable<T> {
+  public remove(entity: Partial<T>): Observable<T> {
+    return from(this.model.remove(entity));
+  }
+
+  public removeById(id: any): Observable<T> {
     return from(
       this.model.findOneAndRemove({
         _id: id,
@@ -74,7 +72,7 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
     );
   }
 
-  public removeByIds(ids: string[]): Observable<boolean> {
+  public removeByIds(ids: any[]): Observable<boolean> {
     return from(
       this.model
         .deleteMany({

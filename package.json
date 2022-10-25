@@ -85,7 +85,8 @@
       "^@lib/fdo-database(|/.*)$": "<rootDir>/libs/fdo-database/src/$1",
       "^@lib/fdo-graphql(|/.*)$": "<rootDir>/libs/fdo-graphql/src/$1",
       "^@lib/fdo-logger(|/.*)$": "<rootDir>/libs/fdo-logger/src/$1",
-      "^@lib/fdo-service(|/.*)$": "<rootDir>/libs/fdo-service/src/$1"
+      "^@lib/fdo-service(|/.*)$": "<rootDir>/libs/fdo-service/src/$1",
+      "^@lib/fdo-domain(|/.*)$": "<rootDir>/libs/fdo-domain/src/$1"
     }
   }
 }

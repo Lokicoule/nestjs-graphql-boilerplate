@@ -13,11 +13,9 @@ export class DtoModel {
   protected readonly _updatedAt: Date;
 
   constructor(builder: DtoBuilder) {
-    if (Boolean(builder)) {
-      this._id = builder.id;
-      this._createdAt = builder.createdAt;
-      this._updatedAt = builder.updatedAt;
-    }
+    this._id = builder.id;
+    this._createdAt = builder.createdAt;
+    this._updatedAt = builder.updatedAt;
   }
 
   public get id(): string {

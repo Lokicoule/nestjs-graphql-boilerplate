@@ -25,7 +25,7 @@ describe('AddressBuilder', () => {
       .setUpdatedAt(sharedDate)
       .build();
 
-    expect(address.id).toBeDefined();
+    expect(address._id).toBeDefined();
     expect(address.createdAt).toEqual(sharedDate);
     expect(address.updatedAt).toEqual(sharedDate);
   });

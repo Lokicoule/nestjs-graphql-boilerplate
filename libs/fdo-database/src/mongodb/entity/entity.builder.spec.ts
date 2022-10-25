@@ -16,7 +16,7 @@ describe('EntityBuilder', () => {
   it('unsuccessfully set id field', () => {
     const entity: EntityModel = new EntityBuilder().setId('id').build();
 
-    expect(entity.id).toBeUndefined();
+    expect(entity._id).toBeUndefined();
   });
 
   it('successfully set id field', () => {
@@ -24,6 +24,6 @@ describe('EntityBuilder', () => {
       .setId('5e9e9f9b8e7d6a0e6c6f7b6a')
       .build();
 
-    expect(entity.id).toBeDefined();
+    expect(entity._id).toBeDefined();
   });
 });

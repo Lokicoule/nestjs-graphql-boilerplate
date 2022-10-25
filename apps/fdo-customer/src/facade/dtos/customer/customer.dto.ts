@@ -16,11 +16,9 @@ export class CustomerDto extends DtoModel {
 
   constructor(builder: CustomerDtoBuilder) {
     super(builder);
-    if (Boolean(builder)) {
-      this._code = builder.code;
-      this._name = builder.name;
-      this._addresses = builder.addresses;
-    }
+    this._code = builder.code;
+    this._name = builder.name;
+    this._addresses = builder.addresses;
   }
 
   public get code(): string {

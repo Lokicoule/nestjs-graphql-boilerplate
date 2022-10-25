@@ -34,13 +34,11 @@ export class Address extends EntityModel {
 
   constructor(builder: AddressBuilder) {
     super(builder);
-    if (Boolean(builder)) {
-      this.street = builder.street;
-      this.city = builder.city;
-      this.state = builder.state;
-      this.zipCode = builder.zipCode;
-      this.country = builder.country;
-    }
+    this.street = builder.street;
+    this.city = builder.city;
+    this.state = builder.state;
+    this.zipCode = builder.zipCode;
+    this.country = builder.country;
   }
 }
 

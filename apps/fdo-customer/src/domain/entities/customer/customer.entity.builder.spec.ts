@@ -30,7 +30,7 @@ describe('CustomerBuilder', () => {
       .setUpdatedAt(sharedDate)
       .build();
 
-    expect(customer.id).toBeDefined();
+    expect(customer._id).toBeDefined();
     expect(customer.createdAt).toEqual(sharedDate);
     expect(customer.updatedAt).toEqual(sharedDate);
   });

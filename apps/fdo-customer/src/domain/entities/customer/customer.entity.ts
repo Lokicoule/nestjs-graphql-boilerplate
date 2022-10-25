@@ -26,11 +26,9 @@ export class Customer extends EntityModel {
 
   constructor(builder: CustomerBuilder) {
     super(builder);
-    if (Boolean(builder)) {
-      this.code = builder.code;
-      this.name = builder.name;
-      this.addresses = builder.addresses;
-    }
+    this.code = builder.code;
+    this.name = builder.name;
+    this.addresses = builder.addresses;
   }
 }
 

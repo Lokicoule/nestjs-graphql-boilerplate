@@ -88,6 +88,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/fdo-service/tsconfig.lib.json"
       }
+    },
+    "fdo-domain": {
+      "type": "library",
+      "root": "libs/fdo-domain",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-domain/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-domain/tsconfig.lib.json"
+      }
     }
   }
 }

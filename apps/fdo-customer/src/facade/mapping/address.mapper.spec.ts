@@ -32,7 +32,7 @@ describe('AddressMapper', () => {
         .build();
 
       const addressDto = AddressMapper.mapToDto(addressEntity);
-      expect(addressDto.id).toEqual(addressEntity.id);
+      expect(addressDto.id).toEqual(addressEntity._id);
       expect(addressDto.id).toBeUndefined();
       expect(addressDto.createdAt).toEqual(addressEntity.createdAt);
       expect(addressDto.updatedAt).toEqual(addressEntity.updatedAt);
@@ -48,7 +48,7 @@ describe('AddressMapper', () => {
 
       const addressDto = AddressMapper.mapToDto(addressEntity);
       expect(JSON.stringify(addressDto.id)).toEqual(
-        JSON.stringify(addressEntity.id),
+        JSON.stringify(addressEntity._id),
       );
       expect(addressDto.createdAt).toEqual(addressEntity.createdAt);
       expect(addressDto.updatedAt).toEqual(addressEntity.updatedAt);

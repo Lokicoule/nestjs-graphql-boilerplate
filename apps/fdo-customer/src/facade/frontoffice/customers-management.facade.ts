@@ -2,81 +2,55 @@ import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { CustomerService } from '../../business/services/customer/customer.service';
 import { AddressInput } from '../dtos/address/address.input';
+import { CustomerCreateInput } from '../dtos/customer/inputs/customer-create.input';
+import { CustomerUpdateInput } from '../dtos/customer/inputs/customer-update.input';
 import { CustomerDto } from '../dtos/customer/customer.dto';
-import { CustomerInput } from '../dtos/customer/customer.input';
 import { CustomerMapper } from '../mapping/customer.mapper';
+import { CustomerCriteriaInput } from '../dtos/customer/inputs/customer-criteria.input';
 
 @Injectable()
 export class CustomersManagementFacade {
   constructor(private readonly _customerService: CustomerService) {}
 
-  public createCustomer(input: CustomerInput): Observable<CustomerDto> {
+  public createCustomer(input: CustomerCreateInput): Observable<CustomerDto> {
     return this._customerService
       .createCustomer(CustomerMapper.mapToEntity(input))
       .pipe(map(CustomerMapper.mapToDto));
   }
 
-  public updateCustomerById(
-    customerId: string,
-    input: CustomerInput,
-  ): Observable<CustomerDto> {
-    if (!Boolean(customerId)) {
-      throw new Error('The customer id is required');
-    }
-    throw new Error('Method not implemented.');
+  public updateCustomer(input: CustomerUpdateInput): Observable<CustomerDto> {
+    return this._customerService
+      .updateCustomer(CustomerMapper.mapToEntity(input))
+      .pipe(map(CustomerMapper.mapToDto));
   }
 
   public removeCustomerById(customerId: string): Observable<CustomerDto> {
     if (!Boolean(customerId)) {
       throw new Error('The customer id is required');
     }
-    throw new Error('Method not implemented.');
+
+    return this._customerService
+      .removeCustomerById(customerId)
+      .pipe(map(CustomerMapper.mapToDto));
   }
 
   public findCustomerById(customerId: string): Observable<CustomerDto> {
     if (!Boolean(customerId)) {
       throw new Error('The customer id is required');
     }
-    throw new Error('Method not implemented.');
+
+    return this._customerService
+      .findCustomerById(customerId)
+      .pipe(map(CustomerMapper.mapToDto));
   }
 
-  public findAllCustomers(): Observable<CustomerDto[]> {
-    throw new Error('Method not implemented.');
-  }
-
-  public addAddress(
-    customerId: string,
-    input: AddressInput,
-  ): Observable<CustomerDto> {
-    if (!Boolean(customerId)) {
-      throw new Error('The customer id is required');
-    }
-
-    throw new Error('Method not implemented.');
-  }
-
-  public removeAddressById(
-    customerId: string,
-    addressId: string,
-  ): Observable<CustomerDto> {
-    if (!Boolean(customerId)) {
-      throw new Error('The customer id is required');
-    }
-    if (!Boolean(addressId)) {
-      throw new Error('The address id is required');
-    }
-
-    throw new Error('Method not implemented.');
-  }
-
-  public updateAddress(
-    customerId: string,
-    input: AddressInput,
-  ): Observable<CustomerDto> {
-    if (!Boolean(customerId)) {
-      throw new Error('The customer id is required');
-    }
-
-    throw new Error('Method not implemented.');
+  public findCustomers(
+    customerCriteria?: CustomerCriteriaInput,
+  ): Observable<CustomerDto[]> {
+    return this._customerService
+      .findCustomers(
+        CustomerMapper.mapCriteriaInputToCriteria(customerCriteria),
+      )
+      .pipe(map(CustomerMapper.mapListToDtoList));
   }
 }

@@ -27,13 +27,11 @@ export class AddressDto extends DtoModel {
 
   constructor(builder: AddressDtoBuilder) {
     super(builder);
-    if (Boolean(builder)) {
-      this._street = builder.street;
-      this._city = builder.city;
-      this._state = builder.state;
-      this._zipCode = builder.zipCode;
-      this._country = builder.country;
-    }
+    this._street = builder.street;
+    this._city = builder.city;
+    this._state = builder.state;
+    this._zipCode = builder.zipCode;
+    this._country = builder.country;
   }
 
   public get street(): string {

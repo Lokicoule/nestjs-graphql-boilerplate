@@ -3,7 +3,7 @@ import { CustomerCriteria } from 'apps/fdo-customer/src/domain/criterias/custome
 import { Address } from 'apps/fdo-customer/src/domain/entities/address/address.entity';
 import { Customer } from 'apps/fdo-customer/src/domain/entities/customer/customer.entity';
 import { CustomerRepository } from 'apps/fdo-customer/src/persistence/repositories/customer/customer.repository';
-import { UseCaseException, TechnicalException } from 'libs/fdo-domain/src';
+import { TechnicalException, UseCaseException } from 'libs/fdo-domain/src';
 import { Observable, throwIfEmpty } from 'rxjs';
 import { AddressUseCase } from '../../use-cases/address.use-case';
 
@@ -36,6 +36,10 @@ export class CustomerService {
 
   public removeCustomerById(id: string): Observable<Customer> {
     return this._customerRepository.removeById(id);
+  }
+
+  public removeCustomersByIds(ids: string[]): Observable<boolean> {
+    return this._customerRepository.removeByIds(ids);
   }
 
   public findCustomerById(id: string): Observable<Customer> {

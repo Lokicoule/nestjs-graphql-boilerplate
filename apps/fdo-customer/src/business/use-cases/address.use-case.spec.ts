@@ -1,9 +1,8 @@
-import exp from 'constants';
 import { AddressUseCase } from './address.use-case';
 
 describe('AddressUseCase', () => {
   describe('validateZipCode', () => {
-    it('zip code is valid', () => {
+    it('zip code contains 5 digits', () => {
       expect(AddressUseCase.validateZipCode('40200')).toBeTruthy();
     });
 

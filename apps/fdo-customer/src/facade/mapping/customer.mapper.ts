@@ -33,7 +33,7 @@ export class CustomerMapper {
     if (customerCriteria?.name) {
       criteriaBuilder.withName(customerCriteria.name);
     }
-    return criteriaBuilder.build();
+    return criteriaBuilder.buildCriteria();
   }
 
   /**

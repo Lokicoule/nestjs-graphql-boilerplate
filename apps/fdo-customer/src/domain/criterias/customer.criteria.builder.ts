@@ -1,6 +1,7 @@
+import { CriteriaBuilder } from 'libs/fdo-domain/src/criteria/criteria.builder';
 import { CustomerCriteria } from './customer.criteria';
 
-export class CustomerCriteriaBuilder {
+export class CustomerCriteriaBuilder extends CriteriaBuilder<CustomerCriteria> {
   private _id: string;
   private _name: string;
   private _code: string;
@@ -33,10 +34,11 @@ export class CustomerCriteriaBuilder {
   }
 
   /**
+   * @override
    * @description Build a new instance of CustomerCriteria and remove all the properties that are undefined.
    * @returns {CustomerCriteria}
    */
   public build(): CustomerCriteria {
-    return JSON.parse(JSON.stringify(new CustomerCriteria(this)));
+    return new CustomerCriteria(this);
   }
 }

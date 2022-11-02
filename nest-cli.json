@@ -97,6 +97,24 @@
       "compilerOptions": {
         "tsConfigPath": "libs/fdo-domain/tsconfig.lib.json"
       }
+    },
+    "fdo-referential": {
+      "type": "library",
+      "root": "libs/fdo-referential",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-referential/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-referential/tsconfig.lib.json"
+      }
+    },
+    "fdo-utils": {
+      "type": "library",
+      "root": "libs/fdo-utils",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-utils/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-utils/tsconfig.lib.json"
+      }
     }
   }
 }

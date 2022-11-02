@@ -1,14 +1,13 @@
-import { AddressBuilder } from '../address/address.entity.builder';
+import { Address } from '../address/address.entity';
 import { Customer } from './customer.entity';
-import { CustomerBuilder } from './customer.entity.builder';
 
 describe('CustomerBuilder', () => {
   it('successfully set own fields', () => {
-    const customer: Customer = new CustomerBuilder()
+    const customer: Customer = new Customer.Builder()
       .setCode('code')
       .setName('name')
       .setAddresses([
-        new AddressBuilder()
+        new Address.Builder()
           .setCity('Mimizan')
           .setCountry('France')
           .setZipCode('40200')
@@ -24,7 +23,7 @@ describe('CustomerBuilder', () => {
 
   it('successfully set inherited fields', () => {
     const sharedDate = new Date();
-    const customer: Customer = new CustomerBuilder()
+    const customer: Customer = new Customer.Builder()
       .setId(1)
       .setCreatedAt(sharedDate)
       .setUpdatedAt(sharedDate)

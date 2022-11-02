@@ -3,13 +3,13 @@ import { AddressInput } from '../../address/address.input';
 
 @InputType()
 export class CustomerCreateInput {
-  @Field(() => String, { name: 'code' })
+  @Field(() => String, { name: 'code', nullable: true })
   private readonly _code: string;
 
   @Field(() => String, { name: 'name' })
   private readonly _name: string;
 
-  @Field(() => [AddressInput], { name: 'addresses', nullable: true })
+  @Field(() => [AddressInput], { name: 'addresses' })
   private readonly _addresses: AddressInput[];
 
   public get code(): string {

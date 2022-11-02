@@ -54,4 +54,12 @@ export class CustomerBuilder extends EntityBuilder {
   public build(): Customer {
     return new Customer(this);
   }
+
+  public copy(customer: Customer): CustomerBuilder {
+    super.copy(customer);
+    this._code = customer.code;
+    this._name = customer.name;
+    this._addresses = customer.addresses;
+    return this;
+  }
 }

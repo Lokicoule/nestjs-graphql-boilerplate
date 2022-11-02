@@ -1,11 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
-import { CustomerService } from '../../business/services/customer/customer.service';
+import { CustomerService } from '../../business/services/customer.service';
 import { CustomerDto } from '../dtos/customer/customer.dto';
 import { CustomerCreateInput } from '../dtos/customer/inputs/customer-create.input';
 import { CustomerCriteriaInput } from '../dtos/customer/inputs/customer-criteria.input';
 import { CustomerUpdateInput } from '../dtos/customer/inputs/customer-update.input';
-import { CustomerMapper } from '../mapping/customer.mapper';
+import { CustomerMapper } from '../mapping/customer/customer.mapper';
 
 @Injectable()
 export class CustomersManagementFacade {
@@ -24,28 +24,16 @@ export class CustomersManagementFacade {
   }
 
   public removeCustomerById(customerId: string): Observable<CustomerDto> {
-    if (!Boolean(customerId)) {
-      throw new Error('The customer id is required');
-    }
-
     return this._customerService
       .removeCustomerById(customerId)
       .pipe(map(CustomerMapper.mapToDto));
   }
 
   public removeCustomersByIds(customerIds: string[]): Observable<boolean> {
-    if (!Boolean(customerIds)) {
-      throw new Error('The customer ids are required');
-    }
-
     return this._customerService.removeCustomersByIds(customerIds);
   }
 
   public findCustomerById(customerId: string): Observable<CustomerDto> {
-    if (!Boolean(customerId)) {
-      throw new Error('The customer id is required');
-    }
-
     return this._customerService
       .findCustomerById(customerId)
       .pipe(map(CustomerMapper.mapToDto));

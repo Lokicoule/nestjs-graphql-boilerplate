@@ -24,10 +24,10 @@
       "@lib/fdo-graphql/*": ["libs/fdo-graphql/src/*"],
       "@lib/fdo-logger": ["libs/fdo-logger/src"],
       "@lib/fdo-logger/*": ["libs/fdo-logger/src/*"],
-      "@lib/fdo-service": ["libs/fdo-service/src"],
-      "@lib/fdo-service/*": ["libs/fdo-service/src/*"],
       "@lib/fdo-domain": ["libs/fdo-domain/src"],
-      "@lib/fdo-domain/*": ["libs/fdo-domain/src/*"]
+      "@lib/fdo-domain/*": ["libs/fdo-domain/src/*"],
+      "@lib/fdo-utils": ["libs/fdo-utils/src"],
+      "@lib/fdo-utils/*": ["libs/fdo-utils/src/*"]
     }
   }
 }

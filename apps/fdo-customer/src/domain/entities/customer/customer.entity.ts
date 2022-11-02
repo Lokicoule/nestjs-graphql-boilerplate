@@ -13,7 +13,7 @@ import { CustomerBuilder } from './customer.entity.builder';
  */
 @Schema({ timestamps: true })
 export class Customer extends EntityModel {
-  @Prop({ required: true })
+  @Prop({ required: true, unique: true, uppercase: true })
   public readonly code: string;
 
   @Prop({ required: true })
@@ -29,6 +29,10 @@ export class Customer extends EntityModel {
     this.code = builder.code;
     this.name = builder.name;
     this.addresses = builder.addresses;
+  }
+
+  public static get Builder(): typeof CustomerBuilder {
+    return CustomerBuilder;
   }
 }
 

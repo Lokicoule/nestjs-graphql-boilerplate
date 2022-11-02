@@ -23,7 +23,7 @@ export class Address extends EntityModel {
   @Prop({ required: true })
   public readonly state: string;
 
-  @Prop()
+  @Prop({ required: true })
   public readonly street: string;
 
   @Prop({
@@ -39,6 +39,10 @@ export class Address extends EntityModel {
     this.state = builder.state;
     this.zipCode = builder.zipCode;
     this.country = builder.country;
+  }
+
+  public static get Builder(): typeof AddressBuilder {
+    return AddressBuilder;
   }
 }
 

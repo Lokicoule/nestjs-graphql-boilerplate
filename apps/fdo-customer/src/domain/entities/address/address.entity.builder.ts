@@ -1,14 +1,6 @@
 import { EntityBuilder } from '@lib/fdo-database/mongodb/entity/entity.builder';
 import { Address } from './address.entity';
 
-/**
- * @class CustomerBuilder
- * @description CustomerBuilder class is used to build Customer objects.
- * @extends EntityBuilder
- * @property {string} code - The customer code.
- * @property {string} name - The customer name.
- * @property {Address[]} addresses - The customer addresses.
- */
 export class AddressBuilder extends EntityBuilder {
   private _street: string;
   private _city: string;

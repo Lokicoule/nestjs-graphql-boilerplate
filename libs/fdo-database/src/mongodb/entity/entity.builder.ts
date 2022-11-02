@@ -38,7 +38,14 @@ export class EntityBuilder {
     return this;
   }
 
-  build(): EntityModel {
+  public build(): EntityModel {
     return new EntityModel(this);
+  }
+
+  public copy(entity: EntityModel): EntityBuilder {
+    this._id = entity._id;
+    this._createdAt = entity.createdAt;
+    this._updatedAt = entity.updatedAt;
+    return this;
   }
 }

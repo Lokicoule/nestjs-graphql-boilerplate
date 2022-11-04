@@ -115,6 +115,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/fdo-utils/tsconfig.lib.json"
       }
+    },
+    "fdo-validator": {
+      "type": "library",
+      "root": "libs/fdo-validator",
+      "entryFile": "index",
+      "sourceRoot": "libs/fdo-validator/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/fdo-validator/tsconfig.lib.json"
+      }
     }
   }
 }

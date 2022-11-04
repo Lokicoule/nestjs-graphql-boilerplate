@@ -27,7 +27,9 @@
       "@lib/fdo-domain": ["libs/fdo-domain/src"],
       "@lib/fdo-domain/*": ["libs/fdo-domain/src/*"],
       "@lib/fdo-utils": ["libs/fdo-utils/src"],
-      "@lib/fdo-utils/*": ["libs/fdo-utils/src/*"]
+      "@lib/fdo-utils/*": ["libs/fdo-utils/src/*"],
+      "@lib/fdo-validator": ["libs/fdo-validator/src"],
+      "@lib/fdo-validator/*": ["libs/fdo-validator/src/*"]
     }
   }
 }

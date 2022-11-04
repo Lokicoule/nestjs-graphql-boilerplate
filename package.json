@@ -32,6 +32,7 @@
     "@nestjs/mongoose": "^9.2.0",
     "@nestjs/platform-express": "^8.0.0",
     "apollo-server-express": "^3.10.3",
+    "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
     "graphql": "^16.6.0",
     "mongoose": "^6.6.5",
@@ -87,7 +88,8 @@
       "^@lib/fdo-graphql(|/.*)$": "<rootDir>/libs/fdo-graphql/src/$1",
       "^@lib/fdo-logger(|/.*)$": "<rootDir>/libs/fdo-logger/src/$1",
       "^@lib/fdo-domain(|/.*)$": "<rootDir>/libs/fdo-domain/src/$1",
-      "^@lib/fdo-utils(|/.*)$": "<rootDir>/libs/fdo-utils/src/$1"
+      "^@lib/fdo-utils(|/.*)$": "<rootDir>/libs/fdo-utils/src/$1",
+      "^@lib/fdo-validator(|/.*)$": "<rootDir>/libs/fdo-validator/src/$1"
     }
   }
 }

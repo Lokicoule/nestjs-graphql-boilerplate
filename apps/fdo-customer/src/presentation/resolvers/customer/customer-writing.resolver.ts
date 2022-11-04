@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { CustomerCreateInput } from 'apps/fdo-customer/src/facade/dtos/customer/inputs/customer-create.input';
-import { CustomerUpdateInput } from 'apps/fdo-customer/src/facade/dtos/customer/inputs/customer-update.input';
+import { CustomerCreateInput } from '../../../facade/dtos/customer/inputs/customer-create.input';
+import { CustomerUpdateInput } from '../../../facade/dtos/customer/inputs/customer-update.input';
 import { Observable } from 'rxjs';
 import { CustomerDto } from '../../../facade/dtos/customer/customer.dto';
 import { CustomersManagementFacade } from '../../../facade/frontoffice/customers-management.facade';

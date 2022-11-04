@@ -7,6 +7,7 @@ import { AddressMapper } from '../address/address.mapper';
 import { CustomerCriteriaInput } from '../../dtos/customer/inputs/customer-criteria.input';
 import { CustomerCriteria } from '../../../domain/criterias/customer/customer.criteria';
 import { CustomerCriteriaBuilder } from '../../../domain/criterias/customer/customer.criteria.builder';
+import { CustomerInput } from '../../dtos/customer/inputs/customer.input';
 
 /**
  * @class CustomerMapper
@@ -62,14 +63,14 @@ export class CustomerMapper {
   /**
    * @method mapToEntity
    * @description Maps a CustomerDto to a Customer
-   * @param {CustomerDto | CustomerUpdateInput | CustomerCreateInput} customerDto - The CustomerDto or the CustomerUpdateInput or the CustomerCreateInput to map
+   * @param {CustomerDto | CustomerInput} customerDto - The CustomerDto or the CustomerInput to map
    * @returns {Customer} - The mapped Customer
    */
   public static mapToEntity(
-    customerDto: CustomerDto | CustomerUpdateInput | CustomerCreateInput,
+    customerDto: CustomerDto | Partial<CustomerInput>,
   ): Customer {
     const customer = new Customer.Builder()
-      .setId(this.hasId(customerDto) && customerDto.id)
+      .setId(customerDto?.id)
       .setCode(customerDto?.code)
       .setName(customerDto.name)
       .setAddresses(
@@ -80,17 +81,5 @@ export class CustomerMapper {
       .build();
 
     return customer;
-  }
-
-  /**
-   * @method hasId
-   * @description Type guard to check if the CustomerDto has an id
-   * @param {CustomerDto} customerDto - The CustomerDto to check
-   * @returns {boolean} - True if the CustomerDto has an id, false otherwise
-   */
-  private static hasId(
-    customerDto: CustomerDto | CustomerUpdateInput | CustomerCreateInput,
-  ): customerDto is CustomerDto {
-    return Boolean((customerDto as CustomerDto).id);
   }
 }

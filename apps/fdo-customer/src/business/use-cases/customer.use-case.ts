@@ -3,6 +3,7 @@ import { StringNumberUtils } from '@lib/fdo-utils';
 import { Property } from '../../domain/entities/property/property.entity';
 import { Setting } from '../../domain/entities/setting/setting.entity';
 import { PropertyKeyEnum } from '../../domain/enums/property/property.enum';
+import { SettingCodeEnum } from '../../domain/enums/setting/setting.enum';
 
 export class CustomerUseCase {
   public static validateEmail(email: string): boolean {
@@ -20,8 +21,8 @@ export class CustomerUseCase {
       throw new UseCaseException('The setting is required');
     }
 
-    if (!Boolean(setting)) {
-      throw new UseCaseException('The setting is required');
+    if (setting.code !== SettingCodeEnum.CODE_GENERATOR) {
+      throw new UseCaseException('The setting code is not valid');
     }
     if (!Boolean(setting.properties)) {
       throw new UseCaseException('The setting properties are required');

@@ -1,12 +1,8 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql';
-import { SettingCreateInput } from './setting-create.input';
-
+import { InputType, PickType } from '@nestjs/graphql';
+import { SettingInput } from './setting.input';
 @InputType()
-export class SettingUpdateInput extends PartialType(SettingCreateInput) {
-  @Field(() => String, { name: 'id' })
-  private readonly _id: string;
-
-  public get id(): string {
-    return this._id;
-  }
-}
+export class SettingUpdateInput extends PickType(SettingInput, [
+  'id',
+  'code',
+  'properties',
+]) {}

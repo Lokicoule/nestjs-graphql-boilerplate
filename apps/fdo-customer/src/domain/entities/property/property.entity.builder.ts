@@ -1,23 +1,16 @@
 import { EntityBuilder } from '@lib/fdo-database/mongodb/entity/entity.builder';
 import { Property } from './property.entity';
-import {
-  PropertyKeyEnum,
-  PropertyKeyEnumProvider,
-} from '../../enums/property/property.enum';
 
 export class PropertyBuilder extends EntityBuilder {
-  private _key: PropertyKeyEnum;
+  private _key: string;
   private _value: string;
 
-  public get key(): PropertyKeyEnum {
+  public get key(): string {
     return this._key;
   }
 
-  public setKey(value: PropertyKeyEnum | string) {
-    this._key =
-      typeof value === 'string'
-        ? PropertyKeyEnumProvider.useFactory(value)
-        : value;
+  public setKey(value: string) {
+    this._key = value;
     return this;
   }
 

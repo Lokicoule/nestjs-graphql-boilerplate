@@ -1,12 +1,14 @@
 import { Property } from '../../domain/entities/property/property.entity';
 import { Setting } from '../../domain/entities/setting/setting.entity';
 import { PropertyKeyEnum } from '../../domain/enums/property/property.enum';
+import { SettingCodeEnum } from '../../domain/enums/setting/setting.enum';
 import { CustomerUseCase } from './customer.use-case';
 
 describe('CustomerUseCase', () => {
   describe('generateCode', () => {
     it('should return a complete code', () => {
       const setting = new Setting.Builder()
+        .setCode(SettingCodeEnum.CODE_GENERATOR)
         .setProperties([
           new Property.Builder()
             .setKey(PropertyKeyEnum.COUNTER)
@@ -28,6 +30,7 @@ describe('CustomerUseCase', () => {
 
     it('should return a code without prefix', () => {
       const setting = new Setting.Builder()
+        .setCode(SettingCodeEnum.CODE_GENERATOR)
         .setProperties([
           new Property.Builder()
             .setKey(PropertyKeyEnum.COUNTER)
@@ -45,6 +48,7 @@ describe('CustomerUseCase', () => {
 
     it('should return a code without suffix', () => {
       const setting = new Setting.Builder()
+        .setCode(SettingCodeEnum.CODE_GENERATOR)
         .setProperties([
           new Property.Builder()
             .setKey(PropertyKeyEnum.COUNTER)
@@ -62,6 +66,7 @@ describe('CustomerUseCase', () => {
 
     it('should return a code without prefix and suffix', () => {
       const setting = new Setting.Builder()
+        .setCode(SettingCodeEnum.CODE_GENERATOR)
         .setProperties([
           new Property.Builder()
             .setKey(PropertyKeyEnum.COUNTER)
@@ -80,7 +85,9 @@ describe('CustomerUseCase', () => {
     });
 
     it('should throw an exception when the setting properties are null', () => {
-      const setting = new Setting.Builder().build();
+      const setting = new Setting.Builder()
+        .setCode(SettingCodeEnum.CODE_GENERATOR)
+        .build();
       expect(() => CustomerUseCase.generateCode(setting)).toThrow(
         'The setting properties are required',
       );
@@ -88,6 +95,8 @@ describe('CustomerUseCase', () => {
 
     it('should throw an exception when the counter property is null', () => {
       const setting = new Setting.Builder()
+        .setCode(SettingCodeEnum.CODE_GENERATOR)
+
         .setProperties([
           new Property.Builder()
             .setKey(PropertyKeyEnum.PREFIX)

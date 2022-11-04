@@ -43,4 +43,11 @@ export class SettingBuilder extends EntityBuilder {
   public build(): Setting {
     return new Setting(this);
   }
+
+  public copy(setting: Setting): SettingBuilder {
+    super.copy(setting);
+    this._code = setting.code;
+    this._properties = setting.properties;
+    return this;
+  }
 }

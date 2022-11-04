@@ -6,7 +6,7 @@ import { SettingCodeEnum } from '../../enums/setting/setting.enum';
 
 @Schema({ timestamps: true })
 export class Setting extends EntityModel {
-  @Prop({ type: String, required: true })
+  @Prop({ type: String, required: true, unique: true, uppercase: true })
   public readonly code: SettingCodeEnum;
 
   @Prop({

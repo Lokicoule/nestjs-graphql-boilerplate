@@ -1,6 +1,6 @@
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { CustomerCriteriaInput } from 'apps/fdo-customer/src/facade/dtos/customer/inputs/customer-criteria.input';
-import { CustomersManagementFacade } from 'apps/fdo-customer/src/facade/frontoffice/customers-management.facade';
+import { CustomerCriteriaInput } from '../../../facade/dtos/customer/inputs/customer-criteria.input';
+import { CustomersManagementFacade } from '../../../facade/frontoffice/customers-management.facade';
 import { Observable } from 'rxjs';
 import { CustomerDto } from '../../../facade/dtos/customer/customer.dto';
 

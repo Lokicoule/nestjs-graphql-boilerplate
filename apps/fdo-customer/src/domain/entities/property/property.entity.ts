@@ -1,12 +1,11 @@
 import { EntityModel } from '@lib/fdo-database/mongodb/entity/entity.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { PropertyBuilder } from './property.entity.builder';
-import { PropertyKeyEnum } from '../../enums/property/property.enum';
 
 @Schema({ timestamps: true })
 export class Property extends EntityModel {
   @Prop({ type: String, required: true, uppercase: true })
-  public readonly key: PropertyKeyEnum;
+  public readonly key: string;
 
   @Prop({ required: true, uppercase: true })
   public readonly value: string;

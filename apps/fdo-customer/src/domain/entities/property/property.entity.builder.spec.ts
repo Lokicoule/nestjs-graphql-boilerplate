@@ -20,12 +20,6 @@ describe('PropertyBuilder', () => {
     expect(property.value).toEqual('value');
   });
 
-  it("should throw an error when key doesn't exist", () => {
-    expect(() =>
-      new Property.Builder().setKey('INVALID').setValue('value').build(),
-    ).toThrowError('Invalid PropertyKeyEnum value: INVALID');
-  });
-
   it('successfully set inherited fields', () => {
     const sharedDate = new Date();
     const property: Property = new Property.Builder()

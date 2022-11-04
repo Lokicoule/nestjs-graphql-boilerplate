@@ -1,12 +1,10 @@
-import { Field, InputType, PartialType } from '@nestjs/graphql';
-import { CustomerCreateInput } from './customer-create.input';
+import { InputType, PickType } from '@nestjs/graphql';
+import { CustomerInput } from './customer.input';
 
 @InputType()
-export class CustomerUpdateInput extends PartialType(CustomerCreateInput) {
-  @Field(() => String, { name: 'id' })
-  private readonly _id: string;
-
-  public get id(): string {
-    return this._id;
-  }
-}
+export class CustomerUpdateInput extends PickType(CustomerInput, [
+  'id',
+  'code',
+  'name',
+  'addresses',
+]) {}

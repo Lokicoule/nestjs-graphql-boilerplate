@@ -4,6 +4,7 @@ import { Setting } from '../../../domain/entities/setting/setting.entity';
 import { SettingCreateInput } from '../../dtos/setting/inputs/setting-create.input';
 import { SettingCriteriaInput } from '../../dtos/setting/inputs/setting-criteria.input';
 import { SettingUpdateInput } from '../../dtos/setting/inputs/setting-update.input';
+import { SettingInput } from '../../dtos/setting/inputs/setting.input';
 import { SettingDto } from '../../dtos/setting/setting.dto';
 import { SettingDtoBuilder } from '../../dtos/setting/setting.dto.builder';
 import { PropertyMapper } from '../property/property.mapper';
@@ -40,10 +41,10 @@ export class SettingMapper {
   }
 
   public static mapToEntity(
-    settingDto: SettingDto | SettingCreateInput | SettingUpdateInput,
+    settingDto: SettingDto | Partial<SettingInput>,
   ): Setting {
     const settingEntity = new Setting.Builder()
-      .setId(this.hasId(settingDto) && settingDto.id)
+      .setId(settingDto?.id)
       .setCode(settingDto.code)
       .setProperties(
         settingDto.properties?.map((propertyDto) =>
@@ -52,11 +53,5 @@ export class SettingMapper {
       )
       .build();
     return settingEntity;
-  }
-
-  private static hasId(
-    settingDto: SettingDto | SettingCreateInput | SettingUpdateInput,
-  ): settingDto is SettingDto {
-    return Boolean((settingDto as SettingDto).id);
   }
 }

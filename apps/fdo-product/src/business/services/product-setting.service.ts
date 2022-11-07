@@ -2,6 +2,7 @@ import { duplicateRetryStrategy } from '@lib/fdo-database/mongodb/retry/duplicat
 import { UseCaseException } from '@lib/fdo-domain';
 import { Injectable } from '@nestjs/common';
 import { defer, map, Observable, of, retry, switchMap } from 'rxjs';
+import { SettingCriteria } from '../../domain/criterias/Setting/Setting.criteria';
 import { Product } from '../../domain/entities/product/product.entity';
 import { Property } from '../../domain/entities/property/property.entity';
 import { Setting } from '../../domain/entities/setting/setting.entity';
@@ -25,8 +26,13 @@ export class ProductSettingService {
       }),
     ).pipe(
       map((setting) =>
-        this.settingService.updateSetting(
-          ProductUseCase.incrementCounter(setting),
+        this.settingService.createOrUpdateSetting(
+          new SettingCriteria.Builder()
+            .withCode(SettingCodeEnum.CODE_GENERATOR)
+            .buildCriteria(),
+          ProductUseCase.incrementCounter(
+            setting || ProductUseCase.initializeCodeGeneratorSetting(),
+          ),
         ),
       ),
       switchMap((setting$) =>

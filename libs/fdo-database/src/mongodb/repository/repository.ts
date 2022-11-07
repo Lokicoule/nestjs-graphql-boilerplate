@@ -1,10 +1,8 @@
-import { Injectable } from '@nestjs/common';
 import { FilterQuery, Model } from 'mongoose';
 import { from, Observable, of, switchMap } from 'rxjs';
 import { Populate } from './populate/populate';
 import { IRepository } from './repository.interface';
 
-@Injectable()
 export abstract class Repository<T> extends Populate implements IRepository<T> {
   protected constructor(private readonly model: Model<T>) {
     super();

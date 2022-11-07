@@ -65,4 +65,20 @@ export class ProductUseCase {
       )
       .build();
   }
+
+  public static initializeCodeGeneratorSetting(): Setting {
+    return new Setting.Builder()
+      .setCode(SettingCodeEnum.CODE_GENERATOR)
+      .setProperties([
+        new Property.Builder()
+          .setKey(PropertyKeyEnum.COUNTER)
+          .setValue('000')
+          .build(),
+        new Property.Builder()
+          .setKey(PropertyKeyEnum.SUFFIX)
+          .setValue('P')
+          .build(),
+      ])
+      .build();
+  }
 }

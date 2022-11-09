@@ -10,6 +10,25 @@ import { SettingRepository } from '../../persistence/repositories/setting/settin
 export class SettingService {
   constructor(private readonly _settingRepository: SettingRepository) {}
 
+  public createSetting(setting: Setting): Observable<Setting> {
+    if (!Boolean(setting)) {
+      throw new UseCaseException('The setting is null or undefined');
+    }
+    this.validateSetting(setting);
+    return this._settingRepository.create(setting);
+  }
+
+  public createOrUpdateSetting(
+    criteria: SettingCriteria,
+    setting: Setting,
+  ): Observable<Setting> {
+    if (!Boolean(setting)) {
+      throw new UseCaseException('The setting is null or undefined');
+    }
+    this.validateSetting(setting);
+    return this._settingRepository.createOrUpdate(criteria, setting);
+  }
+
   public updateSetting(setting: Setting): Observable<Setting> {
     if (!Boolean(setting)) {
       throw new TechnicalException('The setting is null or undefined');

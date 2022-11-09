@@ -2,6 +2,7 @@ import { duplicateRetryStrategy } from '@lib/fdo-database/mongodb/retry/duplicat
 import { UseCaseException } from '@lib/fdo-domain';
 import { Injectable } from '@nestjs/common';
 import { defer, map, Observable, of, retry, switchMap } from 'rxjs';
+import { SettingCriteria } from '../../domain/criterias/Setting/Setting.criteria';
 import { Customer } from '../../domain/entities/customer/customer.entity';
 import { Property } from '../../domain/entities/property/property.entity';
 import { Setting } from '../../domain/entities/setting/setting.entity';
@@ -15,18 +16,23 @@ import { SettingService } from './setting.service';
 export class CustomerSettingService {
   constructor(
     private readonly customerRepository: CustomerRepository,
-    private readonly _settingService: SettingService,
+    private readonly settingService: SettingService,
   ) {}
 
   public generateCustomer(customer: Customer): Observable<Customer> {
     return defer(() =>
-      this._settingService.findSetting({
+      this.settingService.findSetting({
         code: SettingCodeEnum.CODE_GENERATOR,
       }),
     ).pipe(
       map((setting) =>
-        this._settingService.updateSetting(
-          CustomerUseCase.incrementCounter(setting),
+        this.settingService.createOrUpdateSetting(
+          new SettingCriteria.Builder()
+            .withCode(SettingCodeEnum.CODE_GENERATOR)
+            .buildCriteria(),
+          CustomerUseCase.incrementCounter(
+            setting || CustomerUseCase.initializeCodeGeneratorSetting(),
+          ),
         ),
       ),
       switchMap((setting$) =>
@@ -42,7 +48,7 @@ export class CustomerSettingService {
 
   public updateCodeGeneratorSetting(setting: Setting): Observable<Setting> {
     this.validateCodeGeneratorSetting(setting);
-    return this._settingService.updateSetting(setting);
+    return this.settingService.updateSetting(setting);
   }
 
   private validateCodeGeneratorSetting(setting: Setting): void {

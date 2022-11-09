@@ -12,4 +12,8 @@ export class SettingCriteria {
       this.code = builder.code;
     }
   }
+
+  public static get Builder(): typeof SettingCriteriaBuilder {
+    return SettingCriteriaBuilder;
+  }
 }

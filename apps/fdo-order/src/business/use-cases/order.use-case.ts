@@ -1,8 +1,10 @@
 import { UseCaseException } from '@lib/fdo-domain';
 import { StringNumberUtils } from '@lib/fdo-utils';
 import { DateUtils } from '@lib/fdo-utils/date.utils';
+import { Order } from '../../domain/entities/order/order.entity';
 import { Property } from '../../domain/entities/property/property.entity';
 import { Setting } from '../../domain/entities/setting/setting.entity';
+import { OrderLifeCycleEnum } from '../../domain/enums/order/order.enum';
 import { PropertyKeyEnum } from '../../domain/enums/property/property.enum';
 import { SettingCodeEnum } from '../../domain/enums/setting/setting.enum';
 
@@ -81,5 +83,19 @@ export class OrderUseCase {
           .build(),
       ])
       .build();
+  }
+
+  public static lifeCycleStateTransition(
+    order: Order,
+    lifeCycle: OrderLifeCycleEnum,
+  ): Order {
+    if (!Boolean(order)) {
+      throw new UseCaseException('The order is required');
+    }
+    if (!Boolean(lifeCycle)) {
+      throw new UseCaseException('The life cycle is required');
+    }
+
+    return new Order.Builder().copy(order).setLifeCycle(lifeCycle).build();
   }
 }

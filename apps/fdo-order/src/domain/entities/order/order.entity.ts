@@ -1,6 +1,7 @@
 import { EntityModel } from '@lib/fdo-database/mongodb/entity/entity.model';
 import { DateUtils } from '@lib/fdo-utils/date.utils';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { OrderLifeCycleEnum } from '../../enums/order/order.enum';
 import { Customer, CustomerSchema } from '../customer/customer.entity';
 import { OrderItem, OrderItemSchema } from '../order-item/order-item.entity';
 import { OrderBuilder } from './order.entity.builder';
@@ -30,7 +31,11 @@ export class Order extends EntityModel {
   })
   public readonly items: OrderItem[];
 
-  @Prop({ required: true, uppercase: true })
+  @Prop({
+    required: true,
+    uppercase: true,
+    default: OrderLifeCycleEnum.CREATED,
+  })
   public readonly lifeCycle: string;
 
   constructor(builder: OrderBuilder) {

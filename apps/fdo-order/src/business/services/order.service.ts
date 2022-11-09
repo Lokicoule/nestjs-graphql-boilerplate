@@ -5,7 +5,9 @@ import { OrderCriteria } from '../../domain/criterias/order/order.criteria';
 import { Customer } from '../../domain/entities/customer/customer.entity';
 import { OrderItem } from '../../domain/entities/order-item/order-item.entity';
 import { Order } from '../../domain/entities/order/order.entity';
+import { OrderLifeCycleEnum } from '../../domain/enums/order/order.enum';
 import { OrderRepository } from '../../persistence/repositories/order/order.repository';
+import { OrderUseCase } from '../use-cases/order.use-case';
 import { OrderSettingService } from './order-setting.service';
 
 @Injectable()
@@ -22,6 +24,8 @@ export class OrderService {
     if (!Boolean(order.code)) {
       return this.orderSettingService.generateOrder(order);
     }
+    OrderUseCase.lifeCycleStateTransition(order, OrderLifeCycleEnum.CREATED);
+
     this.validateOrder(order);
     return this.orderRepository
       .create(order)

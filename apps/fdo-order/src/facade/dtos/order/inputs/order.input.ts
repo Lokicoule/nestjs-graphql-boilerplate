@@ -27,6 +27,6 @@ export class OrderInput {
   @Field(() => [OrderItemInput], { name: 'items' })
   public readonly items: OrderItemInput[];
 
-  @Field(() => OrderLifeCycleEnum, { name: 'lifeCycle' })
+  @Field(() => OrderLifeCycleEnum, { name: 'lifeCycle', nullable: true })
   public readonly lifeCycle: OrderLifeCycleEnum;
 }

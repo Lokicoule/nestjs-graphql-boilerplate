@@ -1,10 +1,13 @@
 import { Module } from '@nestjs/common';
-import { FdoOrderController } from './fdo-order.controller';
-import { FdoOrderService } from './fdo-order.service';
+import { ConfigModule } from '@nestjs/config';
+import { PresentationModule } from './presentation/presentation.module';
 
 @Module({
-  imports: [],
-  controllers: [FdoOrderController],
-  providers: [FdoOrderService],
+  imports: [
+    ConfigModule.forRoot({
+      envFilePath: ['.env.development', '.env.prod'],
+    }),
+    PresentationModule,
+  ],
 })
 export class FdoOrderModule {}

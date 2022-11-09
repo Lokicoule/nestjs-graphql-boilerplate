@@ -8,9 +8,17 @@ export class OrderCriteria {
   public readonly lifeCycle?: string;
 
   constructor(builder: OrderCriteriaBuilder) {
-    this._id = builder.id;
-    this.code = builder.code;
-    this.customer = builder.customer;
-    this.lifeCycle = builder.lifeCycle;
+    if (Boolean(builder.id)) {
+      this._id = builder.id;
+    }
+    if (Boolean(builder.code)) {
+      this.code = builder.code;
+    }
+    if (Boolean(builder.customer)) {
+      this.customer = builder.customer;
+    }
+    if (Boolean(builder.lifeCycle)) {
+      this.lifeCycle = builder.lifeCycle;
+    }
   }
 }

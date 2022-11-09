@@ -6,8 +6,14 @@ export class CustomerCriteria {
   public readonly name?: string;
 
   constructor(builder: CustomerCriteriaBuilder) {
-    this._id = builder.id;
-    this.code = builder.code;
-    this.name = builder.name;
+    if (Boolean(builder.id)) {
+      this._id = builder.id;
+    }
+    if (Boolean(builder.code)) {
+      this.code = builder.code;
+    }
+    if (Boolean(builder.name)) {
+      this.name = builder.name;
+    }
   }
 }

@@ -27,7 +27,7 @@ describe('CustomerMapper', () => {
       const customerCriteriaInput: CustomerCriteriaInput = {
         id: undefined,
         code: 'code',
-        name: undefined,
+        name: null,
       } as CustomerCriteriaInput;
       const customerCriteria = CustomerMapper.mapCriteriaInputToCriteria(
         customerCriteriaInput,

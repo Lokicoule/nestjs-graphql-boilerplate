@@ -1,5 +1,4 @@
 import { CriteriaBuilder } from '@lib/fdo-domain';
-import { Customer } from '../../entities/customer/customer.entity';
 import { CustomerCriteria } from '../customer/customer.criteria';
 import { OrderCriteria } from './order.criteria';
 

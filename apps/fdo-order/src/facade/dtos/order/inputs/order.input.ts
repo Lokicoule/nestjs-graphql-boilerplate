@@ -1,6 +1,6 @@
 import { DateUtils } from '@lib/fdo-utils/date.utils';
 import { Field, InputType } from '@nestjs/graphql';
-import { OrderLifeCycleEnum } from 'apps/fdo-order/src/domain/enums/order/order.enum';
+import { OrderLifeCycleEnum } from '../../../../domain/enums/order/order.enum';
 import { CustomerInput } from '../../customer/customer.input';
 import { OrderItemInput } from '../../order-item/order-item.input';
 

@@ -1,6 +1,6 @@
-import { CustomerBuilder } from 'apps/fdo-order/src/domain/entities/customer/customer.entity.builder';
-import { OrderItem } from 'apps/fdo-order/src/domain/entities/order-item/order-item.entity';
-import { OrderLifeCycleEnum } from 'apps/fdo-order/src/domain/enums/order/order.enum';
+import { CustomerBuilder } from '../../../domain/entities/customer/customer.entity.builder';
+import { OrderItem } from '../../../domain/entities/order-item/order-item.entity';
+import { OrderLifeCycleEnum } from '../../../domain/enums/order/order.enum';
 import { Order } from '../../../domain/entities/order/order.entity';
 import { CustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
 import { OrderItemDtoBuilder } from '../../dtos/order-item/order-item.dto.builder';

@@ -1,5 +1,5 @@
 import { Field, InputType, PickType } from '@nestjs/graphql';
-import { SettingCodeEnum } from 'apps/fdo-customer/src/domain/enums/setting/setting.enum';
+import { SettingCodeEnum } from '../../../../../domain/enums/setting/setting.enum';
 import { Equals } from 'class-validator';
 import { CodeGeneratorPropertiesValidator } from '../../../../validators/code-generator.validator';
 import { PropertyInput } from '../../../property/property.input';

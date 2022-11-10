@@ -17,6 +17,14 @@ import { GraphQLModule } from '@nestjs/graphql';
                 name: 'customers',
                 url: configService.get('CUSTOMERS_APPLICATION_HTTP_URL'),
               },
+              {
+                name: 'orders',
+                url: configService.get('ORDERS_APPLICATION_HTTP_URL'),
+              },
+              {
+                name: 'products',
+                url: configService.get('PRODUCTS_APPLICATION_HTTP_URL'),
+              },
             ],
           }),
         },

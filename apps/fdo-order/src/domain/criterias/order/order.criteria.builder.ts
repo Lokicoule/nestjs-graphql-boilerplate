@@ -5,8 +5,8 @@ import { OrderCriteria } from './order.criteria';
 export class OrderCriteriaBuilder extends CriteriaBuilder<OrderCriteria> {
   private _id: string;
   private _code: string;
-  private _customer?: CustomerCriteria;
-  private _lifeCycle?: string;
+  private _customer: CustomerCriteria;
+  private _lifeCycle: string;
 
   public withId(id: string): OrderCriteriaBuilder {
     this._id = id;

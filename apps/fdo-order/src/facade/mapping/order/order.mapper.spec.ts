@@ -15,17 +15,30 @@ describe('OrderMapper', () => {
   describe('mapCriteriaInputToCriteria', () => {
     it('should map a OrderCriteriaInput to a OrderCriteria', () => {
       const orderCriteriaInput: OrderCriteriaInput = {
-        id: 'id',
-        code: 'code',
-        label: 'label',
+        customer: {
+          id: '5cc19bdcff7a251001e1f7e7',
+          name: 'toto',
+          code: '0001CL',
+        },
+        code: '0001',
+        id: '5cc19bdcff7a251001e1f7e7',
+        lifeCycle: OrderLifeCycleEnum.CREATED,
       } as OrderCriteriaInput;
       const orderCriteria =
         OrderMapper.mapCriteriaInputToCriteria(orderCriteriaInput);
-      expect(orderCriteria).toEqual({
-        _id: 'id',
-        code: 'code',
-        label: 'label',
-      });
+      expect(orderCriteria).toBeDefined();
+      expect(orderCriteria.customer).toBeDefined();
+      expect(JSON.stringify(orderCriteria.customer._id)).toEqual(
+        JSON.stringify(orderCriteriaInput.customer.id),
+      );
+      expect(orderCriteria.customer.name).toEqual(
+        orderCriteriaInput.customer.name,
+      );
+      expect(orderCriteria.customer.code).toEqual(
+        orderCriteriaInput.customer.code,
+      );
+      expect(orderCriteria.code).toEqual(orderCriteriaInput.code);
+      expect(orderCriteria.lifeCycle).toEqual(orderCriteriaInput.lifeCycle);
     });
 
     it('should map a OrderCriteriaInput with undefined values to a clean object without undefined properties', () => {
@@ -63,18 +76,17 @@ describe('OrderMapper', () => {
     });
 
     it('successfully maps an entity to a DTO with inherited fields and invalid id', () => {
-      const sharedDate = new Date();
-      const orderEntity = new Order.Builder()
-        .setId('id')
-        .setCreatedAt(sharedDate)
-        .setUpdatedAt(sharedDate)
+      const orderEntity: Order = new Order.Builder()
+        .setId('invalidId')
+        .setCreatedAt(new Date())
+        .setUpdatedAt(new Date())
         .build();
 
       const orderDto = OrderMapper.mapToDto(orderEntity);
-      expect(orderDto.id).toEqual(orderEntity._id);
+
       expect(orderDto.id).toBeUndefined();
-      expect(orderDto.createdAt).toEqual(orderEntity.createdAt);
-      expect(orderDto.updatedAt).toEqual(orderEntity.updatedAt);
+      expect(orderDto.createdAt).toBeDefined();
+      expect(orderDto.updatedAt).toBeDefined();
     });
 
     it('successfully maps an entity to a DTO with inherited fields and valid id', () => {

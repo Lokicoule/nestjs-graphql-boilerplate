@@ -7,21 +7,21 @@ import { ProductMapper } from '../product/product.mapper';
 export class OrderItemMapper {
   public static mapToDto(orderItem: OrderItem): OrderItemDto {
     const orderItemDto = new OrderItemDtoBuilder()
-      .setId(orderItem._id?.toString())
-      .setCreatedAt(orderItem.createdAt)
-      .setUpdatedAt(orderItem.updatedAt)
-      .setAmount(orderItem.amount)
-      .setBatchNumber(orderItem.batchNumber)
-      .setBestBeforeDate(orderItem.bestBeforeDate)
-      .setContainerNumber(orderItem.containerNumber)
-      .setUnitPrice(orderItem.unitPrice)
-      .setProduct(ProductMapper.mapToDto(orderItem.product))
+      .setId(orderItem?._id?.toString())
+      .setCreatedAt(orderItem?.createdAt)
+      .setUpdatedAt(orderItem?.updatedAt)
+      .setAmount(orderItem?.amount)
+      .setBatchNumber(orderItem?.batchNumber)
+      .setBestBeforeDate(orderItem?.bestBeforeDate)
+      .setContainerNumber(orderItem?.containerNumber)
+      .setUnitPrice(orderItem?.unitPrice)
+      .setProduct(ProductMapper.mapToDto(orderItem?.product))
       .build();
     return orderItemDto;
   }
 
   public static mapListToDtoList(orderItemList: OrderItem[]): OrderItemDto[] {
-    return orderItemList.map((item) => OrderItemMapper.mapToDto(item));
+    return orderItemList?.map((item) => OrderItemMapper.mapToDto(item));
   }
 
   public static mapToEntity(
@@ -43,6 +43,6 @@ export class OrderItemMapper {
   public static mapListToEntityList(
     orderItemDtoList: OrderItemDto[] | Partial<OrderItemInput>[],
   ): OrderItem[] {
-    return orderItemDtoList.map((item) => OrderItemMapper.mapToEntity(item));
+    return orderItemDtoList?.map((item) => OrderItemMapper.mapToEntity(item));
   }
 }

@@ -36,7 +36,7 @@ export class CustomerMapper {
    */
   public static mapToDto(customer: Customer): CustomerDto {
     const customerDto = new CustomerDtoBuilder()
-      .setId(customer._id?.toString())
+      .setId(customer?._id?.toString())
       .setCreatedAt(customer?.createdAt)
       .setUpdatedAt(customer?.updatedAt)
       .setCode(customer?.code)

@@ -3,5 +3,5 @@ import { OrderInput } from './order.input';
 
 @InputType()
 export class OrderCriteriaInput extends PartialType(
-  PickType(OrderInput, ['id', 'code', 'customer']),
+  PickType(OrderInput, ['id', 'code', 'customer', 'lifeCycle']),
 ) {}

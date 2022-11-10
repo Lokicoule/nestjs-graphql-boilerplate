@@ -21,21 +21,25 @@ export class OrderMapper {
     const criteriaBuilder = new OrderCriteriaBuilder()
       .withId(orderCriteria?.id)
       .withCode(orderCriteria?.code)
-      .withCustomer(orderCriteria?.customer);
+      .withCustomer(
+        orderCriteria?.customer &&
+          CustomerMapper.mapCriteriaInputToCriteria(orderCriteria?.customer),
+      )
+      .withLifeCycle(orderCriteria?.lifeCycle);
     return criteriaBuilder.buildCriteria();
   }
 
   public static mapToDto(order: Order): OrderDto {
     const orderDto = new OrderDtoBuilder()
-      .setId(order._id?.toString())
-      .setCreatedAt(order.createdAt)
-      .setUpdatedAt(order.updatedAt)
-      .setCode(order.code)
-      .setBillingDate(order.billingDate)
-      .setDueDate(order.dueDate)
-      .setCustomer(CustomerMapper.mapToDto(order.customer))
-      .setItems(OrderItemMapper.mapListToDtoList(order.items))
-      .setLifeCycle(order.lifeCycle)
+      .setId(order?._id?.toString())
+      .setCreatedAt(order?.createdAt)
+      .setUpdatedAt(order?.updatedAt)
+      .setCode(order?.code)
+      .setBillingDate(order?.billingDate)
+      .setDueDate(order?.dueDate)
+      .setCustomer(order?.customer && CustomerMapper.mapToDto(order?.customer))
+      .setItems(order?.items && OrderItemMapper.mapListToDtoList(order?.items))
+      .setLifeCycle(order?.lifeCycle)
       .build();
     return orderDto;
   }
@@ -50,8 +54,12 @@ export class OrderMapper {
       .setCode(orderDto?.code)
       .setBillingDate(orderDto?.billingDate)
       .setDueDate(orderDto?.dueDate)
-      .setCustomer(CustomerMapper.mapToEntity(orderDto?.customer))
-      .setItems(OrderItemMapper.mapListToEntityList(orderDto?.items))
+      .setCustomer(
+        orderDto?.customer && CustomerMapper.mapToEntity(orderDto?.customer),
+      )
+      .setItems(
+        orderDto?.items && OrderItemMapper.mapListToEntityList(orderDto?.items),
+      )
       .setLifeCycle(orderDto?.lifeCycle)
       .build();
 

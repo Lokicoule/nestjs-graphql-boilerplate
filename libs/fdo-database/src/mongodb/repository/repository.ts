@@ -44,6 +44,13 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
     return from(this.model.findByIdAndUpdate(id, entity));
   }
 
+  public replace(
+    conditions: FilterQuery<T>,
+    entity: Partial<T>,
+  ): Observable<T> {
+    return from(this.model.findByIdAndUpdate(conditions, { $set: entity }));
+  }
+
   public createOrUpdate(
     conditions: FilterQuery<T>,
     entity: Partial<T>,

@@ -15,6 +15,7 @@ interface IQueryRepository<T> extends IPopulate {
 interface IMutationRepository<T> {
   create(item: Partial<T>): Observable<T>;
   updateById(id: any, item: Partial<T>): Observable<T>;
+  replace(conditions: FilterQuery<T>, entity: Partial<T>): Observable<T>;
   createOrUpdate(conditions: any, item: T): Observable<T>;
   removeById(id: any): Observable<T>;
   removeByIds(ids: any[]): Observable<boolean>;

@@ -44,6 +44,13 @@ export class OrderService {
     return this.orderRepository.updateById(order._id, order);
   }
 
+  public replaceOrderByCriteria(
+    orderCriteria: OrderCriteria,
+    order: Order,
+  ): Observable<Order> {
+    return this.orderRepository.replace(orderCriteria, order);
+  }
+
   public removeOrderById(id: string): Observable<Order> {
     return this.orderRepository.removeById(id);
   }

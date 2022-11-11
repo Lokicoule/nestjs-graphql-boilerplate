@@ -23,6 +23,18 @@ export class OrdersManagementFacade {
       .pipe(map(OrderMapper.mapToDto));
   }
 
+  public replaceOrderByCriteria(
+    orderCriteria: OrderCriteriaInput,
+    input: Partial<OrderUpdateInput>,
+  ): Observable<OrderDto> {
+    return this.orderService
+      .replaceOrderByCriteria(
+        OrderMapper.mapCriteriaInputToCriteria(orderCriteria),
+        OrderMapper.mapToEntity(input),
+      )
+      .pipe(map(OrderMapper.mapToDto));
+  }
+
   public removeOrderById(orderId: string): Observable<OrderDto> {
     return this.orderService
       .removeOrderById(orderId)

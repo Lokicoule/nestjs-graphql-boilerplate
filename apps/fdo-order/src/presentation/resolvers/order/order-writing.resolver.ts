@@ -4,6 +4,7 @@ import { OrderUpdateInput } from '../../../facade/dtos/order/inputs/order-update
 import { Observable } from 'rxjs';
 import { OrderDto } from '../../../facade/dtos/order/order.dto';
 import { OrdersManagementFacade } from '../../../facade/frontoffice/orders-management.facade';
+import { OrderCriteriaInput } from 'apps/fdo-order/src/facade/dtos/order/inputs/order-criteria.input';
 
 @Resolver(() => OrderDto)
 export class OrderWritingResolver {

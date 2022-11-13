@@ -23,6 +23,13 @@
       "entryFile": "main",
       "sourceRoot": "apps/fdo-customer/src",
       "compilerOptions": {
+        "assets": [
+          {
+            "include": "data/i18n/**/*",
+            "watchAssets": true,
+            "outDir": "dist/apps/fdo-customer"
+          }
+        ],
         "tsConfigPath": "apps/fdo-customer/tsconfig.app.json"
       }
     },

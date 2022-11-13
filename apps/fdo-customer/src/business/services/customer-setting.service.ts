@@ -55,7 +55,7 @@ export class CustomerSettingService {
     const listErrors: string[] = [];
 
     if (!Boolean(setting.code)) {
-      listErrors.push('The setting code is required');
+      listErrors.push('setting.code.required');
     }
     if (setting.code !== SettingCodeEnum.CODE_GENERATOR) {
       listErrors.push('The setting code is not valid');
@@ -66,7 +66,7 @@ export class CustomerSettingService {
     );
 
     if (listErrors.length > 0) {
-      throw new UseCaseException(JSON.stringify(listErrors));
+      throw new UseCaseException(listErrors);
     }
   }
 

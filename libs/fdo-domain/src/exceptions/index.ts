@@ -1,2 +1,2 @@
-export * from './techinal.exception';
+export * from './technical.exception';
 export * from './use-case.exception';

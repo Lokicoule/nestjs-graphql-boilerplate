@@ -37,7 +37,7 @@ export class OrderService {
       throw new TechnicalException('The order is null or undefined');
     }
     if (!Boolean(order._id)) {
-      throw new TechnicalException('The order id is required');
+      throw new UseCaseException('The order id is required');
     }
 
     this.validateOrder(order);

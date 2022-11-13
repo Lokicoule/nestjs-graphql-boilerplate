@@ -31,7 +31,7 @@ export class ProductService {
       throw new TechnicalException('The product is null or undefined');
     }
     if (!Boolean(product._id)) {
-      throw new TechnicalException('The product id is required');
+      throw new UseCaseException('The product id is required');
     }
 
     this.validateProduct(product);

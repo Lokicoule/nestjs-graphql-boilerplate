@@ -7,13 +7,11 @@ import { Customer } from '../../domain/entities/customer/customer.entity';
 import { CustomerRepository } from '../../persistence/repositories/customer/customer.repository';
 import { AddressUseCase } from '../use-cases/address.use-case';
 import { CustomerSettingService } from './customer-setting.service';
-import { SettingService } from './setting.service';
 
 @Injectable()
 export class CustomerService {
   constructor(
     private readonly _customerRepository: CustomerRepository,
-    private readonly _settingService: SettingService,
     private readonly customerSettingService: CustomerSettingService,
   ) {}
 
@@ -35,7 +33,7 @@ export class CustomerService {
       throw new TechnicalException('The customer is null or undefined');
     }
     if (!Boolean(customer._id)) {
-      throw new TechnicalException('The customer id is required');
+      throw new UseCaseException('The customer id is required');
     }
 
     this.validateCustomer(customer);

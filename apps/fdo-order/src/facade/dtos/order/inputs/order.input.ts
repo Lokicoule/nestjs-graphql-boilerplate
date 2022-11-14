@@ -1,4 +1,3 @@
-import { DateUtils } from '@lib/fdo-utils/date.utils';
 import { Field, InputType } from '@nestjs/graphql';
 import { OrderLifeCycleEnum } from '../../../../domain/enums/order/order.enum';
 import { CustomerInput } from '../../customer/customer.input';
@@ -12,12 +11,15 @@ export class OrderInput {
   @Field(() => String, { name: 'code', nullable: true })
   public readonly code: string;
 
-  @Field(() => Date, { name: 'billingDate', defaultValue: DateUtils.now })
+  @Field(() => Date, {
+    name: 'billingDate',
+    nullable: true,
+  })
   public readonly billingDate: Date;
 
   @Field(() => Date, {
     name: 'dueDate',
-    defaultValue: DateUtils.addDays(DateUtils.now, 30),
+    nullable: true,
   })
   public readonly dueDate: Date;
 

@@ -1,8 +1,7 @@
+import { CustomExceptionFilter, LoggingInterceptor } from '@lib/fdo-graphql';
 import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { FacadeModule } from '../facade/facade.module';
-import { CustomExceptionFilter } from './filters/custom-exception.filter';
-import { LoggingInterceptor } from './interceptors/logging.interceptor';
 import { ApolloProviderModule } from './providers/apollo/apollo.provider.module';
 import { CustomerSettingWritingResolver } from './resolvers/customer-setting/customer-setting-writing.resolver';
 import { CustomerDeletingResolver } from './resolvers/customer/customer-deleting.resolver';

@@ -1,4 +1,6 @@
+import { CustomExceptionFilter, LoggingInterceptor } from '@lib/fdo-graphql';
 import { Module } from '@nestjs/common';
+import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { FacadeModule } from '../facade/facade.module';
 import { ApolloProviderModule } from './providers/apollo/apollo.provider.module';
 import { ProductSettingWritingResolver } from './resolvers/product-setting/product-setting-writing.resolver';
@@ -19,6 +21,17 @@ const settingResolvers = [SettingReadingResolver, SettingWritingResolver];
 
 @Module({
   imports: [ApolloProviderModule, FacadeModule],
-  providers: [...productResolvers, ...settingResolvers],
+  providers: [
+    ...productResolvers,
+    ...settingResolvers,
+    {
+      provide: APP_FILTER,
+      useClass: CustomExceptionFilter,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggingInterceptor,
+    },
+  ],
 })
 export class PresentationModule {}

@@ -44,7 +44,7 @@ export class CustomExceptionFilter implements GqlExceptionFilter {
     rawArgs: string,
   ) {
     const operation = info.operation.operation.toUpperCase();
-    this.logger.log(
+    this.logger.error(
       `${operation} ${info.fieldName} [Args: ${rawArgs}] ${exception.message} ${exception.stack}`,
     );
   }

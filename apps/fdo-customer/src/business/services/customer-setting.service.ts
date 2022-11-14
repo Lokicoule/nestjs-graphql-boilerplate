@@ -55,7 +55,7 @@ export class CustomerSettingService {
     const listErrors: string[] = [];
 
     if (!Boolean(setting.code)) {
-      listErrors.push('setting.code.required');
+      listErrors.push('The code is null or undefined');
     }
     if (setting.code !== SettingCodeEnum.CODE_GENERATOR) {
       listErrors.push('The setting code is not valid');

@@ -131,6 +131,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/fdo-validator/tsconfig.lib.json"
       }
+    },
+    "fdo-user": {
+      "type": "application",
+      "root": "apps/fdo-user",
+      "entryFile": "main",
+      "sourceRoot": "apps/fdo-user/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/fdo-user/tsconfig.app.json"
+      }
     }
   }
 }

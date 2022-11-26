@@ -58,7 +58,7 @@ describe('StringValidationUtils', () => {
 
   describe('isVAT', () => {
     it('should return true if VAT is valid', () => {
-      expect(StringValidationUtils.isVAT('FR123456789')).toBe(true);
+      expect(StringValidationUtils.isVAT('FR12345678999')).toBe(true);
     });
 
     it('should return false if VAT is invalid', () => {

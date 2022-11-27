@@ -1,9 +1,11 @@
+import { Authentication } from '@nestjs-cognito/graphql';
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { UserCriteriaInput } from '../../../facade/dtos/user/inputs/user-criteria.input';
-import { UsersManagementFacade } from '../../../facade/frontoffice/users-management.facade';
 import { Observable } from 'rxjs';
+import { UserCriteriaInput } from '../../../facade/dtos/user/inputs/user-criteria.input';
 import { UserDto } from '../../../facade/dtos/user/user.dto';
+import { UsersManagementFacade } from '../../../facade/frontoffice/users-management.facade';
 
+@Authentication()
 @Resolver(() => UserDto)
 export class UserReadingResolver {
   constructor(private readonly usersManagementFacade: UsersManagementFacade) {}

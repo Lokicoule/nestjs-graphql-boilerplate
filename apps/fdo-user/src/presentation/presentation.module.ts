@@ -3,13 +3,14 @@ import { Module } from '@nestjs/common';
 import { APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core';
 import { FacadeModule } from '../facade/facade.module';
 import { ApolloProviderModule } from './providers/apollo/apollo.provider.module';
-import { UserWritingResolver } from './resolvers/user/user-writing.resolver';
+import { CognitoProviderModule } from './providers/cognito/cognito.provider.module';
 import { UserReadingResolver } from './resolvers/user/user-reading.resolver';
+import { UserWritingResolver } from './resolvers/user/user-writing.resolver';
 
 const userResolvers = [UserReadingResolver, UserWritingResolver];
 
 @Module({
-  imports: [ApolloProviderModule, FacadeModule],
+  imports: [ApolloProviderModule, CognitoProviderModule, FacadeModule],
   providers: [
     ...userResolvers,
     {

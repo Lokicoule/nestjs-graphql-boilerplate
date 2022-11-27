@@ -4,7 +4,9 @@ import { UserUpdateInput } from '../../../facade/dtos/user/inputs/user-update.in
 import { Observable } from 'rxjs';
 import { UserDto } from '../../../facade/dtos/user/user.dto';
 import { UsersManagementFacade } from '../../../facade/frontoffice/users-management.facade';
+import { Authentication } from '@nestjs-cognito/graphql';
 
+@Authentication()
 @Resolver(() => UserDto)
 export class UserWritingResolver {
   constructor(private readonly usersManagementFacade: UsersManagementFacade) {}

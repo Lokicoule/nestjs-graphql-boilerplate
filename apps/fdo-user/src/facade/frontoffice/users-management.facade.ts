@@ -23,6 +23,12 @@ export class UsersManagementFacade {
       .pipe(map(UserMapper.mapToDto));
   }
 
+  public replaceUser(input: UserUpdateInput): Observable<UserDto> {
+    return this.userService
+      .replaceUser(UserMapper.mapToEntity(input))
+      .pipe(map(UserMapper.mapToDto));
+  }
+
   public findUserById(userId: string): Observable<UserDto> {
     return this.userService.findUserById(userId).pipe(map(UserMapper.mapToDto));
   }

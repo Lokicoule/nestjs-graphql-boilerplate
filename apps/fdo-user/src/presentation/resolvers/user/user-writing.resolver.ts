@@ -26,4 +26,12 @@ export class UserWritingResolver {
   ): Observable<UserDto> {
     return this.usersManagementFacade.updateUser(payload);
   }
+
+  @Mutation(() => UserDto, { name: `replaceUser` })
+  replace(
+    @Args('replaceUserInput')
+    payload: UserUpdateInput,
+  ): Observable<UserDto> {
+    return this.usersManagementFacade.replaceUser(payload);
+  }
 }

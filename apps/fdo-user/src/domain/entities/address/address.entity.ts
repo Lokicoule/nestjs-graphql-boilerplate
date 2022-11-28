@@ -1,4 +1,5 @@
 import { EntityModel } from '@lib/fdo-database/mongodb/entity/entity.model';
+import { StringValidationUtils } from '@lib/fdo-utils/string-validation.utils';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AddressBuilder } from './address.entity.builder';
 
@@ -31,7 +32,7 @@ export class Address extends EntityModel {
 
   @Prop({
     required: true,
-    match: /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/,
+    match: StringValidationUtils.PATTERNS.ZIP_CODE,
   })
   public readonly zipCode: string;
 

@@ -3,6 +3,7 @@ import { StringValidationUtils } from '@lib/fdo-utils/string-validation.utils';
 import { Injectable } from '@nestjs/common';
 import { Observable, throwIfEmpty } from 'rxjs';
 import { UserCriteria } from '../../domain/criterias/user/user.criteria';
+import { UserCriteriaBuilder } from '../../domain/criterias/user/user.criteria.builder';
 import { Address } from '../../domain/entities/address/address.entity';
 import { Company } from '../../domain/entities/company/company.entity';
 import { User } from '../../domain/entities/user/user.entity';
@@ -33,6 +34,32 @@ export class UserService {
 
     this.validateUser(user);
     return this.userRepository.updateById(user._id, user);
+  }
+
+  /**
+   * This method is used to add or replace data in the user collection
+   * @param user
+   * @returns {Observable<User>}
+   * @memberof UserService
+   */
+  public replaceUser(user: User): Observable<User> {
+    if (!Boolean(user)) {
+      throw new TechnicalException('The user is null or undefined');
+    }
+    const userCriteriaBuilder = new UserCriteriaBuilder();
+
+    if (Boolean(user._id)) {
+      userCriteriaBuilder.withId(user._id.toString());
+    } else if (Boolean(user.email)) {
+      userCriteriaBuilder.withEmail(user.email);
+    } else {
+      throw new UseCaseException('Expected id or email');
+    }
+
+    return this.userRepository.replace(
+      userCriteriaBuilder.buildCriteria(),
+      user,
+    );
   }
 
   public findUserById(id: string): Observable<User> {
@@ -73,15 +100,11 @@ export class UserService {
     if (Boolean(user.address)) {
       const addressErrors = this.validateAddress(user.address);
       listErrors.push(...addressErrors);
-    } else {
-      listErrors.push('The address is required');
     }
 
     if (Boolean(user.company)) {
       const companyErrors = this.validateCompany(user.company);
       listErrors.push(...companyErrors);
-    } else {
-      listErrors.push('The company is required');
     }
 
     if (listErrors.length > 0) {

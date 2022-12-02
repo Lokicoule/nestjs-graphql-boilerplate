@@ -2,11 +2,11 @@ export class StringValidationUtils {
   public static PATTERNS = {
     EMAIL: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
     PHONE: /^(\+\d{2}|00\d{2}|0)[1-9](\d{2}){4}$/,
-    RCS: /^RCS\s[A-Z]+\s([A-Z]\s)?[0-9]{3}\s[0-9]{3}\s[0-9]{3}$/,
-    SIRET: /^[0-9]{14}$/,
-    SIREN: /^[0-9]{9}$/,
-    VAT: /^[A-Z]{2}[0-9]{11}$/,
-    ZIP_CODE: /^[0-9]{5}$/,
+    RCS: /^RCS\s[A-Z]+\s([A-Z]\s?)?\d{3}\s?\d{3}\s?\d{3}$/,
+    SIRET: /^\d{3}\s?\d{3}\s?\d{3}\s\d{5}$/,
+    SIREN: /^\d{3}\s?\d{3}\s?\d{3}$/,
+    VAT: /^[a-zA-Z]{2}\s?\d{2}\s?\d{3}\s?\d{3}\s?\d{3}$/,
+    ZIP_CODE: /^\d{5}$/,
   };
 
   public static isEmail(email: string): boolean {

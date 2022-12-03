@@ -13,9 +13,8 @@ describe('UserBuilder', () => {
         new Address.Builder()
           .setCountry('country')
           .setCity('city')
-          .setState('state')
-          .setStreet('street')
-          .setNumber('number')
+          .setAdditionalAddress('additionalAddress')
+          .setAddress('address')
           .build(),
       )
       .setCompany(

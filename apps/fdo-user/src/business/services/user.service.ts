@@ -115,16 +115,12 @@ export class UserService {
   private validateAddress(address: Address): string[] {
     const listErrors: string[] = [];
 
-    if (!Boolean(address.street)) {
-      listErrors.push('The street is required');
+    if (!Boolean(address.address)) {
+      listErrors.push('The address is required');
     }
 
     if (!Boolean(address.city)) {
       listErrors.push('The city is required');
-    }
-
-    if (!Boolean(address.state)) {
-      listErrors.push('The state is required');
     }
 
     if (!Boolean(address.country)) {
@@ -135,10 +131,6 @@ export class UserService {
       listErrors.push('The zip code is required');
     } else if (!StringValidationUtils.isZipCode(address.zipCode)) {
       listErrors.push('The zip code is invalid');
-    }
-
-    if (!Boolean(address.number)) {
-      listErrors.push('The number is required');
     }
 
     return listErrors;

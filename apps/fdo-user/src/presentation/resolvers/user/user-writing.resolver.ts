@@ -1,10 +1,10 @@
+import { Authentication } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Observable } from 'rxjs';
 import { UserCreateInput } from '../../../facade/dtos/user/inputs/user-create.input';
 import { UserUpdateInput } from '../../../facade/dtos/user/inputs/user-update.input';
-import { Observable } from 'rxjs';
 import { UserDto } from '../../../facade/dtos/user/user.dto';
 import { UsersManagementFacade } from '../../../facade/frontoffice/users-management.facade';
-import { Authentication } from '@nestjs-cognito/graphql';
 
 @Authentication()
 @Resolver(() => UserDto)
@@ -25,13 +25,5 @@ export class UserWritingResolver {
     payload: UserUpdateInput,
   ): Observable<UserDto> {
     return this.usersManagementFacade.updateUser(payload);
-  }
-
-  @Mutation(() => UserDto, { name: `replaceUser` })
-  replace(
-    @Args('replaceUserInput')
-    payload: UserUpdateInput,
-  ): Observable<UserDto> {
-    return this.usersManagementFacade.replaceUser(payload);
   }
 }

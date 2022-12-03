@@ -7,19 +7,27 @@ import { AddressDto } from './address.dto';
  * @see AddressDto
  */
 export class AddressDtoBuilder extends DtoBuilder {
-  private _street: string;
+  private _address: string;
+  private _additionalAddress: string;
   private _city: string;
-  private _state: string;
-  private _zipCode: string;
   private _country: string;
-  private _number: string;
+  private _zipCode: string;
 
-  public get street(): string {
-    return this._street;
+  public get address(): string {
+    return this._address;
   }
 
-  public setStreet(value: string) {
-    this._street = value;
+  public setAddress(value: string) {
+    this._address = value;
+    return this;
+  }
+
+  public get additionalAddress(): string {
+    return this._additionalAddress;
+  }
+
+  public setAdditionalAddress(value: string) {
+    this._additionalAddress = value;
     return this;
   }
 
@@ -32,24 +40,6 @@ export class AddressDtoBuilder extends DtoBuilder {
     return this;
   }
 
-  public get state(): string {
-    return this._state;
-  }
-
-  public setState(value: string) {
-    this._state = value;
-    return this;
-  }
-
-  public get zipCode(): string {
-    return this._zipCode;
-  }
-
-  public setZipCode(value: string) {
-    this._zipCode = value;
-    return this;
-  }
-
   public get country(): string {
     return this._country;
   }
@@ -59,12 +49,12 @@ export class AddressDtoBuilder extends DtoBuilder {
     return this;
   }
 
-  public get number(): string {
-    return this._number;
+  public get zipCode(): string {
+    return this._zipCode;
   }
 
-  public setNumber(value: string) {
-    this._number = value;
+  public setZipCode(value: string) {
+    this._zipCode = value;
     return this;
   }
 

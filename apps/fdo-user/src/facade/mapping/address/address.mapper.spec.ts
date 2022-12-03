@@ -8,9 +8,9 @@ describe('AddressMapper', () => {
   describe('mapToDto', () => {
     it('successfully maps an entity to a DTO', () => {
       const addressEntity = new Address.Builder()
-        .setStreet('street')
+        .setAddress('address')
         .setCity('city')
-        .setState('state')
+        .setAdditionalAddress('additionalAddress')
         .setZipCode('zipCode')
         .setCountry('country')
         .build();
@@ -18,8 +18,10 @@ describe('AddressMapper', () => {
       const addressDto = AddressMapper.mapToDto(addressEntity);
       expect(addressDto.city).toEqual(addressEntity.city);
       expect(addressDto.country).toEqual(addressEntity.country);
-      expect(addressDto.state).toEqual(addressEntity.state);
-      expect(addressDto.street).toEqual(addressEntity.street);
+      expect(addressDto.additionalAddress).toEqual(
+        addressEntity.additionalAddress,
+      );
+      expect(addressDto.address).toEqual(addressEntity.address);
       expect(addressDto.zipCode).toEqual(addressEntity.zipCode);
     });
 
@@ -71,9 +73,9 @@ describe('AddressMapper', () => {
 
     it('successfully maps an Input to an entity', () => {
       const addressInput: AddressInput = {
-        street: 'street',
+        address: 'address',
         city: 'city',
-        state: 'state',
+        additionalAddress: 'additionalAddress',
         zipCode: 'zipCode',
         country: 'country',
       } as AddressInput;
@@ -82,8 +84,10 @@ describe('AddressMapper', () => {
       expect(addressEntity.city).toEqual(addressInput.city);
       expect(addressEntity.country).toEqual(addressInput.country);
       expect(addressEntity.zipCode).toEqual(addressInput.zipCode);
-      expect(addressEntity.state).toEqual(addressInput.state);
-      expect(addressEntity.street).toEqual(addressInput.street);
+      expect(addressEntity.additionalAddress).toEqual(
+        addressInput.additionalAddress,
+      );
+      expect(addressEntity.address).toEqual(addressInput.address);
     });
   });
 });

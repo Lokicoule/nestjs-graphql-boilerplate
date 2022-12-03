@@ -15,7 +15,6 @@ describe('StringValidationUtils', () => {
     it('should return true if phone is valid', () => {
       expect(StringValidationUtils.isPhone('0123456789')).toBeTruthy();
       expect(StringValidationUtils.isPhone('+33123456789')).toBeTruthy();
-      expect(StringValidationUtils.isPhone('0033123456789')).toBeTruthy();
     });
 
     it('should return false if phone is invalid', () => {

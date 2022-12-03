@@ -7,28 +7,25 @@ import { AddressBuilder } from './address.entity.builder';
  * @class Address
  * @description Address class is used to represent an address.
  * @extends EntityModel
- * @property {string} street - The street.
+ * @property {string} address - The address.
  * @property {string} city - The city.
- * @property {string} state - The state.
+ * @property {string} additionalAddress - The additionalAddress.
  * @property {string} zipCode - The zip code.
  * @property {string} country - The country.
  */
 @Schema({ timestamps: true })
 export class Address extends EntityModel {
   @Prop({ required: true })
+  public readonly address: string;
+
+  @Prop({ required: false })
+  public readonly additionalAddress: string;
+
+  @Prop({ required: true })
   public readonly city: string;
 
   @Prop({ required: true })
   public readonly country: string;
-
-  @Prop({ required: true })
-  public readonly state: string;
-
-  @Prop({ required: true })
-  public readonly street: string;
-
-  @Prop({ required: true })
-  public readonly number: string;
 
   @Prop({
     required: true,
@@ -38,12 +35,11 @@ export class Address extends EntityModel {
 
   constructor(builder: AddressBuilder) {
     super(builder);
-    this.street = builder.street;
+    this.address = builder.address;
     this.city = builder.city;
-    this.state = builder.state;
+    this.additionalAddress = builder.additionalAddress;
     this.zipCode = builder.zipCode;
     this.country = builder.country;
-    this.number = builder.number;
   }
 
   public static get Builder(): typeof AddressBuilder {

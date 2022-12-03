@@ -6,6 +6,7 @@ import { UserCreateInput } from '../dtos/user/inputs/user-create.input';
 import { UserCriteriaInput } from '../dtos/user/inputs/user-criteria.input';
 import { UserUpdateInput } from '../dtos/user/inputs/user-update.input';
 import { UserMapper } from '../mapping/user/user.mapper';
+import { UserInput } from '../dtos/user/inputs/user.input';
 
 @Injectable()
 export class UsersManagementFacade {
@@ -23,7 +24,7 @@ export class UsersManagementFacade {
       .pipe(map(UserMapper.mapToDto));
   }
 
-  public replaceUser(input: UserUpdateInput): Observable<UserDto> {
+  public replaceUser(input: UserInput): Observable<UserDto> {
     return this.userService
       .replaceUser(UserMapper.mapToEntity(input))
       .pipe(map(UserMapper.mapToDto));

@@ -1,7 +1,7 @@
 export class StringValidationUtils {
   public static PATTERNS = {
     EMAIL: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-    PHONE: /^(\+\d{2}|00\d{2}|0)[1-9](\d{2}){4}$/,
+    PHONE: /^(\+33|0)[1-9]\s?(\d{2}\s?){4}$/,
     RCS: /^RCS\s[A-Z]+\s([A-Z]\s?)?\d{3}\s?\d{3}\s?\d{3}$/,
     SIRET: /^\d{3}\s?\d{3}\s?\d{3}\s\d{5}$/,
     SIREN: /^\d{3}\s?\d{3}\s?\d{3}$/,

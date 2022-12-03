@@ -19,12 +19,11 @@ export class AddressMapper {
       .setId(address._id?.toString())
       .setCreatedAt(address.createdAt)
       .setUpdatedAt(address.updatedAt)
-      .setStreet(address.street)
+      .setAddress(address.address)
       .setCity(address.city)
-      .setState(address.state)
+      .setAdditionalAddress(address?.additionalAddress)
       .setZipCode(address.zipCode)
       .setCountry(address.country)
-      .setNumber(address.number)
       .build();
     return addressDto;
   }
@@ -37,12 +36,11 @@ export class AddressMapper {
    */
   public static mapToEntity(addressDto: AddressInput | AddressDto): Address {
     const address = new Address.Builder()
-      .setStreet(addressDto?.street)
+      .setAddress(addressDto?.address)
       .setCity(addressDto?.city)
-      .setState(addressDto?.state)
+      .setAdditionalAddress(addressDto?.additionalAddress)
       .setZipCode(addressDto?.zipCode)
       .setCountry(addressDto?.country)
-      .setNumber(addressDto?.number)
       .build();
     return address;
   }

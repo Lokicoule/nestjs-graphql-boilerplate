@@ -1,3 +1,4 @@
+import { TransactionModule } from '@lib/fdo-database/mongodb/transaction/transaction.module';
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { User, UserSchema } from '../domain/entities/user/user.entity';
@@ -8,8 +9,9 @@ import { UserRepository } from './repositories/user/user.repository';
   imports: [
     MongoDBProviderModule,
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    TransactionModule,
   ],
   providers: [UserRepository],
-  exports: [UserRepository],
+  exports: [UserRepository, TransactionModule],
 })
 export class PersistenceModule {}

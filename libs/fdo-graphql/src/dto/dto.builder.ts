@@ -35,4 +35,11 @@ export class DtoBuilder {
   build(): DtoModel {
     return new DtoModel(this);
   }
+
+  copy(dto: DtoModel): DtoBuilder {
+    this._id = dto.id;
+    this._createdAt = dto.createdAt;
+    this._updatedAt = dto.updatedAt;
+    return this;
+  }
 }

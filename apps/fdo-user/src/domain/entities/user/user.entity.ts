@@ -6,6 +6,9 @@ import { UserBuilder } from './user.entity.builder';
 
 @Schema({ timestamps: true })
 export class User extends EntityModel {
+  @Prop({ required: true })
+  public readonly cognitoId: string;
+
   @Prop({ required: true, uppercase: true })
   public readonly firstName: string;
 
@@ -30,6 +33,7 @@ export class User extends EntityModel {
 
   constructor(builder: UserBuilder) {
     super(builder);
+    this.cognitoId = builder.cognitoId;
     this.firstName = builder.firstName;
     this.lastName = builder.lastName;
     this.email = builder.email;

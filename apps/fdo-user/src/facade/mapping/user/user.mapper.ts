@@ -7,6 +7,7 @@ import { UserDto } from '../../dtos/user/user.dto';
 import { UserDtoBuilder } from '../../dtos/user/user.dto.builder';
 import { AddressMapper } from '../address/address.mapper';
 import { CompanyMapper } from '../company/company.mapper';
+import { User as CognitoUser } from '@nestjs-cognito/auth';
 
 /**
  * @class UserMapper
@@ -63,11 +64,16 @@ export class UserMapper {
    * @method mapToEntity
    * @description Maps a UserDto to a User
    * @param {UserDto | UserInput} userDto - The UserDto or the UserInput to map
+   * @param {CognitoUser} cognitoUser - The authenticated user to map
    * @returns {User} - The mapped User
    */
-  public static mapToEntity(userDto: UserDto | Partial<UserInput>): User {
+  public static mapToEntity(
+    userDto: UserDto | Partial<UserInput>,
+    cognitoUser?: CognitoUser,
+  ): User {
     const user = new User.Builder()
       .setId(userDto?.id)
+      .setCognitoId(cognitoUser?.username)
       .setFirstName(userDto?.firstName)
       .setLastName(userDto?.lastName)
       .setEmail(userDto?.email)
@@ -75,7 +81,6 @@ export class UserMapper {
       .setAddress(AddressMapper.mapToEntity(userDto?.address))
       .setCompany(CompanyMapper.mapToEntity(userDto?.company))
       .build();
-
     return user;
   }
 }

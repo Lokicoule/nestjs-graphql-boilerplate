@@ -4,6 +4,8 @@ import { Company } from '../company/company.entity';
 import { User } from './user.entity';
 
 export class UserBuilder extends EntityBuilder {
+  private _cognitoId: string;
+
   private _firstName: string;
 
   private _lastName: string;
@@ -15,6 +17,15 @@ export class UserBuilder extends EntityBuilder {
   private _address: Address;
 
   private _company: Company;
+
+  public get cognitoId(): string {
+    return this._cognitoId;
+  }
+
+  public setCognitoId(value: string) {
+    this._cognitoId = value;
+    return this;
+  }
 
   public get firstName(): string {
     return this._firstName;

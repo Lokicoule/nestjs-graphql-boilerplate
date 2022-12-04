@@ -8,6 +8,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
         region: configService.get('COGNITO_REGION'),
+        credentials: {
+          accessKeyId: configService.get('COGNITO_ACCESS_KEY_ID'),
+          secretAccessKey: configService.get('COGNITO_SECRET_ACCESS_KEY'),
+        },
       }),
       inject: [ConfigService],
     }),

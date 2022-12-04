@@ -1,7 +1,15 @@
+import {
+  AdminAddUserToGroupCommandInput,
+  AdminAddUserToGroupCommandOutput,
+  CognitoIdentityProvider,
+} from '@aws-sdk/client-cognito-identity-provider';
+import { TransactionManager } from '@lib/fdo-database/mongodb/transaction/transaction-manager.service';
 import { TechnicalException, UseCaseException } from '@lib/fdo-domain';
 import { StringValidationUtils } from '@lib/fdo-utils/string-validation.utils';
+import { InjectCognitoIdentityProvider } from '@nestjs-cognito/core';
 import { Injectable } from '@nestjs/common';
-import { Observable, throwIfEmpty } from 'rxjs';
+import { ClientSession } from 'mongoose';
+import { from, map, Observable, of, tap, throwIfEmpty } from 'rxjs';
 import { UserCriteria } from '../../domain/criterias/user/user.criteria';
 import { UserCriteriaBuilder } from '../../domain/criterias/user/user.criteria.builder';
 import { Address } from '../../domain/entities/address/address.entity';
@@ -11,7 +19,12 @@ import { UserRepository } from '../../persistence/repositories/user/user.reposit
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    @InjectCognitoIdentityProvider()
+    private readonly cognitoClient: CognitoIdentityProvider,
+    private readonly transactionManager: TransactionManager,
+  ) {}
 
   public createUser(user: User): Observable<User> {
     if (!Boolean(user)) {
@@ -19,9 +32,45 @@ export class UserService {
     }
 
     this.validateUser(user);
-    return this.userRepository
-      .create(user)
-      .pipe(throwIfEmpty(() => new TechnicalException('User not created')));
+
+    return from(
+      this.transactionManager.withAsyncTransaction(
+        async (session: ClientSession) => {
+          const createdUser = await this.userRepository.createAsync(
+            user,
+            session,
+          );
+          await this.addUserToGroup(
+            'User',
+            createdUser.cognitoId,
+            process.env.COGNITO_USER_POOL_ID,
+          );
+          return createdUser;
+        },
+      ),
+    );
+  }
+
+  private addUserToGroup(
+    groupName: string,
+    username: string,
+    userPoolId: string,
+  ): Promise<AdminAddUserToGroupCommandOutput> {
+    const params: AdminAddUserToGroupCommandInput = {
+      GroupName: groupName,
+      UserPoolId: userPoolId,
+      Username: username,
+    };
+
+    return new Promise((resolve, reject) => {
+      this.cognitoClient.adminAddUserToGroup(params, (error, data) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(data);
+        }
+      });
+    });
   }
 
   public updateUser(user: User): Observable<User> {

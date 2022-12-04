@@ -1,4 +1,4 @@
-import { FilterQuery, Model } from 'mongoose';
+import { ClientSession, FilterQuery, HydratedDocument, Model } from 'mongoose';
 import { from, Observable, of, switchMap } from 'rxjs';
 import { Populate } from './populate/populate';
 import { IRepository } from './repository.interface';
@@ -10,6 +10,16 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
 
   public create(entity: Partial<T>): Observable<T> {
     return from(this.model.create(entity));
+  }
+
+  public async createAsync(
+    entity: Partial<T>,
+    session?: ClientSession,
+  ): Promise<T> {
+    const model = new this.model(entity);
+    const result = await model.save({ session });
+
+    return result.toObject() as T;
   }
 
   public find(conditions?: FilterQuery<T>): Observable<T[]> {

@@ -1,8 +1,8 @@
 import { Repository } from '@lib/fdo-database/mongodb/repository';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { User } from '../../../domain/entities/user/user.entity';
 import { Model } from 'mongoose';
+import { User } from '../../../domain/entities/user/user.entity';
 
 @Injectable()
 export class UserRepository extends Repository<User> {

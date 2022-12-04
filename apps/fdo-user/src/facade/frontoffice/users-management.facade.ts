@@ -1,20 +1,24 @@
+import { User } from '@nestjs-cognito/auth';
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 import { UserService } from '../../business/services/user.service';
-import { UserDto } from '../dtos/user/user.dto';
 import { UserCreateInput } from '../dtos/user/inputs/user-create.input';
 import { UserCriteriaInput } from '../dtos/user/inputs/user-criteria.input';
 import { UserUpdateInput } from '../dtos/user/inputs/user-update.input';
-import { UserMapper } from '../mapping/user/user.mapper';
 import { UserInput } from '../dtos/user/inputs/user.input';
+import { UserDto } from '../dtos/user/user.dto';
+import { UserMapper } from '../mapping/user/user.mapper';
 
 @Injectable()
 export class UsersManagementFacade {
   constructor(private readonly userService: UserService) {}
 
-  public createUser(input: UserCreateInput): Observable<UserDto> {
+  public createUser(
+    input: UserCreateInput,
+    cognitoUser: User,
+  ): Observable<UserDto> {
     return this.userService
-      .createUser(UserMapper.mapToEntity(input))
+      .createUser(UserMapper.mapToEntity(input, cognitoUser))
       .pipe(map(UserMapper.mapToDto));
   }
 

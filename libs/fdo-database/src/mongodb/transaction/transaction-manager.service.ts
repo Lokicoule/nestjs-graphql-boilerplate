@@ -8,6 +8,18 @@ import { Observable } from 'rxjs';
 export class TransactionManager {
   constructor(@InjectConnection() private readonly connection: Connection) {}
 
+  /**
+   * @method withAsyncTransaction
+   * @param callback
+   * @returns Promise<T>
+   * @description This method is used to execute a transaction with async/await
+   * @example
+   * const result = await this.transactionManager.withAsyncTransaction(async (session) => {
+   *  const user = await this.userRepository.createAsync(userEntity, session);
+   *  const profile = await this.profileRepository.createAsync(profileEntity, session);
+   *  return { user, profile };
+   * });
+   */
   public async withAsyncTransaction<T>(
     callback: (session: ClientSession) => Promise<T>,
   ): Promise<T> {
@@ -25,6 +37,15 @@ export class TransactionManager {
     }
   }
 
+  /**
+   * @method withTransaction
+   * @param callback
+   * @returns Observable<T>
+   * @description This method is used to execute a transaction with rxjs
+   * @note This method is not tested yet
+   * @todo Test this method
+   * Maybe this method is not necessary
+   */
   public withObservableTransaction<T>(
     callback: (session: ClientSession) => Observable<T>,
   ): Observable<T> {

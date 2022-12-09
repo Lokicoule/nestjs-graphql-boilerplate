@@ -17,13 +17,13 @@ export class AddressMapper {
   public static mapToDto(address: Address): AddressDto {
     const addressDto = new AddressDtoBuilder()
       .setId(address?._id?.toString())
-      .setCreatedAt(address?.createdAt)
-      .setUpdatedAt(address?.updatedAt)
-      .setStreet(address?.street)
-      .setCity(address?.city)
-      .setState(address?.state)
-      .setZipCode(address?.zipCode)
-      .setCountry(address?.country)
+      .setCreatedAt(address.createdAt)
+      .setUpdatedAt(address.updatedAt)
+      .setAddress(address.address)
+      .setCity(address.city)
+      .setAdditionalAddress(address?.additionalAddress)
+      .setZipCode(address.zipCode)
+      .setCountry(address.country)
       .build();
     return addressDto;
   }
@@ -36,9 +36,9 @@ export class AddressMapper {
    */
   public static mapToEntity(addressDto: AddressInput | AddressDto): Address {
     const address = new Address.Builder()
-      .setStreet(addressDto?.street)
+      .setAddress(addressDto?.address)
       .setCity(addressDto?.city)
-      .setState(addressDto?.state)
+      .setAdditionalAddress(addressDto?.additionalAddress)
       .setZipCode(addressDto?.zipCode)
       .setCountry(addressDto?.country)
       .build();

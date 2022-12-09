@@ -4,6 +4,9 @@ import { ProductBuilder } from './product.entity.builder';
 
 @Schema({ timestamps: true })
 export class Product extends EntityModel {
+  @Prop({ required: true })
+  public readonly cognitoId: string;
+
   @Prop({ required: true, unique: true, uppercase: true })
   public readonly code: string;
 

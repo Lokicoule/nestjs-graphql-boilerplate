@@ -2,12 +2,16 @@ import { ProductCriteriaBuilder } from './product.criteria.builder';
 
 export class ProductCriteria {
   public readonly _id?: string;
+  public readonly cognitoId?: string;
   public readonly code?: string;
   public readonly label?: string;
 
   constructor(builder: ProductCriteriaBuilder) {
     if (Boolean(builder.id)) {
       this._id = builder.id;
+    }
+    if (Boolean(builder.cognitoId)) {
+      this.cognitoId = builder.cognitoId;
     }
     if (Boolean(builder.code)) {
       this.code = builder.code;

@@ -1,8 +1,9 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { OrderCriteriaInput } from '../../../facade/dtos/order/inputs/order-criteria.input';
 import { OrdersManagementFacade } from '../../../facade/frontoffice/orders-management.facade';
 import { Observable } from 'rxjs';
 import { OrderDto } from '../../../facade/dtos/order/order.dto';
+import { OrderCustomerDto } from '../../../facade/dtos/customer/customer.dto';
 
 @Resolver(() => OrderDto)
 export class OrderReadingResolver {

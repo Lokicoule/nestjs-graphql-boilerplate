@@ -2,6 +2,7 @@ import { TechnicalException, UseCaseException } from '@lib/fdo-domain';
 import { Injectable } from '@nestjs/common';
 import { Observable, throwIfEmpty } from 'rxjs';
 import { OrderCriteria } from '../../domain/criterias/order/order.criteria';
+import { OrderCriteriaBuilder } from '../../domain/criterias/order/order.criteria.builder';
 import { Customer } from '../../domain/entities/customer/customer.entity';
 import { OrderItem } from '../../domain/entities/order-item/order-item.entity';
 import { Order } from '../../domain/entities/order/order.entity';
@@ -70,7 +71,7 @@ export class OrderService {
   private validateOrder(order: Order): void {
     const listErrors: string[] = [];
 
-    listErrors.push(...this.validateOrderCustomer(order));
+    listErrors.push(...this.validateCustomer(order));
     listErrors.push(...this.validateOrderItems(order));
     if (!Boolean(order.lifeCycle)) {
       listErrors.push('The order life cycle is required');
@@ -81,7 +82,7 @@ export class OrderService {
     }
   }
 
-  private validateOrderCustomer(order: Order): string[] {
+  private validateCustomer(order: Order): string[] {
     const listErrors: string[] = [];
 
     if (!Boolean(order.customer)) {

@@ -1,8 +1,8 @@
 import { Address } from '../../../domain/entities/address/address.entity';
 import { Customer } from '../../../domain/entities/customer/customer.entity';
 import { CustomerCriteriaInput } from '../../dtos/customer/customer-criteria.input';
-import { CustomerDto } from '../../dtos/customer/customer.dto';
-import { CustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
+import { OrderCustomerDto } from '../../dtos/customer/customer.dto';
+import { OrderCustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
 import { CustomerMapper } from './customer.mapper';
 
 describe('CustomerMapper', () => {
@@ -45,7 +45,6 @@ describe('CustomerMapper', () => {
         .setName('name')
         .setDeliveryAddress(
           new Address.Builder()
-            .setStreet('street')
             .setZipCode('zipCode')
             .setCity('city')
             .setCountry('country')
@@ -53,14 +52,14 @@ describe('CustomerMapper', () => {
         )
         .setInvoiceAddress(
           new Address.Builder()
-            .setStreet('street')
             .setZipCode('zipCode')
             .setCity('city')
             .setCountry('country')
             .build(),
         )
         .build();
-      const customerDto: CustomerDto = CustomerMapper.mapToDto(customerEntity);
+      const customerDto: OrderCustomerDto =
+        CustomerMapper.mapToDto(customerEntity);
 
       expect(customerDto.code).toEqual(customerEntity.code);
       expect(customerDto.name).toEqual(customerEntity.name);
@@ -70,12 +69,6 @@ describe('CustomerMapper', () => {
       expect(customerDto.deliveryAddress.country).toEqual(
         customerEntity.deliveryAddress.country,
       );
-      expect(customerDto.deliveryAddress.state).toEqual(
-        customerEntity.deliveryAddress.state,
-      );
-      expect(customerDto.deliveryAddress.street).toEqual(
-        customerEntity.deliveryAddress.street,
-      );
       expect(customerDto.deliveryAddress.zipCode).toEqual(
         customerEntity.deliveryAddress.zipCode,
       );
@@ -84,12 +77,6 @@ describe('CustomerMapper', () => {
       );
       expect(customerDto.invoiceAddress.country).toEqual(
         customerEntity.invoiceAddress.country,
-      );
-      expect(customerDto.invoiceAddress.state).toEqual(
-        customerEntity.invoiceAddress.state,
-      );
-      expect(customerDto.invoiceAddress.street).toEqual(
-        customerEntity.invoiceAddress.street,
       );
       expect(customerDto.invoiceAddress.zipCode).toEqual(
         customerEntity.invoiceAddress.zipCode,
@@ -131,7 +118,7 @@ describe('CustomerMapper', () => {
 
   describe('mapToEntity', () => {
     it('successfully maps a DTO to an entity', () => {
-      const customerDto: CustomerDto = new CustomerDtoBuilder()
+      const customerDto: OrderCustomerDto = new OrderCustomerDtoBuilder()
         .setId('5e9e9f9b8e7d6a0e6c6f7b6a')
         .setCode('code')
         .setName('name')

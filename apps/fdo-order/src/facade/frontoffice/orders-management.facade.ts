@@ -6,6 +6,8 @@ import { OrderCreateInput } from '../dtos/order/inputs/order-create.input';
 import { OrderCriteriaInput } from '../dtos/order/inputs/order-criteria.input';
 import { OrderUpdateInput } from '../dtos/order/inputs/order-update.input';
 import { OrderMapper } from '../mapping/order/order.mapper';
+import { OrderCriteriaBuilder } from '../../domain/criterias/order/order.criteria.builder';
+import { CustomerCriteriaBuilder } from '../../domain/criterias/customer/customer.criteria.builder';
 
 @Injectable()
 export class OrdersManagementFacade {
@@ -56,6 +58,18 @@ export class OrdersManagementFacade {
   ): Observable<OrderDto[]> {
     return this.orderService
       .findOrders(OrderMapper.mapCriteriaInputToCriteria(orderCriteria))
+      .pipe(map(OrderMapper.mapListToDtoList));
+  }
+
+  public findOrdersByCustomerId(customerId: string): Observable<OrderDto[]> {
+    return this.orderService
+      .findOrders(
+        new OrderCriteriaBuilder()
+          .withCustomer(
+            new CustomerCriteriaBuilder().withId(customerId).build(),
+          )
+          .build(),
+      )
       .pipe(map(OrderMapper.mapListToDtoList));
   }
 }

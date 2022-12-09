@@ -5,6 +5,7 @@ import { ProductCriteriaInput } from '../../dtos/product/inputs/product-criteria
 import { ProductInput } from '../../dtos/product/inputs/product.input';
 import { ProductDto } from '../../dtos/product/product.dto';
 import { ProductDtoBuilder } from '../../dtos/product/product.dto.builder';
+import { User } from '@nestjs-cognito/auth';
 
 /**
  * @class ProductMapper
@@ -19,9 +20,11 @@ export class ProductMapper {
    */
   public static mapCriteriaInputToCriteria(
     productCriteria: ProductCriteriaInput,
+    cognitoUser?: User,
   ): ProductCriteria {
     const criteriaBuilder = new ProductCriteriaBuilder()
       .withId(productCriteria?.id)
+      .withCognitoId(cognitoUser?.username)
       .withCode(productCriteria?.code)
       .withLabel(productCriteria?.label);
     return criteriaBuilder.buildCriteria();
@@ -62,9 +65,11 @@ export class ProductMapper {
    */
   public static mapToEntity(
     productDto: ProductDto | Partial<ProductInput>,
+    cognitoUser?: User,
   ): Product {
     const product = new Product.Builder()
       .setId(productDto?.id)
+      .setCognitoId(cognitoUser?.username)
       .setCode(productDto?.code)
       .setLabel(productDto.label)
       .build();

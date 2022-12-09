@@ -2,7 +2,7 @@ import { CustomerBuilder } from '../../../domain/entities/customer/customer.enti
 import { OrderItem } from '../../../domain/entities/order-item/order-item.entity';
 import { OrderLifeCycleEnum } from '../../../domain/enums/order/order.enum';
 import { Order } from '../../../domain/entities/order/order.entity';
-import { CustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
+import { OrderCustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
 import { OrderItemDtoBuilder } from '../../dtos/order-item/order-item.dto.builder';
 import { OrderCreateInput } from '../../dtos/order/inputs/order-create.input';
 import { OrderCriteriaInput } from '../../dtos/order/inputs/order-criteria.input';
@@ -58,6 +58,7 @@ describe('OrderMapper', () => {
   describe('mapToDto', () => {
     it('successfully maps an entity to a DTO', () => {
       const orderEntity: Order = new Order.Builder()
+        .setId(1)
         .setCode('code')
         .setBillingDate(new Date())
         .setDueDate(new Date())
@@ -114,7 +115,7 @@ describe('OrderMapper', () => {
         .setBillingDate(new Date())
         .setDueDate(new Date())
         .setLifeCycle(OrderLifeCycleEnum.CANCELLED)
-        .setCustomer(new CustomerDtoBuilder().setCode('code').build())
+        .setCustomer(new OrderCustomerDtoBuilder().setCode('code').build())
         .setItems([new OrderItemDtoBuilder().setAmount(1).build()])
         .build();
       const orderEntity: Order = OrderMapper.mapToEntity(orderDto);

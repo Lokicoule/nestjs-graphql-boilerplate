@@ -1,11 +1,11 @@
 import { TechnicalException, UseCaseException } from '@lib/fdo-domain';
+import { StringValidationUtils } from '@lib/fdo-utils/string-validation.utils';
 import { Injectable } from '@nestjs/common';
 import { Observable, throwIfEmpty } from 'rxjs';
 import { CustomerCriteria } from '../../domain/criterias/customer/customer.criteria';
 import { Address } from '../../domain/entities/address/address.entity';
 import { Customer } from '../../domain/entities/customer/customer.entity';
 import { CustomerRepository } from '../../persistence/repositories/customer/customer.repository';
-import { AddressUseCase } from '../use-cases/address.use-case';
 import { CustomerSettingService } from './customer-setting.service';
 
 @Injectable()
@@ -82,26 +82,25 @@ export class CustomerService {
 
   private validateAddress(address: Address): string[] {
     const listErrors: string[] = [];
-    if (!Boolean(address)) {
-      listErrors.push('The address is null or undefined');
-    } else {
-      if (!Boolean(address.street)) {
-        listErrors.push('The street is required');
-      }
-      if (!Boolean(address.city)) {
-        listErrors.push('The city is required');
-      }
-      if (!Boolean(address.country)) {
-        listErrors.push('The country is required');
-      }
-      if (!Boolean(address.zipCode)) {
-        listErrors.push('The zip code is required');
-      } else {
-        if (!AddressUseCase.validateZipCode(address.zipCode)) {
-          listErrors.push('The zip code is invalid');
-        }
-      }
+
+    if (!Boolean(address.address)) {
+      listErrors.push('The address is required');
     }
+
+    if (!Boolean(address.city)) {
+      listErrors.push('The city is required');
+    }
+
+    if (!Boolean(address.country)) {
+      listErrors.push('The country is required');
+    }
+
+    if (!Boolean(address.zipCode)) {
+      listErrors.push('The zip code is required');
+    } else if (!StringValidationUtils.isZipCode(address.zipCode)) {
+      listErrors.push('The zip code is invalid');
+    }
+
     return listErrors;
   }
 }

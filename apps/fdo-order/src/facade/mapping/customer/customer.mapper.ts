@@ -1,6 +1,6 @@
 import { Customer } from '../../../domain/entities/customer/customer.entity';
-import { CustomerDto } from '../../dtos/customer/customer.dto';
-import { CustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
+import { OrderCustomerDto } from '../../dtos/customer/customer.dto';
+import { OrderCustomerDtoBuilder } from '../../dtos/customer/customer.dto.builder';
 import { AddressMapper } from '../address/address.mapper';
 import { CustomerCriteriaInput } from '../../dtos/customer/customer-criteria.input';
 import { CustomerCriteria } from '../../../domain/criterias/customer/customer.criteria';
@@ -30,31 +30,37 @@ export class CustomerMapper {
 
   /**
    * @method mapToDto
-   * @description Maps a Customer to a CustomerDto
+   * @description Maps a Customer to a OrderCustomerDto
    * @param {Customer} customer - The Customer to map
-   * @returns {CustomerDto} - The mapped CustomerDto
+   * @returns {OrderCustomerDto} - The mapped OrderCustomerDto
    */
-  public static mapToDto(customer: Customer): CustomerDto {
-    const customerDto = new CustomerDtoBuilder()
+  public static mapToDto(customer: Customer): OrderCustomerDto {
+    const customerDto = new OrderCustomerDtoBuilder()
       .setId(customer?._id?.toString())
       .setCreatedAt(customer?.createdAt)
       .setUpdatedAt(customer?.updatedAt)
       .setCode(customer?.code)
       .setName(customer?.name)
-      .setDeliveryAddress(AddressMapper.mapToDto(customer?.deliveryAddress))
-      .setInvoiceAddress(AddressMapper.mapToDto(customer?.invoiceAddress))
+      .setDeliveryAddress(
+        customer.deliveryAddress &&
+          AddressMapper.mapToDto(customer?.deliveryAddress),
+      )
+      .setInvoiceAddress(
+        customer.invoiceAddress &&
+          AddressMapper.mapToDto(customer?.invoiceAddress),
+      )
       .build();
     return customerDto;
   }
 
   /**
    * @method mapToEntity
-   * @description Maps a CustomerDto to a Customer
-   * @param {CustomerDto | CustomerInput} customerDto - The CustomerDto or the CustomerInput to map
+   * @description Maps a OrderCustomerDto to a Customer
+   * @param {OrderCustomerDto | CustomerInput} customerDto - The OrderCustomerDto or the CustomerInput to map
    * @returns {Customer} - The mapped Customer
    */
   public static mapToEntity(
-    customerDto: CustomerDto | Partial<CustomerInput>,
+    customerDto: OrderCustomerDto | Partial<CustomerInput>,
   ): Customer {
     const customer = new Customer.Builder()
       .setId(customerDto?.id)

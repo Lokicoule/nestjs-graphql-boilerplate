@@ -1,8 +1,8 @@
 import { DtoBuilder } from '@lib/fdo-graphql/dto/dto.builder';
 import { AddressDto } from '../address/address.dto';
-import { CustomerDto } from './customer.dto';
+import { OrderCustomerDto } from './customer.dto';
 
-export class CustomerDtoBuilder extends DtoBuilder {
+export class OrderCustomerDtoBuilder extends DtoBuilder {
   private _code: string;
   private _name: string;
   private _deliveryAddress: AddressDto;
@@ -44,7 +44,7 @@ export class CustomerDtoBuilder extends DtoBuilder {
     return this;
   }
 
-  build(): CustomerDto {
-    return new CustomerDto(this);
+  build(): OrderCustomerDto {
+    return new OrderCustomerDto(this);
   }
 }

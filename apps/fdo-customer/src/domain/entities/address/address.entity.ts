@@ -1,4 +1,5 @@
 import { EntityModel } from '@lib/fdo-database/mongodb/entity/entity.model';
+import { StringValidationUtils } from '@lib/fdo-utils/string-validation.utils';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { AddressBuilder } from './address.entity.builder';
 
@@ -6,37 +7,37 @@ import { AddressBuilder } from './address.entity.builder';
  * @class Address
  * @description Address class is used to represent an address.
  * @extends EntityModel
- * @property {string} street - The street.
+ * @property {string} address - The address.
  * @property {string} city - The city.
- * @property {string} state - The state.
+ * @property {string} additionalAddress - The additionalAddress.
  * @property {string} zipCode - The zip code.
  * @property {string} country - The country.
  */
 @Schema({ timestamps: true })
 export class Address extends EntityModel {
   @Prop({ required: true })
+  public readonly address: string;
+
+  @Prop({ required: false })
+  public readonly additionalAddress: string;
+
+  @Prop({ required: true })
   public readonly city: string;
 
   @Prop({ required: true })
   public readonly country: string;
 
-  @Prop({ required: true })
-  public readonly state: string;
-
-  @Prop({ required: true })
-  public readonly street: string;
-
   @Prop({
     required: true,
-    match: /^(?:0[1-9]|[1-8]\d|9[0-8])\d{3}$/,
+    match: StringValidationUtils.PATTERNS.ZIP_CODE,
   })
   public readonly zipCode: string;
 
   constructor(builder: AddressBuilder) {
     super(builder);
-    this.street = builder.street;
+    this.address = builder.address;
     this.city = builder.city;
-    this.state = builder.state;
+    this.additionalAddress = builder.additionalAddress;
     this.zipCode = builder.zipCode;
     this.country = builder.country;
   }

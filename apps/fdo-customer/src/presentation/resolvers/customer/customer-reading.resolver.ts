@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver, ResolveReference } from '@nestjs/graphql';
 import { CustomerCriteriaInput } from '../../../facade/dtos/customer/inputs/customer-criteria.input';
 import { CustomersManagementFacade } from '../../../facade/frontoffice/customers-management.facade';
 import { Observable } from 'rxjs';

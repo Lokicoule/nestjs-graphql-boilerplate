@@ -6,20 +6,27 @@ import { ProductCreateInput } from '../dtos/product/inputs/product-create.input'
 import { ProductCriteriaInput } from '../dtos/product/inputs/product-criteria.input';
 import { ProductUpdateInput } from '../dtos/product/inputs/product-update.input';
 import { ProductMapper } from '../mapping/product/product.mapper';
+import { User } from '@nestjs-cognito/auth';
 
 @Injectable()
 export class ProductsManagementFacade {
   constructor(private readonly productService: ProductService) {}
 
-  public createProduct(input: ProductCreateInput): Observable<ProductDto> {
+  public createProduct(
+    input: ProductCreateInput,
+    cognitoUser: User,
+  ): Observable<ProductDto> {
     return this.productService
-      .createProduct(ProductMapper.mapToEntity(input))
+      .createProduct(ProductMapper.mapToEntity(input, cognitoUser))
       .pipe(map(ProductMapper.mapToDto));
   }
 
-  public updateProduct(input: ProductUpdateInput): Observable<ProductDto> {
+  public updateProduct(
+    input: ProductUpdateInput,
+    cognitoUser: User,
+  ): Observable<ProductDto> {
     return this.productService
-      .updateProduct(ProductMapper.mapToEntity(input))
+      .updateProduct(ProductMapper.mapToEntity(input, cognitoUser))
       .pipe(map(ProductMapper.mapToDto));
   }
 
@@ -40,10 +47,13 @@ export class ProductsManagementFacade {
   }
 
   public findProducts(
+    cognitoUser: User,
     productCriteria?: ProductCriteriaInput,
   ): Observable<ProductDto[]> {
     return this.productService
-      .findProducts(ProductMapper.mapCriteriaInputToCriteria(productCriteria))
+      .findProducts(
+        ProductMapper.mapCriteriaInputToCriteria(productCriteria, cognitoUser),
+      )
       .pipe(map(ProductMapper.mapListToDtoList));
   }
 }

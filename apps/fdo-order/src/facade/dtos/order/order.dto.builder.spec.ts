@@ -1,5 +1,5 @@
 import { OrderLifeCycleEnum } from '../../../domain/enums/order/order.enum';
-import { CustomerDtoBuilder } from '../customer/customer.dto.builder';
+import { OrderCustomerDtoBuilder } from '../customer/customer.dto.builder';
 import { OrderItemDtoBuilder } from '../order-item/order-item.dto.builder';
 import { ProductDtoBuilder } from '../product/product.dto.builder';
 import { OrderDto } from './order.dto';
@@ -11,7 +11,7 @@ describe('OrderDtoBuilder', () => {
       .setCode('code')
       .setBillingDate(new Date())
       .setDueDate(new Date())
-      .setCustomer(new CustomerDtoBuilder().setCode('code').build())
+      .setCustomer(new OrderCustomerDtoBuilder().setCode('code').build())
       .setItems([
         new OrderItemDtoBuilder()
           .setProduct(new ProductDtoBuilder().setCode('code').build())

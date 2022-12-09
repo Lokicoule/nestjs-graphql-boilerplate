@@ -1,10 +1,10 @@
 import { DtoModel } from '@lib/fdo-graphql';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { AddressDto } from '../address/address.dto';
-import { CustomerDtoBuilder } from './customer.dto.builder';
+import { OrderCustomerDtoBuilder } from './customer.dto.builder';
 
 @ObjectType()
-export class CustomerDto extends DtoModel {
+export class OrderCustomerDto extends DtoModel {
   @Field(() => String, { name: 'code' })
   private _code: string;
 
@@ -17,7 +17,7 @@ export class CustomerDto extends DtoModel {
   @Field(() => AddressDto, { name: 'invoiceAddress', nullable: true })
   private _invoiceAddress: AddressDto;
 
-  constructor(builder: CustomerDtoBuilder) {
+  constructor(builder: OrderCustomerDtoBuilder) {
     super(builder);
     this._code = builder.code;
     this._name = builder.name;

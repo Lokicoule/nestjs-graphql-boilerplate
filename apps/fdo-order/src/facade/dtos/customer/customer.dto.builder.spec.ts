@@ -1,31 +1,31 @@
 import { AddressDtoBuilder } from '../address/address.dto.builder';
-import { CustomerDto } from './customer.dto';
-import { CustomerDtoBuilder } from './customer.dto.builder';
+import { OrderCustomerDto } from './customer.dto';
+import { OrderCustomerDtoBuilder } from './customer.dto.builder';
 
-describe('CustomerDtoBuilder', () => {
+describe('OrderCustomerDtoBuilder', () => {
   it('successfully set own fields', () => {
-    const customer: CustomerDto = new CustomerDtoBuilder()
+    const orderCustomer: OrderCustomerDto = new OrderCustomerDtoBuilder()
       .setCode('code')
       .setName('name')
       .setDeliveryAddress(new AddressDtoBuilder().setCity('city').build())
       .setInvoiceAddress(new AddressDtoBuilder().setCity('Mimizan').build())
       .build();
-    expect(customer.code).toEqual('code');
-    expect(customer.name).toEqual('name');
-    expect(customer.deliveryAddress.city).toEqual('city');
-    expect(customer.invoiceAddress.city).toEqual('Mimizan');
+    expect(orderCustomer.code).toEqual('code');
+    expect(orderCustomer.name).toEqual('name');
+    expect(orderCustomer.deliveryAddress.city).toEqual('city');
+    expect(orderCustomer.invoiceAddress.city).toEqual('Mimizan');
   });
 
   it('successfully set inherited fields', () => {
     const sharedDate = new Date();
-    const customer: CustomerDto = new CustomerDtoBuilder()
+    const orderCustomer: OrderCustomerDto = new OrderCustomerDtoBuilder()
       .setId('id')
       .setCreatedAt(sharedDate)
       .setUpdatedAt(sharedDate)
       .build();
 
-    expect(customer.id).toEqual('id');
-    expect(customer.createdAt).toEqual(sharedDate);
-    expect(customer.updatedAt).toEqual(sharedDate);
+    expect(orderCustomer.id).toEqual('id');
+    expect(orderCustomer.createdAt).toEqual(sharedDate);
+    expect(orderCustomer.updatedAt).toEqual(sharedDate);
   });
 });

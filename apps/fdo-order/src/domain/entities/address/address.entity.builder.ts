@@ -2,18 +2,18 @@ import { EntityBuilder } from '@lib/fdo-database/mongodb/entity/entity.builder';
 import { Address } from './address.entity';
 
 export class AddressBuilder extends EntityBuilder {
-  private _street: string;
+  private _address: string;
   private _city: string;
-  private _state: string;
+  private _additionalAddress: string;
   private _zipCode: string;
   private _country: string;
 
-  public get street(): string {
-    return this._street;
+  public get address(): string {
+    return this._address;
   }
 
-  public setStreet(value: string) {
-    this._street = value;
+  public setAddress(value: string) {
+    this._address = value;
     return this;
   }
 
@@ -26,12 +26,12 @@ export class AddressBuilder extends EntityBuilder {
     return this;
   }
 
-  public get state(): string {
-    return this._state;
+  public get additionalAddress(): string {
+    return this._additionalAddress;
   }
 
-  public setState(value: string) {
-    this._state = value;
+  public setAdditionalAddress(value: string) {
+    this._additionalAddress = value;
     return this;
   }
 

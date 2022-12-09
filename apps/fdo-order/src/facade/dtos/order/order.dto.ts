@@ -4,7 +4,7 @@ import {
   OrderLifeCycleEnum,
   OrderLifeCycleEnumProvider,
 } from '../../../domain/enums/order/order.enum';
-import { CustomerDto } from '../customer/customer.dto';
+import { OrderCustomerDto } from '../customer/customer.dto';
 import { OrderItemDto } from '../order-item/order-item.dto';
 import { OrderDtoBuilder } from './order.dto.builder';
 
@@ -25,8 +25,8 @@ export class OrderDto extends DtoModel {
   })
   private _dueDate: Date;
 
-  @Field(() => CustomerDto, { name: 'customer' })
-  private _customer: CustomerDto;
+  @Field(() => OrderCustomerDto, { name: 'customer' })
+  private _customer: OrderCustomerDto;
 
   @Field(() => [OrderItemDto], { name: 'items' })
   private _items: OrderItemDto[];
@@ -56,7 +56,7 @@ export class OrderDto extends DtoModel {
     return this._dueDate;
   }
 
-  public get customer(): CustomerDto {
+  public get customer(): OrderCustomerDto {
     return this._customer;
   }
 

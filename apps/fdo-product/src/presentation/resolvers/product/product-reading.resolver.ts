@@ -3,8 +3,13 @@ import { ProductCriteriaInput } from '../../../facade/dtos/product/inputs/produc
 import { ProductsManagementFacade } from '../../../facade/frontoffice/products-management.facade';
 import { Observable } from 'rxjs';
 import { ProductDto } from '../../../facade/dtos/product/product.dto';
+import { Authorization } from '@nestjs-cognito/graphql';
+import { CurrentUser } from '@nestjs-cognito/auth';
 
 @Resolver(() => ProductDto)
+@Authorization({
+  requiredGroups: ['User'],
+})
 export class ProductReadingResolver {
   constructor(
     private readonly productsManagementFacade: ProductsManagementFacade,
@@ -15,10 +20,11 @@ export class ProductReadingResolver {
     nullable: true,
   })
   findByCriteria(
+    @CurrentUser() cognitoUser,
     @Args('criterions', { nullable: true })
     criterions?: ProductCriteriaInput,
   ): Observable<ProductDto[]> {
-    return this.productsManagementFacade.findProducts(criterions);
+    return this.productsManagementFacade.findProducts(cognitoUser, criterions);
   }
 
   @Query(() => ProductDto, {

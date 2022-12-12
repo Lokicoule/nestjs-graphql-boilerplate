@@ -3,8 +3,7 @@ import { ProductCriteriaInput } from '../../../facade/dtos/product/inputs/produc
 import { ProductsManagementFacade } from '../../../facade/frontoffice/products-management.facade';
 import { Observable } from 'rxjs';
 import { ProductDto } from '../../../facade/dtos/product/product.dto';
-import { Authorization } from '@nestjs-cognito/graphql';
-import { CurrentUser } from '@nestjs-cognito/auth';
+import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 
 @Resolver(() => ProductDto)
 @Authorization({

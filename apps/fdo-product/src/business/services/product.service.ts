@@ -14,12 +14,14 @@ export class ProductService {
   ) {}
 
   public createProduct(product: Product): Observable<Product> {
+    console.log(product);
     if (!Boolean(product)) {
       throw new TechnicalException('The product is required');
     }
     if (!Boolean(product.code)) {
       return this.productSettingService.generateProduct(product);
     }
+
     this.validateProduct(product);
     return this.productRepository
       .create(product)

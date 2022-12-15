@@ -2,7 +2,7 @@ import { Repository } from '@lib/fdo-database/mongodb/repository';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Setting } from '../../../domain/entities/Setting/Setting.entity';
+import { Setting } from '../../../domain/entities/setting/setting.entity';
 
 @Injectable()
 export class SettingRepository extends Repository<Setting> {

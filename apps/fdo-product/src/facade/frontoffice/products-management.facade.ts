@@ -16,6 +16,7 @@ export class ProductsManagementFacade {
     input: ProductCreateInput,
     cognitoUser: User,
   ): Observable<ProductDto> {
+    console.log('cognitoUser', cognitoUser);
     return this.productService
       .createProduct(ProductMapper.mapToEntity(input, cognitoUser))
       .pipe(map(ProductMapper.mapToDto));

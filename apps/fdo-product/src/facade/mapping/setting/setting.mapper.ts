@@ -1,9 +1,7 @@
-import { SettingCriteria } from '../../../domain/criterias/setting/setting.criteria';
+import { SettingCriteria } from '../../../domain/criterias/Setting/Setting.criteria';
 import { SettingCriteriaBuilder } from '../../../domain/criterias/setting/setting.criteria.builder';
 import { Setting } from '../../../domain/entities/setting/setting.entity';
-import { SettingCreateInput } from '../../dtos/setting/inputs/setting-create.input';
 import { SettingCriteriaInput } from '../../dtos/setting/inputs/setting-criteria.input';
-import { SettingUpdateInput } from '../../dtos/setting/inputs/setting-update.input';
 import { SettingInput } from '../../dtos/setting/inputs/setting.input';
 import { SettingDto } from '../../dtos/setting/setting.dto';
 import { SettingDtoBuilder } from '../../dtos/setting/setting.dto.builder';

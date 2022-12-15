@@ -140,6 +140,33 @@
       "compilerOptions": {
         "tsConfigPath": "apps/fdo-user/tsconfig.app.json"
       }
+    },
+    "test-app": {
+      "type": "application",
+      "root": "apps/test-app",
+      "entryFile": "main",
+      "sourceRoot": "apps/test-app/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/test-app/tsconfig.app.json"
+      }
+    },
+    "users-application": {
+      "type": "application",
+      "root": "apps/users-application",
+      "entryFile": "main",
+      "sourceRoot": "apps/users-application/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/users-application/tsconfig.app.json"
+      }
+    },
+    "products-application": {
+      "type": "application",
+      "root": "apps/products-application",
+      "entryFile": "main",
+      "sourceRoot": "apps/products-application/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/products-application/tsconfig.app.json"
+      }
     }
   }
 }

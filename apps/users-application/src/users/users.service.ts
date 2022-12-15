@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+/* import { Injectable } from '@nestjs/common';
 import { UserDto } from './facade/dtos/user.dto';
 
 @Injectable()
@@ -12,3 +12,4 @@ export class UsersService {
     return this.users.find((user) => user.id === id);
   }
 }
+ */

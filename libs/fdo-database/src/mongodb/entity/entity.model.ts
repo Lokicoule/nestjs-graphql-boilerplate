@@ -1,9 +1,16 @@
 import { Prop } from '@nestjs/mongoose';
-import { Types } from 'mongoose';
-import { EntityBuilder } from './entity.builder';
+import { Transform } from 'class-transformer';
+import { ObjectId } from 'mongoose';
+
+export interface IEntityModel {
+  _id?: ObjectId | string;
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 export class EntityModel {
-  public readonly _id: Types.ObjectId;
+  @Transform(({ value }) => value.toString())
+  public _id: ObjectId | string;
 
   @Prop()
   public readonly createdAt: Date;
@@ -11,9 +18,9 @@ export class EntityModel {
   @Prop()
   public readonly updatedAt: Date;
 
-  constructor(builder: EntityBuilder) {
-    this._id = builder.id;
-    this.createdAt = builder.createdAt;
-    this.updatedAt = builder.updatedAt;
+  constructor(data: IEntityModel) {
+    this._id = data._id;
+    this.createdAt = data.createdAt;
+    this.updatedAt = data.updatedAt;
   }
 }

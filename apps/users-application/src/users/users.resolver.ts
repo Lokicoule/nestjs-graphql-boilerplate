@@ -1,4 +1,4 @@
-import { Args, ID, Query, Resolver, ResolveReference } from '@nestjs/graphql';
+/* import { Args, ID, Query, Resolver, ResolveReference } from '@nestjs/graphql';
 import { UserDto } from './facade/dtos/user.dto';
 import { UsersService } from './users.service';
 
@@ -16,3 +16,4 @@ export class UsersResolver {
     return this.usersService.findById(reference.id);
   }
 }
+ */

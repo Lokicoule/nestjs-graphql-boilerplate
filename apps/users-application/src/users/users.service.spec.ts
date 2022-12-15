@@ -17,7 +17,7 @@ describe('UsersService', () => {
   });
 
   it('should fetch a user by its id', () => {
-    const user = service.findById(1);
-    expect(user.id).toEqual(1);
+    const user = service.findById('id_1');
+    expect(user.id).toEqual('id_1');
   });
 });

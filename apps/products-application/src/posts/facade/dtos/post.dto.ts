@@ -10,8 +10,8 @@ export class PostDto {
   @Field()
   title: string;
 
-  @Field((type) => Int)
-  authorId: number;
+  @Field((type) => String)
+  authorId: string;
 
   @Field((type) => UserDto)
   user?: UserDto;

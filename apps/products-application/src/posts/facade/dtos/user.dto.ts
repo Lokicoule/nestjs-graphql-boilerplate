@@ -7,7 +7,7 @@ import { PostDto } from './post.dto';
 export class UserDto {
   @Field((type) => ID)
   @Directive('@external')
-  id: number;
+  id: string;
 
   @Field((type) => [PostDto])
   posts?: PostDto[];

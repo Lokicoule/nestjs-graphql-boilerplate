@@ -4,7 +4,7 @@ import { PostsResolver } from './posts.resolver';
 import { PostsService } from './posts.service';
 
 const mockPost: PostDto = {
-  authorId: 1,
+  authorId: 'id_1',
   id: 1,
   title: 'Mock Post',
 };

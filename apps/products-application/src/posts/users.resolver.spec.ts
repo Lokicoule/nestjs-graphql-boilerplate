@@ -4,7 +4,7 @@ import { PostsService } from './posts.service';
 import { UsersResolver } from './users.resolver';
 
 const postsServiceMock = {
-  findAllByAuthorId: jest.fn((authorId: number): PostDto[] => {
+  findAllByAuthorId: jest.fn((authorId: string): PostDto[] => {
     return [{ authorId, id: 1, title: 'Post Mock' }];
   }),
 };
@@ -28,11 +28,11 @@ describe('UsersResolver', () => {
   });
 
   it('should resolve posts of a user', () => {
-    const result = resolver.posts({ id: 1 });
+    const result = resolver.posts({ id: 'id_1' });
     expect(result).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          authorId: 1,
+          authorId: 'id_1',
         }),
       ]),
     );

@@ -4,8 +4,12 @@ import { PostDto } from './facade/dtos/post.dto';
 @Injectable()
 export class PostsService {
   private posts: PostDto[] = [
-    { authorId: 'id_1', id: 1, title: 'Lorem Ipsum' },
-    { authorId: 'id_1', id: 2, title: 'Foo' },
+    {
+      authorId: '4273b4f9-29e2-4acc-91f4-8ca51bdf0fe5',
+      id: 1,
+      title: 'Lorem Ipsum',
+    },
+    { authorId: '4273b4f9-29e2-4acc-91f4-8ca51bdf0fe5', id: 2, title: 'Foo' },
     { authorId: 'id_1', id: 3, title: 'Bar' },
     { authorId: 'id_2', id: 4, title: 'Hello World' },
   ];

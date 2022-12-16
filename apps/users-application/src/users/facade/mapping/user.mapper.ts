@@ -1,33 +1,35 @@
-import { IUser, User } from '../../domain/entities/user/user.entity';
-import { UserDto } from '../dtos/user.dto';
+import { User } from '../../domain/entities/user/user.entity';
 import { UserInput } from '../dtos/inputs/user.input';
-import { CompanyMapper } from './company.mapper';
+import { UserDto } from '../dtos/user.dto';
 import { AddressMapper } from './address.mapper';
+import { CompanyMapper } from './company.mapper';
 
 export class UserMapper {
   public static toDto(user: User): UserDto {
-    const { _id, company, address, ...baseUser } = user;
+    if (!Boolean(user)) return;
 
-    const userDto: UserDto = Object.assign({} as UserDto, {
-      ...baseUser,
-      id: _id?.toString(),
-      company: CompanyMapper.toDto(company),
-      address: AddressMapper.toDto(address),
+    return new UserDto({
+      id: user._id?.toString(),
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      address: AddressMapper.toDto(user.address),
+      company: CompanyMapper.toDto(user.company),
     });
-
-    return new UserDto(userDto);
   }
 
   public static toEntity(user: Partial<UserInput>): User {
-    const { id, company, address, ...baseUser } = user;
+    if (!Boolean(user)) return;
 
-    const userEntity: IUser = Object.assign({} as IUser, {
-      ...baseUser,
-      _id: id,
-      company: CompanyMapper.toEntity(company),
-      address: AddressMapper.toEntity(address),
+    return new User({
+      _id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone,
+      address: AddressMapper.toEntity(user.address),
+      company: CompanyMapper.toEntity(user.company),
     });
-
-    return new User(userEntity);
   }
 }

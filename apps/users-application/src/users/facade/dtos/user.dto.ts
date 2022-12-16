@@ -3,7 +3,7 @@ import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { AddressDto } from './address.dto';
 import { CompanyDto } from './company.dto';
 
-interface IUserDto extends IDtoModel {
+export interface IUserDto extends IDtoModel {
   firstName: string;
   lastName: string;
   email: string;

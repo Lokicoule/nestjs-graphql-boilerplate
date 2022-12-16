@@ -113,5 +113,42 @@ describe('UserMapper', () => {
         },
       });
     });
+
+    it('should return userDto with null company', () => {
+      const user: User = new User({
+        _id: 'id',
+        firstName: 'firstName',
+        lastName: 'lastName',
+        email: 'email',
+        phone: 'phone',
+        company: null,
+        address: new Address({
+          _id: 'id',
+          address: 'address',
+          city: 'city',
+          country: 'country',
+          zipCode: 'zipCode',
+          additionalAddress: 'additionalAddress',
+        }),
+      });
+
+      const userDto: UserDto = UserMapper.toDto(user);
+
+      expect(userDto).toEqual({
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
+        address: {
+          id: user.address?._id?.toString(),
+          address: user.address?.address,
+          city: user.address?.city,
+          country: user.address?.country,
+          zipCode: user.address?.zipCode,
+          additionalAddress: user.address?.additionalAddress,
+        },
+      });
+    });
   });
 });

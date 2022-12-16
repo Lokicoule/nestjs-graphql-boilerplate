@@ -4,24 +4,28 @@ import { AddressInput } from '../dtos/inputs/address.input';
 
 export class AddressMapper {
   public static toEntity(input: AddressInput): Address {
-    const { id, ...addressWithoutId } = input;
+    if (!Boolean(input)) return;
 
-    const address: Address = Object.assign({} as Address, {
-      ...addressWithoutId,
-      _id: id,
+    return new Address({
+      _id: input.id,
+      address: input.address,
+      city: input.city,
+      country: input.country,
+      zipCode: input.zipCode,
+      additionalAddress: input.additionalAddress,
     });
-
-    return new Address(address);
   }
 
   public static toDto(address: Address): AddressDto {
-    const { _id, ...addressWithoutId } = address;
+    if (!Boolean(address)) return;
 
-    const addressDto: AddressDto = Object.assign({} as AddressDto, {
-      ...addressWithoutId,
-      id: _id?.toString(),
+    return new AddressDto({
+      id: address._id?.toString(),
+      address: address.address,
+      city: address.city,
+      country: address.country,
+      zipCode: address.zipCode,
+      additionalAddress: address.additionalAddress,
     });
-
-    return new AddressDto(addressDto);
   }
 }

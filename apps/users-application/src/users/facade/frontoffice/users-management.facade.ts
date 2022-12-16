@@ -39,6 +39,13 @@ export class UsersManagementFacade {
   }
 
   public findUserById(userId: string): Observable<UserDto> {
-    return this.usersService.findUserById(userId).pipe(map(UserMapper.toDto));
+    return this.usersService.findUserById(userId).pipe(
+      map((data) => {
+        console.log(data);
+        const dto = UserMapper.toDto(data);
+        console.log(dto);
+        return dto;
+      }),
+    );
   }
 }

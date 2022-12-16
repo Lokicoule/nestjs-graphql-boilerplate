@@ -2,6 +2,7 @@ import { Company } from '../../domain/entities/company/company.entity';
 import { CompanyDto } from '../dtos/company.dto';
 import { CompanyInput } from '../dtos/inputs/company.input';
 import { CompanyMapper } from './company.mapper';
+import { Types } from 'mongoose';
 
 describe('CompanyMapper', () => {
   describe('toEntity', () => {
@@ -18,12 +19,12 @@ describe('CompanyMapper', () => {
       const company: Company = CompanyMapper.toEntity(companyInput);
 
       expect(company).toEqual({
-        _id: 'id',
-        name: 'name',
-        rcsNumber: 'rcsNumber',
-        vatNumber: 'vatNumber',
-        sirenNumber: 'sirenNumber',
-        siretNumber: 'siretNumber',
+        _id: companyInput.id,
+        name: companyInput.name,
+        rcsNumber: companyInput.rcsNumber,
+        vatNumber: companyInput.vatNumber,
+        sirenNumber: companyInput.sirenNumber,
+        siretNumber: companyInput.siretNumber,
       });
     });
   });
@@ -42,12 +43,12 @@ describe('CompanyMapper', () => {
       const companyDto: CompanyDto = CompanyMapper.toDto(company);
 
       expect(companyDto).toEqual({
-        id: 'id',
-        name: 'name',
-        rcsNumber: 'rcsNumber',
-        vatNumber: 'vatNumber',
-        sirenNumber: 'sirenNumber',
-        siretNumber: 'siretNumber',
+        id: company._id.toString(),
+        name: company.name,
+        rcsNumber: company.rcsNumber,
+        vatNumber: company.vatNumber,
+        sirenNumber: company.sirenNumber,
+        siretNumber: company.siretNumber,
       });
     });
   });

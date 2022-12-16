@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { Address } from '../../domain/entities/address/address.entity';
 import { AddressDto } from '../dtos/address.dto';
 import { AddressInput } from '../dtos/inputs/address.input';
@@ -18,12 +19,12 @@ describe('AddressMapper', () => {
       const address: Address = AddressMapper.toEntity(addressInput);
 
       expect(address).toEqual({
-        _id: 'id',
-        address: 'address',
-        city: 'city',
-        country: 'country',
-        zipCode: 'zipCode',
-        additionalAddress: 'additionalAddress',
+        _id: addressInput.id,
+        address: addressInput.address,
+        city: addressInput.city,
+        country: addressInput.country,
+        zipCode: addressInput.zipCode,
+        additionalAddress: addressInput.additionalAddress,
       });
     });
   });
@@ -42,12 +43,12 @@ describe('AddressMapper', () => {
       const addressDto: AddressDto = AddressMapper.toDto(address);
 
       expect(addressDto).toEqual({
-        id: 'id',
-        address: 'address',
-        city: 'city',
-        country: 'country',
-        zipCode: 'zipCode',
-        additionalAddress: 'additionalAddress',
+        id: address._id?.toString(),
+        address: address.address,
+        city: address.city,
+        country: address.country,
+        zipCode: address.zipCode,
+        additionalAddress: address.additionalAddress,
       });
     });
   });

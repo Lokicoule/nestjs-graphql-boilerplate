@@ -4,6 +4,7 @@ import { User } from '../../domain/entities/user/user.entity';
 import { UserInput } from '../dtos/inputs/user.input';
 import { UserDto } from '../dtos/user.dto';
 import { UserMapper } from './user.mapper';
+import { Types } from 'mongoose';
 
 describe('UserMapper', () => {
   describe('toEntity', () => {
@@ -35,26 +36,26 @@ describe('UserMapper', () => {
       const user: User = UserMapper.toEntity(userInput);
 
       expect(user).toEqual({
-        _id: 'id',
-        firstName: 'firstName',
-        lastName: 'lastName',
-        email: 'email',
-        phone: 'phone',
+        _id: userInput.id,
+        firstName: userInput.firstName,
+        lastName: userInput.lastName,
+        email: userInput.email,
+        phone: userInput.phone,
         address: {
-          _id: 'id',
-          address: 'address',
-          city: 'city',
-          country: 'country',
-          zipCode: 'zipCode',
-          additionalAddress: 'additionalAddress',
+          _id: userInput.address?.id,
+          address: userInput.address?.address,
+          city: userInput.address?.city,
+          country: userInput.address?.country,
+          zipCode: userInput.address?.zipCode,
+          additionalAddress: userInput.address?.additionalAddress,
         },
         company: {
-          _id: 'id',
-          name: 'name',
-          rcsNumber: 'rcsNumber',
-          vatNumber: 'vatNumber',
-          sirenNumber: 'sirenNumber',
-          siretNumber: 'siretNumber',
+          _id: userInput.company?.id,
+          name: userInput.company?.name,
+          rcsNumber: userInput.company?.rcsNumber,
+          vatNumber: userInput.company?.vatNumber,
+          sirenNumber: userInput.company?.sirenNumber,
+          siretNumber: userInput.company?.siretNumber,
         },
       });
     });
@@ -89,26 +90,26 @@ describe('UserMapper', () => {
       const userDto: UserDto = UserMapper.toDto(user);
 
       expect(userDto).toEqual({
-        id: 'id',
-        firstName: 'firstName',
-        lastName: 'lastName',
-        email: 'email',
-        phone: 'phone',
+        id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        phone: user.phone,
         address: {
-          id: 'id',
-          address: 'address',
-          city: 'city',
-          country: 'country',
-          zipCode: 'zipCode',
-          additionalAddress: 'additionalAddress',
+          id: user.address?._id?.toString(),
+          address: user.address?.address,
+          city: user.address?.city,
+          country: user.address?.country,
+          zipCode: user.address?.zipCode,
+          additionalAddress: user.address?.additionalAddress,
         },
         company: {
-          id: 'id',
-          name: 'name',
-          rcsNumber: 'rcsNumber',
-          vatNumber: 'vatNumber',
-          sirenNumber: 'sirenNumber',
-          siretNumber: 'siretNumber',
+          id: user.company?._id?.toString(),
+          name: user.company?.name,
+          rcsNumber: user.company?.rcsNumber,
+          vatNumber: user.company?.vatNumber,
+          sirenNumber: user.company?.sirenNumber,
+          siretNumber: user.company?.siretNumber,
         },
       });
     });

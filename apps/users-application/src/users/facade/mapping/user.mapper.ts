@@ -1,4 +1,4 @@
-import { User } from '../../domain/entities/user/user.entity';
+import { IUser, User } from '../../domain/entities/user/user.entity';
 import { UserDto } from '../dtos/user.dto';
 import { UserInput } from '../dtos/inputs/user.input';
 import { CompanyMapper } from './company.mapper';
@@ -21,7 +21,7 @@ export class UserMapper {
   public static toEntity(user: Partial<UserInput>): User {
     const { id, company, address, ...baseUser } = user;
 
-    const userEntity: User = Object.assign({} as User, {
+    const userEntity: IUser = Object.assign({} as IUser, {
       ...baseUser,
       _id: id,
       company: CompanyMapper.toEntity(company),

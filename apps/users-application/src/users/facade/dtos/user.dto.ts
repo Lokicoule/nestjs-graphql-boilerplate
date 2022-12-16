@@ -1,11 +1,20 @@
-import { DtoModel } from '@lib/fdo-graphql';
+import { DtoModel, IDtoModel } from '@lib/fdo-graphql';
 import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { AddressDto } from './address.dto';
 import { CompanyDto } from './company.dto';
 
+interface IUserDto extends IDtoModel {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: AddressDto;
+  company: CompanyDto;
+}
+
 @ObjectType()
 @Directive('@key(fields: "id")')
-export class UserDto extends DtoModel {
+export class UserDto extends DtoModel implements IUserDto {
   /*   @Field((type) => ID)
   id: string; */
 
@@ -27,7 +36,7 @@ export class UserDto extends DtoModel {
   @Field(() => CompanyDto, { name: 'company', nullable: true })
   public company: CompanyDto;
 
-  constructor(data: UserDto) {
+  constructor(data: IUserDto) {
     super(data);
     this.firstName = data.firstName;
     this.lastName = data.lastName;

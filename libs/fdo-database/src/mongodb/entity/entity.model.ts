@@ -1,5 +1,4 @@
 import { Prop } from '@nestjs/mongoose';
-import { Transform } from 'class-transformer';
 import { ObjectId } from 'mongoose';
 
 export interface IEntityModel {
@@ -8,8 +7,7 @@ export interface IEntityModel {
   updatedAt?: Date;
 }
 
-export class EntityModel {
-  @Transform(({ value }) => value.toString())
+export class EntityModel implements IEntityModel {
   public _id: ObjectId | string;
 
   @Prop()

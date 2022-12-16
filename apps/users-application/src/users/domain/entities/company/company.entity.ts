@@ -14,7 +14,7 @@ export interface ICompany extends IEntityModel {
 }
 
 @Schema({ timestamps: true })
-export class Company extends EntityModel {
+export class Company extends EntityModel implements ICompany {
   @Prop({ required: true, unique: true, uppercase: true })
   public name: string;
 

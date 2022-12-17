@@ -26,6 +26,8 @@ export class AddressMapper {
       country: address.country,
       zipCode: address.zipCode,
       additionalAddress: address.additionalAddress,
+      createdAt: address?.createdAt,
+      updatedAt: address?.updatedAt,
     });
   }
 }

@@ -9,13 +9,13 @@ export interface IDtoModel {
 @ObjectType()
 export class DtoModel {
   @Field(() => ID, { name: 'id' })
-  public id: string;
+  public readonly id: string;
 
   @Field(() => Date, { name: 'createdAt', nullable: true })
-  public createdAt: Date;
+  public readonly createdAt: Date;
 
   @Field(() => Date, { name: 'updatedAt', nullable: true })
-  public updatedAt: Date;
+  public readonly updatedAt: Date;
 
   constructor(data: IDtoModel) {
     this.id = data.id;

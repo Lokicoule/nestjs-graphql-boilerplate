@@ -75,6 +75,19 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
     );
   }
 
+  public findOneAndUpdate(
+    conditions: FilterQuery<T>,
+    entity: Partial<T>,
+  ): Observable<T> {
+    if (!Boolean(conditions)) return;
+
+    return from(
+      this.model.findOneAndUpdate(conditions, entity, {
+        upsert: true,
+      }),
+    );
+  }
+
   public remove(entity: Partial<T>): Observable<T> {
     return from(this.model.remove(entity));
   }

@@ -4,7 +4,7 @@ import {
 } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
-import { UserDto } from './facade/dtos/user.dto';
+import { UserDto } from '../users/facade/dtos/user.dto';
 import { PostsResolver } from './posts.resolver';
 import { PostsService } from './posts.service';
 import { UsersResolver } from './users.resolver';

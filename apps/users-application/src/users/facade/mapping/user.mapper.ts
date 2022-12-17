@@ -16,6 +16,8 @@ export class UserMapper {
       phone: user.phone,
       address: AddressMapper.toDto(user.address),
       company: CompanyMapper.toDto(user.company),
+      createdAt: user?.createdAt,
+      updatedAt: user?.updatedAt,
     });
   }
 

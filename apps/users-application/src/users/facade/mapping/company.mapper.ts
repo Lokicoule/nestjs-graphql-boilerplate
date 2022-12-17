@@ -13,6 +13,8 @@ export class CompanyMapper {
       vatNumber: company.vatNumber,
       sirenNumber: company.sirenNumber,
       siretNumber: company.siretNumber,
+      createdAt: company?.createdAt,
+      updatedAt: company?.updatedAt,
     });
   }
 

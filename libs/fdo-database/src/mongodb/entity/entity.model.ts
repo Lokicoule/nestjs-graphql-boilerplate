@@ -11,10 +11,10 @@ export class EntityModel implements IEntityModel {
   public _id: ObjectId | string;
 
   @Prop()
-  public readonly createdAt: Date;
+  public readonly createdAt?: Date;
 
   @Prop()
-  public readonly updatedAt: Date;
+  public readonly updatedAt?: Date;
 
   constructor(data: IEntityModel) {
     this._id = data._id;

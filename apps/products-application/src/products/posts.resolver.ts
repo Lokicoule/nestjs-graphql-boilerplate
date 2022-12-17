@@ -8,8 +8,8 @@ import {
 } from '@nestjs/graphql';
 import { PostsService } from './posts.service';
 import { ParseIntPipe } from '@nestjs/common';
-import { PostDto } from './facade/dtos/post.dto';
-import { UserDto } from './facade/dtos/user.dto';
+import { PostDto } from './facade/dtos/product.dto';
+import { UserDto } from '../users/facade/dtos/user.dto';
 
 @Resolver((of) => PostDto)
 export class PostsResolver {

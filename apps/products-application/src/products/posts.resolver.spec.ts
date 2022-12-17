@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { PostDto } from './facade/dtos/post.dto';
+import { PostDto } from './facade/dtos/product.dto';
 import { PostsResolver } from './posts.resolver';
 import { PostsService } from './posts.service';
 

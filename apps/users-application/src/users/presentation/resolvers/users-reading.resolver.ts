@@ -7,7 +7,7 @@ import { UsersManagementFacade } from '../../facade/frontoffice/users-management
 
 @Authentication()
 @Resolver(() => UserDto)
-export class UserReadingResolver {
+export class UsersReadingResolver {
   constructor(private readonly usersManagementFacade: UsersManagementFacade) {}
 
   @Query(() => UserDto, {

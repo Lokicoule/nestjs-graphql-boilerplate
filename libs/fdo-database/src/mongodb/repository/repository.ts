@@ -100,6 +100,18 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
     );
   }
 
+  public removeByConditions(conditions: FilterQuery<T>): Observable<T> {
+    return from(this.model.findOneAndRemove(conditions));
+  }
+
+  public removeMany(conditions: FilterQuery<T>): Observable<boolean> {
+    return from(
+      this.model
+        .deleteMany(conditions)
+        .then(({ deletedCount }) => deletedCount > 0),
+    );
+  }
+
   public removeByIds(ids: any[]): Observable<boolean> {
     return from(
       this.model

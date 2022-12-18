@@ -1,7 +1,8 @@
+import { User } from '@nestjs-cognito/auth';
 import { Injectable } from '@nestjs/common';
+import { UserDto } from '../../../users/facade/dtos/user.dto';
 import { map, Observable } from 'rxjs';
 import { SettingsService } from '../../business/services/settings.service';
-import { SettingCodeEnum } from '../../domain/enums/setting.enum';
 import { SettingCriteriaInput } from '../dtos/inputs/setting-criteria.input';
 import { SettingInput } from '../dtos/inputs/setting.input';
 import { SettingDto } from '../dtos/setting.dto';
@@ -12,44 +13,38 @@ export class SettingsManagementFacade {
   constructor(private readonly settingsService: SettingsService) {}
 
   public updateSetting(
-    authorId: string,
+    cognitoUser: User,
     input: SettingInput,
   ): Observable<SettingDto> {
-    switch (input.code) {
-      case SettingCodeEnum.CODE_GENERATOR:
-        return this.settingsService
-          .updateCodeGeneratorSetting(
-            SettingMapper.toEntity({
-              authorId,
-              ...input,
-            }),
-          )
-          .pipe(map(SettingMapper.toDto));
-      default:
-        return this.settingsService
-          .updateSetting(SettingMapper.toEntity({ authorId, ...input }))
-          .pipe(map(SettingMapper.toDto));
-    }
+    return this.settingsService
+      .updateSetting(
+        SettingMapper.toEntity({ ...input, authorId: cognitoUser.username }),
+      )
+      .pipe(map(SettingMapper.toDto));
   }
 
-  public findSettingByIdAndAuthorId(
-    authorId: string,
+  public findSettingById(
+    cognitoUser: User,
     settingId: string,
   ): Observable<SettingDto> {
     return this.settingsService
       .findSetting({
         _id: settingId,
-        authorId,
+        authorId: cognitoUser.username,
       })
       .pipe(map(SettingMapper.toDto));
   }
 
-  public findSettingsByAuthorId(
-    authorId: string,
+  public findSettings(
+    user: User | UserDto,
     settingCriteria?: SettingCriteriaInput,
   ): Observable<SettingDto[]> {
     return this.settingsService
-      .findSettings({ authorId, ...settingCriteria })
+      .findSettings({ ...settingCriteria, authorId: this.getAuthorId(user) })
       .pipe(map(SettingMapper.toDtoArray));
+  }
+
+  private getAuthorId(user: User | UserDto): string {
+    return user instanceof User ? user.username : user.id;
   }
 }

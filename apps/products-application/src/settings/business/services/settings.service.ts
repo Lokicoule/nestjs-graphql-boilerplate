@@ -5,7 +5,6 @@ import { SettingCriteria } from '../../domain/criterias/setting.criteria';
 import { Property } from '../../domain/entities/property.entity';
 import { Setting } from '../../domain/entities/setting.entity';
 import { SettingsRepository } from '../../persistence/repositories/settings.repository';
-import { CodeGeneratorUseCase } from '../use-cases/code-generator.use-case';
 
 @Injectable()
 export class SettingsService {
@@ -15,6 +14,7 @@ export class SettingsService {
     if (!Boolean(setting)) {
       throw new UseCaseException('The setting is null or undefined');
     }
+
     this.validateSetting(setting);
     return this.settingsRepository.create(setting);
   }
@@ -26,6 +26,7 @@ export class SettingsService {
     if (!Boolean(setting)) {
       throw new UseCaseException('The setting is null or undefined');
     }
+
     this.validateSetting(setting);
     return this.settingsRepository.createOrUpdate(criteria, setting);
   }
@@ -46,11 +47,6 @@ export class SettingsService {
       },
       setting,
     );
-  }
-
-  public updateCodeGeneratorSetting(setting: Setting): Observable<Setting> {
-    CodeGeneratorUseCase.validateSetting(setting);
-    return this.updateSetting(setting);
   }
 
   public findSetting(settingCriteria: SettingCriteria): Observable<Setting> {

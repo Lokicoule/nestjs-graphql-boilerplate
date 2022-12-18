@@ -11,7 +11,7 @@ import { UserDto } from '../../../users/facade/dtos/user.dto';
   requiredGroups: ['User'],
 })
 @Resolver(() => SettingDto)
-export class SettingReadingResolver {
+export class SettingsReadingResolver {
   constructor(
     private readonly settingsManagementFacade: SettingsManagementFacade,
   ) {}
@@ -25,10 +25,7 @@ export class SettingReadingResolver {
     @Args('criterias', { nullable: true })
     criterias?: SettingCriteriaInput,
   ): Observable<SettingDto[]> {
-    return this.settingsManagementFacade.findSettingsByAuthorId(
-      user.username,
-      criterias,
-    );
+    return this.settingsManagementFacade.findSettings(user, criterias);
   }
 
   @Query(() => SettingDto, {
@@ -39,10 +36,7 @@ export class SettingReadingResolver {
     @CurrentUser() user: User,
     @Args('id', { type: () => String }) id: string,
   ): Observable<SettingDto> {
-    return this.settingsManagementFacade.findSettingByIdAndAuthorId(
-      user.username,
-      id,
-    );
+    return this.settingsManagementFacade.findSettingById(user, id);
   }
 
   @ResolveField((of) => UserDto)

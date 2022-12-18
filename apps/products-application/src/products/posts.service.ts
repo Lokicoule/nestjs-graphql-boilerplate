@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+/* import { Injectable } from '@nestjs/common';
 import { PostDto } from './facade/dtos/product.dto';
 
 @Injectable()
@@ -26,3 +26,4 @@ export class PostsService {
     return this.posts;
   }
 }
+ */

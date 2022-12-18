@@ -22,7 +22,7 @@ export class UsersService {
     if (!Boolean(user)) {
       throw new TechnicalException('The user is required');
     }
-    console.log('user', user);
+
     this.validateUser(user);
 
     return from(

@@ -1,4 +1,4 @@
-import {
+/* import {
   Args,
   ID,
   Parent,
@@ -32,3 +32,4 @@ export class PostsResolver {
     return { __typename: 'User', id: post.authorId };
   }
 }
+ */

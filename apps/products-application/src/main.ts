@@ -8,5 +8,6 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(configService.get('PRODUCTS_APPLICATION_HTTP_PORT'));
+  console.log(`Products application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

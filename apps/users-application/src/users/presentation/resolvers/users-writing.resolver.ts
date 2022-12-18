@@ -9,7 +9,7 @@ import { UserUpdateInput } from '../../facade/dtos/inputs/user-update.input';
 
 @Authentication()
 @Resolver(() => UserDto)
-export class UserWritingResolver {
+export class UsersWritingResolver {
   constructor(private readonly usersManagementFacade: UsersManagementFacade) {}
 
   @Mutation(() => UserDto, { name: `createUser`, nullable: true })

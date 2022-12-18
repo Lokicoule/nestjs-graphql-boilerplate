@@ -2,17 +2,27 @@ import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { SettingDto } from '../../../settings/facade/dtos/setting.dto';
 import { ProductDto } from '../../../products/facade/dtos/product.dto';
 
+interface IUserDto {
+  id: string;
+  products?: ProductDto[];
+  settings?: SettingDto[];
+}
+
 @ObjectType()
 @Directive('@extends')
 @Directive('@key(fields: "id")')
-export class UserDto {
+export class UserDto implements IUserDto {
   @Field((type) => ID)
   @Directive('@external')
-  id: string;
+  public readonly id: string;
 
   @Field((type) => [ProductDto])
-  products?: ProductDto[];
+  public readonly products?: ProductDto[];
 
   @Field((type) => [SettingDto])
-  settings?: ProductDto[];
+  public readonly settings?: SettingDto[];
+
+  constructor(partial: Partial<IUserDto>) {
+    Object.assign(this, partial);
+  }
 }

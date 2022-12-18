@@ -1,10 +1,10 @@
 import { ArrayContains } from '@lib/fdo-validator';
 import { applyDecorators } from '@nestjs/common';
 import { ArrayUnique } from 'class-validator';
-import { PropertyKeyEnum } from '../../domain/enums/property.enum';
-import { PropertyInput } from '../dtos/inputs/property.input';
+import { PropertyKeyEnum } from '../../../settings/domain/enums/property.enum';
+import { PropertyInput } from '../../../settings/facade/dtos/inputs/property.input';
 
-export function CodeGeneratorPropertiesValidator() {
+export function ProductCodeSettingValidator() {
   return applyDecorators(
     ArrayContains(
       (o: PropertyInput) =>

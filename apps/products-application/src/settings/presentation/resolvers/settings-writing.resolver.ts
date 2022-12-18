@@ -3,7 +3,6 @@ import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 import { SettingUpdateInput } from '../../facade/dtos/inputs/setting-update.input';
-import { SettingCodeGeneratorInput } from '../../facade/dtos/inputs/use-cases/code-generator.input';
 import { SettingDto } from '../../facade/dtos/setting.dto';
 import { SettingsManagementFacade } from '../../facade/frontoffice/settings-management.facade';
 
@@ -11,19 +10,10 @@ import { SettingsManagementFacade } from '../../facade/frontoffice/settings-mana
   requiredGroups: ['User'],
 })
 @Resolver(() => SettingDto)
-export class ProductSettingWritingResolver {
+export class SettingsWritingResolver {
   constructor(
     private readonly settingsManagementFacade: SettingsManagementFacade,
   ) {}
-
-  @Mutation(() => SettingDto, { name: `updateCodeGeneratorSetting` })
-  updateCodeGeneratorSetting(
-    @CurrentUser() user: User,
-    @Args('updateSettingCodeGeneratorInput')
-    payload: SettingCodeGeneratorInput,
-  ): Observable<SettingDto> {
-    return this.settingsManagementFacade.updateSetting(user.username, payload);
-  }
 
   @Mutation(() => SettingDto, { name: `updateSetting` })
   update(
@@ -31,6 +21,6 @@ export class ProductSettingWritingResolver {
     @Args('updateSettingInput')
     payload: SettingUpdateInput,
   ): Observable<SettingDto> {
-    return this.settingsManagementFacade.updateSetting(user.username, payload);
+    return this.settingsManagementFacade.updateSetting(user, payload);
   }
 }

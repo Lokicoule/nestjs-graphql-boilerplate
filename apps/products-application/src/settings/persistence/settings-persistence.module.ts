@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { MongooseProviderModule } from '../../mongoose/mongodb.provider.module';
+import { MongooseProviderModule } from '../../mongoose/mongoose.provider.module';
 import { Setting, SettingSchema } from '../domain/entities/setting.entity';
 import { SettingsRepository } from './repositories/settings.repository';
 

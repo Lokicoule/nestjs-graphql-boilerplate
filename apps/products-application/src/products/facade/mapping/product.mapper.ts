@@ -14,7 +14,7 @@ export class ProductMapper extends ArrayMapperWithCriteria<
   ProductCriteriaInput & Pick<ProductCriteria, 'authorId'>,
   ProductCriteria
 > {
-  protected mapToCriteria(
+  public toCriteria(
     dto: ProductCriteriaInput & Pick<ProductCriteria, 'authorId'>,
   ): ProductCriteria {
     return new ProductCriteria({

@@ -50,6 +50,7 @@ export class ProductUseCase {
       throw new UseCaseException('The setting properties are required');
     }
 
+    // add _id only for update
     return new Setting({
       _id: setting?._id,
       authorId: setting.authorId,

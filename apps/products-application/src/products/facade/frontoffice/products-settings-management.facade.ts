@@ -11,6 +11,7 @@ import { ProductCodeSettingInput } from '../dtos/inputs/product-code-setting.inp
 export class ProductsSettingsManagementFacade {
   constructor(
     private readonly productsSettingsService: ProductsSettingsService,
+    private readonly settingMapper: SettingMapper,
   ) {}
 
   public updateSetting(
@@ -19,11 +20,11 @@ export class ProductsSettingsManagementFacade {
   ): Observable<SettingDto> {
     return this.productsSettingsService
       .updateCodeGeneratorSetting(
-        SettingMapper.toEntity({
+        this.settingMapper.toEntity({
           ...input,
           authorId: cognitoUser.username,
         }),
       )
-      .pipe(map(SettingMapper.toDto));
+      .pipe(map((dto) => this.settingMapper.toDto(dto)));
   }
 }

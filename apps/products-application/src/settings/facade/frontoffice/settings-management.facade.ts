@@ -7,32 +7,63 @@ import { SettingCriteriaInput } from '../dtos/inputs/setting-criteria.input';
 import { SettingInput } from '../dtos/inputs/setting.input';
 import { SettingDto } from '../dtos/setting.dto';
 import { SettingMapper } from '../mapping/setting.mapper';
+import { SettingCriteria } from '../../domain/criterias/setting.criteria';
+import { Setting } from '../../domain/entities/setting.entity';
 
 @Injectable()
 export class SettingsManagementFacade {
-  constructor(private readonly settingsService: SettingsService) {}
+  constructor(
+    private readonly settingsService: SettingsService,
+    private readonly settingMapper: SettingMapper,
+  ) {}
 
-  public updateSetting(
-    cognitoUser: User,
-    input: SettingInput,
+  createOrUpdateSetting(
+    settingCriteria: SettingCriteriaInput,
+    setting: Setting,
   ): Observable<SettingDto> {
     return this.settingsService
-      .updateSetting(
-        SettingMapper.toEntity({ ...input, authorId: cognitoUser.username }),
+      .createOrUpdateSetting(
+        this.settingMapper.toCriteria(settingCriteria),
+        setting,
       )
-      .pipe(map(SettingMapper.toDto));
+      .pipe(map((dto) => this.settingMapper.toDto(dto)));
+  }
+
+  public updateSetting(
+    user: User | string,
+    input: SettingInput | Setting,
+  ): Observable<SettingDto> {
+    return this.settingsService
+      .updateSetting(this.getSetting(input, user))
+      .pipe(map((dto) => this.settingMapper.toDto(dto)));
+  }
+
+  public findSetting(
+    user: User | string,
+    settingCriteria?: SettingCriteriaInput,
+  ): Observable<SettingDto> {
+    return this.settingsService
+      .findSetting(
+        new SettingCriteria({
+          ...settingCriteria,
+          authorId: this.getAuthorId(user),
+        }),
+      )
+      .pipe(map((dto) => this.settingMapper.toDto(dto)));
   }
 
   public findSettingById(
-    cognitoUser: User,
+    user: User | string,
     settingId: string,
   ): Observable<SettingDto> {
     return this.settingsService
-      .findSetting({
-        _id: settingId,
-        authorId: cognitoUser.username,
-      })
-      .pipe(map(SettingMapper.toDto));
+      .findSetting(
+        new SettingCriteria({
+          id: settingId,
+          authorId: this.getAuthorId(user),
+        }),
+      )
+      .pipe(map((dto) => this.settingMapper.toDto(dto)));
   }
 
   public findSettings(
@@ -40,11 +71,36 @@ export class SettingsManagementFacade {
     settingCriteria?: SettingCriteriaInput,
   ): Observable<SettingDto[]> {
     return this.settingsService
-      .findSettings({ ...settingCriteria, authorId: this.getAuthorId(user) })
-      .pipe(map(SettingMapper.toDtoArray));
+      .findSettings(
+        new SettingCriteria({
+          ...settingCriteria,
+          authorId: this.getAuthorId(user),
+        }),
+      )
+      .pipe(map((dto) => this.settingMapper.toDtoArray(dto)));
   }
 
-  private getAuthorId(user: User | UserDto): string {
-    return user instanceof User ? user.username : user.id;
+  private getSetting(
+    setting: SettingInput | Setting,
+    user: User | string,
+  ): Setting {
+    if (setting instanceof Setting) {
+      return setting;
+    } else {
+      return this.settingMapper.toEntity({
+        ...setting,
+        authorId: this.getAuthorId(user),
+      });
+    }
+  }
+
+  private getAuthorId(user: User | UserDto | string): string {
+    if (user instanceof User) {
+      return user.username;
+    } else if (user instanceof UserDto) {
+      return user.id;
+    } else {
+      return user;
+    }
   }
 }

@@ -1,3 +1,5 @@
+import { Criteria } from '@lib/fdo-domain/criteria/criteria';
+
 export interface IProductCriteria {
   id?: string;
   authorId?: string;
@@ -5,6 +7,7 @@ export interface IProductCriteria {
   label?: string;
 }
 
+@Criteria
 export class ProductCriteria implements IProductCriteria {
   public readonly id?: string;
   public readonly authorId?: string;

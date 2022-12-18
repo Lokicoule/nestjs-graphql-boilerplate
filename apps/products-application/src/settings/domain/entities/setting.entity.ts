@@ -14,7 +14,7 @@ export interface ISetting extends IEntityModel {
 
 @Schema({ timestamps: true })
 export class Setting extends EntityModel {
-  @Prop({ type: String, required: true, unique: true, uppercase: true })
+  @Prop({ type: String, required: true, uppercase: true })
   public readonly code: SettingCodeEnum;
 
   @Prop({
@@ -34,4 +34,8 @@ export class Setting extends EntityModel {
 }
 
 export type SettingDocument = Setting & Document;
-export const SettingSchema = SchemaFactory.createForClass(Setting);
+const SettingSchema = SchemaFactory.createForClass(Setting);
+
+SettingSchema.index({ code: 1, authorId: 1 }, { unique: true });
+
+export { SettingSchema };

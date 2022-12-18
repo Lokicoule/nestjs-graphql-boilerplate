@@ -1,10 +1,9 @@
 import { UserBuilder } from '@nestjs-cognito/auth';
 import { Test, TestingModule } from '@nestjs/testing';
-import { TestScheduler } from 'rxjs/testing';
 import { UserDto } from '../../../users/facade/dtos/user.dto';
 import { SettingsService } from '../../business/services/settings.service';
-import { SettingCriteriaInput } from '../dtos/inputs/setting-criteria.input';
-import { SettingInput } from '../dtos/inputs/setting.input';
+import { PropertyMapper } from '../mapping/property.mapper';
+import { SettingMapper } from '../mapping/setting.mapper';
 import { SettingsManagementFacade } from './settings-management.facade';
 
 describe('SettingsManagementFacade', () => {
@@ -22,6 +21,8 @@ describe('SettingsManagementFacade', () => {
           },
         },
         SettingsManagementFacade,
+        SettingMapper,
+        PropertyMapper,
       ],
     }).compile();
 

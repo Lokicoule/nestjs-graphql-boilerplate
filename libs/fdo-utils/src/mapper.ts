@@ -24,11 +24,7 @@ export abstract class MapperWithCriteria<
   TCriteriaDto,
   TCriteriaEntity,
 > extends Mapper<TDto, TDtoInput, TEntity> {
-  protected abstract mapToCriteria(dto: TCriteriaDto): TCriteriaEntity;
-
-  public toCriteria(dto: TCriteriaDto): TCriteriaEntity {
-    return JSON.parse(JSON.stringify(this.mapToCriteria(dto)));
-  }
+  public abstract toCriteria(dto: TCriteriaDto): TCriteriaEntity;
 }
 
 export abstract class ArrayMapperWithCriteria<

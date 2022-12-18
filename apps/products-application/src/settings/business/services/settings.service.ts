@@ -27,8 +27,13 @@ export class SettingsService {
       throw new UseCaseException('The setting is null or undefined');
     }
 
+    console.log('criteria', criteria);
+    console.log('setting', setting);
     this.validateSetting(setting);
-    return this.settingsRepository.createOrUpdate(criteria, setting);
+    return this.settingsRepository.createOrUpdate(
+      criteria /* .query */,
+      setting,
+    );
   }
 
   public updateSetting(setting: Setting): Observable<Setting> {
@@ -54,10 +59,10 @@ export class SettingsService {
       throw new TechnicalException('The setting criteria is null or undefined');
     }
 
+    console.log('settingCriteria', settingCriteria);
     if (!Boolean(settingCriteria.authorId)) {
       throw new TechnicalException('The author id is required');
     }
-
     return this.settingsRepository.findOne(settingCriteria);
   }
 

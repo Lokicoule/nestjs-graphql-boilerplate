@@ -1,11 +1,27 @@
+import { Test, TestingModule } from '@nestjs/testing';
 import { Setting } from '../../domain/entities/setting.entity';
 import { PropertyEnum } from '../../domain/enums/property.enum';
 import { SettingEnum } from '../../domain/enums/setting.enum';
 import { SettingInput } from '../dtos/inputs/setting.input';
 import { SettingDto } from '../dtos/setting.dto';
+import { PropertyMapper } from './property.mapper';
 import { SettingMapper } from './setting.mapper';
 
 describe('SettingMapper', () => {
+  let settingMapper: SettingMapper;
+
+  beforeEach(async () => {
+    const module: TestingModule = await Test.createTestingModule({
+      providers: [SettingMapper, PropertyMapper],
+    }).compile();
+
+    settingMapper = module.get<SettingMapper>(SettingMapper);
+  });
+
+  it('should be defined', () => {
+    expect(settingMapper).toBeDefined();
+  });
+
   describe('toEntity', () => {
     it('should return setting', () => {
       const settingInput: SettingInput = {
@@ -20,7 +36,7 @@ describe('SettingMapper', () => {
         ],
       };
 
-      const setting: Setting = SettingMapper.toEntity({
+      const setting: Setting = settingMapper.toEntity({
         authorId: 'id',
         ...settingInput,
       });
@@ -55,7 +71,7 @@ describe('SettingMapper', () => {
         ],
       });
 
-      const settingDto: SettingDto = SettingMapper.toDto(setting);
+      const settingDto: SettingDto = settingMapper.toDto(setting);
 
       expect(settingDto).toEqual({
         id: setting._id?.toString(),

@@ -5,6 +5,7 @@ import { duplicateRetryStrategy } from '@lib/fdo-database/mongodb/retry/duplicat
 import { UseCaseException } from '@lib/fdo-domain';
 
 import { SettingsService } from '../../../settings/business/services/settings.service';
+import { SettingCriteria } from '../../../settings/domain/criterias/setting.criteria';
 import { Property } from '../../../settings/domain/entities/property.entity';
 import { Setting } from '../../../settings/domain/entities/setting.entity';
 import { PropertyEnum } from '../../../settings/domain/enums/property.enum';
@@ -12,7 +13,6 @@ import { SettingEnum } from '../../../settings/domain/enums/setting.enum';
 import { Product } from '../../domain/entities/product.entity';
 import { ProductsRepository } from '../../persistence/repositories/products.repository';
 import { ProductUseCase } from '../use-cases/product.use-case';
-import { SettingCriteria } from '../../../settings/domain/criterias/setting.criteria';
 
 @Injectable()
 export class ProductsSettingsService {
@@ -23,10 +23,12 @@ export class ProductsSettingsService {
 
   public generateProduct(product: Product): Observable<Product> {
     return defer(() =>
-      this.settingsService.findSetting({
-        code: SettingEnum.getEnum().CODE_GENERATOR,
-        authorId: product.authorId,
-      }),
+      this.settingsService.findSetting(
+        new SettingCriteria({
+          code: SettingEnum.getEnum().CODE_GENERATOR,
+          authorId: product.authorId,
+        }) /* .query */,
+      ),
     ).pipe(
       map((setting) =>
         this.settingsService.createOrUpdateSetting(

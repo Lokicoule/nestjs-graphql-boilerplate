@@ -1,32 +1,31 @@
-import { IProperty, Property } from '../../domain/entities/property.entity';
+import { ArrayMapper } from '@lib/fdo-utils';
+import { Property } from '../../domain/entities/property.entity';
 import { PropertyEnum } from '../../domain/enums/property.enum';
 import { PropertyInput } from '../dtos/inputs/property.input';
-import { IPropertyDto, PropertyDto } from '../dtos/property.dto';
+import { PropertyDto } from '../dtos/property.dto';
+import { Injectable } from '@nestjs/common';
 
-export class PropertyMapper {
-  public static toEntity(data: PropertyInput): Property {
-    return new Property({
-      _id: data.id,
-      key: data.key,
-      value: data.value,
-    });
-  }
-
-  public static toEntityArray(data: PropertyInput[]): Property[] {
-    return data?.map((input) => this.toEntity(input));
-  }
-
-  public static toDto(data: IProperty): PropertyDto {
+@Injectable()
+export class PropertyMapper extends ArrayMapper<
+  PropertyDto,
+  PropertyInput,
+  Property
+> {
+  public toDto(entity: Property): PropertyDto {
     return new PropertyDto({
-      id: data?._id.toString(),
-      key: PropertyEnum.getValue(data.key),
-      value: data.value,
-      createdAt: data?.createdAt,
-      updatedAt: data?.updatedAt,
+      id: entity?._id.toString(),
+      key: PropertyEnum.getValue(entity.key),
+      value: entity.value,
+      createdAt: entity?.createdAt,
+      updatedAt: entity?.updatedAt,
     });
   }
 
-  public static toDtoArray(data: IProperty[]): PropertyDto[] {
-    return data?.map((entity) => this.toDto(entity));
+  public toEntity(dto: PropertyInput): Property {
+    return new Property({
+      _id: dto.id,
+      key: dto.key,
+      value: dto.value,
+    });
   }
 }

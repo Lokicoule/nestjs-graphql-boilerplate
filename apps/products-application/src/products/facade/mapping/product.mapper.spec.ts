@@ -1,7 +1,7 @@
+import { Test, TestingModule } from '@nestjs/testing';
 import { Product } from '../../domain/entities/product.entity';
 import { ProductDto } from '../dtos/product.dto';
 import { ProductMapper } from './product.mapper';
-import { Test, TestingModule } from '@nestjs/testing';
 
 describe('ProductMapper', () => {
   let productMapper: ProductMapper;

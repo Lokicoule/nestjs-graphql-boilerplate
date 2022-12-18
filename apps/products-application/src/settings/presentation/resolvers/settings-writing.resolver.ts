@@ -21,6 +21,6 @@ export class SettingsWritingResolver {
     @Args('updateSettingInput')
     payload: SettingUpdateInput,
   ): Observable<SettingDto> {
-    return this.settingsManagementFacade.updateSetting(user, payload);
+    return this.settingsManagementFacade.updateSetting(user.username, payload);
   }
 }

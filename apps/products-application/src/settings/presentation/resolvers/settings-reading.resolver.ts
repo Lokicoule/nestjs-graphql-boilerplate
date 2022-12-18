@@ -25,7 +25,7 @@ export class SettingsReadingResolver {
     @Args('criterias', { nullable: true })
     criterias?: SettingCriteriaInput,
   ): Observable<SettingDto[]> {
-    return this.settingsManagementFacade.findSettings(user, criterias);
+    return this.settingsManagementFacade.findSettings(user.username, criterias);
   }
 
   @Query(() => SettingDto, {
@@ -36,11 +36,12 @@ export class SettingsReadingResolver {
     @CurrentUser() user: User,
     @Args('id', { type: () => String }) id: string,
   ): Observable<SettingDto> {
-    return this.settingsManagementFacade.findSettingById(user, id);
+    return this.settingsManagementFacade.findSettingById(user.username, id);
   }
 
   @ResolveField((of) => UserDto)
   user(@Parent() setting: SettingDto): any {
+    console.log('setting.authorId', setting.authorId);
     return { __typename: 'User', id: setting.authorId };
   }
 }

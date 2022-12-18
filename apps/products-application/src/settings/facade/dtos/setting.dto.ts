@@ -5,6 +5,7 @@ import {
   ObjectType,
   registerEnumType,
 } from '@nestjs/graphql';
+import { UserDto } from '../../../users/facade/dtos/user.dto';
 import { SettingCodeEnum, SettingEnum } from '../../domain/enums/setting.enum';
 import { PropertyDto } from './property.dto';
 
@@ -16,6 +17,7 @@ export interface ISettingDto extends IDtoModel {
   code: SettingCodeEnum;
   properties: PropertyDto[];
   authorId: string;
+  user?: UserDto;
 }
 
 @ObjectType()
@@ -30,10 +32,14 @@ export class SettingDto extends DtoModel {
   @Field((type) => String)
   public readonly authorId: string;
 
+  @Field((type) => UserDto)
+  public readonly user?: UserDto;
+
   constructor(data: ISettingDto) {
     super(data);
     this.code = data.code;
     this.properties = data.properties;
     this.authorId = data.authorId;
+    this.user = data.user;
   }
 }

@@ -21,6 +21,9 @@ export class ProductsSettingsWritingResolver {
     @Args('payload')
     payload: ProductCodeSettingInput,
   ): Observable<SettingDto> {
-    return this.productSettingsManagementFacade.updateSetting(user, payload);
+    return this.productSettingsManagementFacade.updateSetting(
+      user.username,
+      payload,
+    );
   }
 }

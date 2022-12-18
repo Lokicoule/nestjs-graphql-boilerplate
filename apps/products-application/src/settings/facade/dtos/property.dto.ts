@@ -1,5 +1,10 @@
 import { DtoModel, IDtoModel } from '@lib/fdo-graphql';
-import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import {
+  Field,
+  ObjectType,
+  registerEnumType,
+  Directive,
+} from '@nestjs/graphql';
 import {
   PropertyEnum,
   PropertyKeyEnum,
@@ -15,7 +20,7 @@ export interface IPropertyDto extends IDtoModel {
 }
 
 @ObjectType()
-export class PropertyDto extends DtoModel {
+export class PropertyDto extends DtoModel implements IPropertyDto {
   @Field(() => PropertyKeyEnum, { name: 'key' })
   public readonly key: PropertyKeyEnum;
 

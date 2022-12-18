@@ -6,6 +6,7 @@ import { ProductCreateInput } from '../../facade/dtos/inputs/product-create.inpu
 import { ProductUpdateInput } from '../../facade/dtos/inputs/product-update.input';
 import { ProductDto } from '../../facade/dtos/product.dto';
 import { ProductsManagementFacade } from '../../facade/frontoffice/products-management.facade';
+import { User } from '@nestjs-cognito/auth';
 
 @Resolver(() => ProductDto)
 @Authorization({
@@ -18,19 +19,25 @@ export class ProductsWritingResolver {
 
   @Mutation(() => ProductDto, { name: `createProduct`, nullable: true })
   create(
-    @CurrentUser() cognitoUser,
+    @CurrentUser() cognitoUser: User,
     @Args('payload')
     payload: ProductCreateInput,
   ): Observable<ProductDto> {
-    return this.productsManagementFacade.createProduct(cognitoUser, payload);
+    return this.productsManagementFacade.createProduct(
+      cognitoUser.username,
+      payload,
+    );
   }
 
   @Mutation(() => ProductDto, { name: `updateProduct` })
   update(
-    @CurrentUser() cognitoUser,
+    @CurrentUser() cognitoUser: User,
     @Args('payload')
     payload: ProductUpdateInput,
   ): Observable<ProductDto> {
-    return this.productsManagementFacade.updateProduct(cognitoUser, payload);
+    return this.productsManagementFacade.updateProduct(
+      cognitoUser.username,
+      payload,
+    );
   }
 }

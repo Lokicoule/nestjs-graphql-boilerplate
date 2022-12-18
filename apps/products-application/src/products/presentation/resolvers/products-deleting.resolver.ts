@@ -22,7 +22,10 @@ export class ProductsDeletingResolver {
     @CurrentUser() cognitoUser: User,
     @Args('id', { type: () => String }) id: string,
   ): Observable<ProductDto> {
-    return this.productsManagementFacade.removeProductById(cognitoUser, id);
+    return this.productsManagementFacade.removeProductById(
+      cognitoUser.username,
+      id,
+    );
   }
 
   @Mutation(() => Boolean, {
@@ -32,6 +35,9 @@ export class ProductsDeletingResolver {
     @CurrentUser() cognitoUser: User,
     @Args('ids', { type: () => [String] }) ids: string[],
   ): Observable<boolean> {
-    return this.productsManagementFacade.removeProductsByIds(cognitoUser, ids);
+    return this.productsManagementFacade.removeProductsByIds(
+      cognitoUser.username,
+      ids,
+    );
   }
 }

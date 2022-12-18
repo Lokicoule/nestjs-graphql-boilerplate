@@ -77,6 +77,8 @@ export class SettingsService {
       throw new TechnicalException('The author id is required');
     }
 
+    console.log('settingCriteria', settingCriteria);
+
     return this.settingsRepository.find(settingCriteria);
   }
 

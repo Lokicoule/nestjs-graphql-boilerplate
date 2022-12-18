@@ -16,11 +16,11 @@ export class UsersReadingResolver {
 
   @ResolveField((of) => [ProductDto])
   public products(@Parent() user: UserDto): Observable<ProductDto[]> {
-    return this.productsManagementFacade.findProducts(user);
+    return this.productsManagementFacade.findProducts(user.id);
   }
 
   @ResolveField((of) => [SettingDto])
   public settings(@Parent() user: UserDto): Observable<SettingDto[]> {
-    return this.settingsManagementFacade.findSettings(user);
+    return this.settingsManagementFacade.findSettings(user.id);
   }
 }

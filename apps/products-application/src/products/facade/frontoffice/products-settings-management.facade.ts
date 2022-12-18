@@ -15,14 +15,14 @@ export class ProductsSettingsManagementFacade {
   ) {}
 
   public updateSetting(
-    cognitoUser: User,
+    authorId: string,
     input: ProductCodeSettingInput,
   ): Observable<SettingDto> {
     return this.productsSettingsService
       .updateCodeGeneratorSetting(
         this.settingMapper.toEntity({
           ...input,
-          authorId: cognitoUser.username,
+          authorId,
         }),
       )
       .pipe(map((dto) => this.settingMapper.toDto(dto)));

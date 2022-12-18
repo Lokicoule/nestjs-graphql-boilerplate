@@ -32,6 +32,6 @@ export class Product extends EntityModel implements IProduct {
 export type ProductDocument = Product & Document;
 const ProductSchema = SchemaFactory.createForClass(Product);
 
-ProductSchema.index({ code: 1, cognitoId: 1 }, { unique: true });
+ProductSchema.index({ code: 1, authorId: 1 }, { unique: true });
 
 export { ProductSchema };

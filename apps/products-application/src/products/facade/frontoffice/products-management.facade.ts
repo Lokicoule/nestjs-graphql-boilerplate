@@ -18,70 +18,67 @@ export class ProductsManagementFacade {
   ) {}
 
   public createProduct(
-    cognitoUser: User,
+    authorId: string,
     input: ProductCreateInput,
   ): Observable<ProductDto> {
     return this.productsService
       .createProduct(
         this.productMapper.toEntity({
           ...input,
-          authorId: cognitoUser.username,
+          authorId,
         }),
       )
       .pipe(map((dto) => this.productMapper.toDto(dto)));
   }
 
   public updateProduct(
-    cognitoUser: User,
+    authorId: string,
     input: ProductUpdateInput,
   ): Observable<ProductDto> {
     return this.productsService
       .updateProduct(
         this.productMapper.toEntity({
           ...input,
-          authorId: cognitoUser.username,
+          authorId,
         }),
       )
       .pipe(map((dto) => this.productMapper.toDto(dto)));
   }
 
   public removeProductById(
-    cognitoUser: User,
+    authorId: string,
     productId: string,
   ): Observable<ProductDto> {
     return this.productsService
-      .removeProductById(cognitoUser.username, productId)
+      .removeProductById(authorId, productId)
       .pipe(map((dto) => this.productMapper.toDto(dto)));
   }
 
   public removeProductsByIds(
-    cognitoUser: User,
+    authorId: string,
     productIds: string[],
   ): Observable<boolean> {
-    return this.productsService.removeProductsByIds(
-      cognitoUser.username,
-      productIds,
-    );
+    return this.productsService.removeProductsByIds(authorId, productIds);
   }
 
   public findProductById(
-    cognitoUser: User,
+    authorId: string,
     productId: string,
   ): Observable<ProductDto> {
     return this.productsService
-      .findProductById(cognitoUser.username, productId)
+      .findProductById(authorId, productId)
       .pipe(map((dto) => this.productMapper.toDto(dto)));
   }
 
   public findProducts(
-    user: User | UserDto,
+    authorId: string,
     productCriteria?: ProductCriteriaInput,
   ): Observable<ProductDto[]> {
     return this.productsService
       .findProducts(
         this.productMapper.toCriteria({
           ...productCriteria,
-          authorId: this.getAuthorId(user),
+          authorId,
         }),
       )
       .pipe(map((dto) => this.productMapper.toDtoArray(dto)));

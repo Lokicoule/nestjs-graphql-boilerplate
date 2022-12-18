@@ -21,18 +21,18 @@ export class SettingMapper extends ArrayMapperWithCriteria<
 
   public toEntity(data: SettingInput & Pick<Setting, 'authorId'>): Setting {
     return new Setting({
-      _id: data.id,
-      code: data.code,
-      properties: this.propertyMapper.toEntityArray(data.properties),
-      authorId: data.authorId,
+      _id: data?.id,
+      code: data?.code,
+      properties: this.propertyMapper.toEntityArray(data?.properties),
+      authorId: data?.authorId,
     });
   }
 
   public toDto(data: ISetting): SettingDto {
     return {
       id: data._id?.toString(),
-      code: data.code,
-      properties: this.propertyMapper.toDtoArray(data.properties),
+      code: data?.code,
+      properties: this.propertyMapper.toDtoArray(data?.properties),
       createdAt: data?.createdAt,
       updatedAt: data?.updatedAt,
       authorId: data?.authorId,

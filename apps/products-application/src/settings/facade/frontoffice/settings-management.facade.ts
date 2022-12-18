@@ -17,90 +17,73 @@ export class SettingsManagementFacade {
     private readonly settingMapper: SettingMapper,
   ) {}
 
-  createOrUpdateSetting(
-    settingCriteria: SettingCriteriaInput,
-    setting: Setting,
-  ): Observable<SettingDto> {
-    return this.settingsService
-      .createOrUpdateSetting(
-        this.settingMapper.toCriteria(settingCriteria),
-        setting,
-      )
-      .pipe(map((dto) => this.settingMapper.toDto(dto)));
-  }
-
   public updateSetting(
-    user: User | string,
+    authorId: string,
     input: SettingInput | Setting,
   ): Observable<SettingDto> {
     return this.settingsService
-      .updateSetting(this.getSetting(input, user))
+      .updateSetting(this.getSetting(input, authorId))
       .pipe(map((dto) => this.settingMapper.toDto(dto)));
   }
 
   public findSetting(
-    user: User | string,
+    authorId: string,
     settingCriteria?: SettingCriteriaInput,
   ): Observable<SettingDto> {
     return this.settingsService
       .findSetting(
         new SettingCriteria({
           ...settingCriteria,
-          authorId: this.getAuthorId(user),
+          authorId,
         }),
       )
       .pipe(map((dto) => this.settingMapper.toDto(dto)));
   }
 
   public findSettingById(
-    user: User | string,
+    authorId: string,
     settingId: string,
   ): Observable<SettingDto> {
     return this.settingsService
       .findSetting(
         new SettingCriteria({
           id: settingId,
-          authorId: this.getAuthorId(user),
+          authorId,
         }),
       )
       .pipe(map((dto) => this.settingMapper.toDto(dto)));
   }
 
   public findSettings(
-    user: User | UserDto,
+    authorId: string,
     settingCriteria?: SettingCriteriaInput,
   ): Observable<SettingDto[]> {
     return this.settingsService
       .findSettings(
         new SettingCriteria({
           ...settingCriteria,
-          authorId: this.getAuthorId(user),
+          authorId,
         }),
       )
-      .pipe(map((dto) => this.settingMapper.toDtoArray(dto)));
+      .pipe(
+        map((dto) => {
+          console.log('dto', dto);
+          return this.settingMapper.toDtoArray(dto);
+        }),
+      );
   }
 
   private getSetting(
     setting: SettingInput | Setting,
-    user: User | string,
+    authorId: string,
   ): Setting {
     if (setting instanceof Setting) {
       return setting;
     } else {
       return this.settingMapper.toEntity({
         ...setting,
-        authorId: this.getAuthorId(user),
+        authorId,
       });
-    }
-  }
-
-  private getAuthorId(user: User | UserDto | string): string {
-    if (user instanceof User) {
-      return user.username;
-    } else if (user instanceof UserDto) {
-      return user.id;
-    } else {
-      return user;
     }
   }
 }

@@ -1,19 +1,20 @@
 import { CognitoAuthModule } from '@nestjs-cognito/auth';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-
+import { ConfigModule } from '@nestjs/config';
+import { AppConfigService } from '~/data/config/app.config';
+import { DataModule } from '~/data/data.module';
 @Module({
   imports: [
     CognitoAuthModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
-        region: configService.get('COGNITO_REGION'),
+      imports: [DataModule],
+      useFactory: (appConfigService: AppConfigService) => ({
+        region: appConfigService.cognito.region,
         credentials: {
-          accessKeyId: configService.get('COGNITO_ACCESS_KEY_ID'),
-          secretAccessKey: configService.get('COGNITO_SECRET_ACCESS_KEY'),
+          accessKeyId: appConfigService.cognito.accessKeyId,
+          secretAccessKey: appConfigService.cognito.secretAccessKey,
         },
       }),
-      inject: [ConfigService],
+      inject: [AppConfigService],
     }),
   ],
 })

@@ -1,7 +1,7 @@
 import { ArrayContains } from '@lib/fdo-validator';
 import { applyDecorators } from '@nestjs/common';
 import { ArrayUnique } from 'class-validator';
-import { PropertyKeyEnum } from '~/domain/enums/property.enum';
+import { PropertyKeyEnum } from '~/domain/enums';
 import { PropertyInput } from '../dtos/settings/inputs/property.input';
 
 export function ProductCodeSettingValidator() {

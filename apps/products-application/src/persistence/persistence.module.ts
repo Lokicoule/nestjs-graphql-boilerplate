@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
+import { DomainModule } from '~/domain/domain.module';
 import { Product, ProductSchema } from '~/domain/entities/product.entity';
 import { Setting, SettingSchema } from '~/domain/entities/setting.entity';
 import { MongooseProviderModule } from './providers/mongoose.provider.module';
@@ -8,6 +9,7 @@ import { SettingsRepository } from './repositories/settings.repository';
 
 @Module({
   imports: [
+    DomainModule,
     MongooseProviderModule,
     MongooseModule.forFeature([
       { name: Product.name, schema: ProductSchema },

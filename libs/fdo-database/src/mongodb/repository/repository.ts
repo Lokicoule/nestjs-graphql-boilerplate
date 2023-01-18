@@ -1,4 +1,4 @@
-import { ClientSession, FilterQuery, HydratedDocument, Model } from 'mongoose';
+import { ClientSession, FilterQuery, Model } from 'mongoose';
 import { from, Observable, of, switchMap } from 'rxjs';
 import { Populate } from './populate/populate';
 import { IRepository } from './repository.interface';
@@ -47,6 +47,14 @@ export abstract class Repository<T> extends Populate implements IRepository<T> {
         if (value) return of(value);
         return this.create(entity);
       }),
+    );
+  }
+
+  public findIfExists(conditions: FilterQuery<T>): Observable<boolean> {
+    if (!Boolean(conditions)) return of(false);
+
+    return from(this.model.count(conditions)).pipe(
+      switchMap((count) => of(count > 0)),
     );
   }
 

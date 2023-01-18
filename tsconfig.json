@@ -19,42 +19,22 @@
     "noFallthroughCasesInSwitch": false,
     "resolveJsonModule": true,
     "paths": {
-      "@lib/fdo-database": [
-        "libs/fdo-database/src"
+      "~/*": [
+        "apps/products-application/src/*",
+        "apps/users-application/src/*"
       ],
-      "@lib/fdo-database/*": [
-        "libs/fdo-database/src/*"
-      ],
-      "@lib/fdo-graphql": [
-        "libs/fdo-graphql/src"
-      ],
-      "@lib/fdo-graphql/*": [
-        "libs/fdo-graphql/src/*"
-      ],
-      "@lib/fdo-logger": [
-        "libs/fdo-logger/src"
-      ],
-      "@lib/fdo-logger/*": [
-        "libs/fdo-logger/src/*"
-      ],
-      "@lib/fdo-domain": [
-        "libs/fdo-domain/src"
-      ],
-      "@lib/fdo-domain/*": [
-        "libs/fdo-domain/src/*"
-      ],
-      "@lib/fdo-utils": [
-        "libs/fdo-utils/src"
-      ],
-      "@lib/fdo-utils/*": [
-        "libs/fdo-utils/src/*"
-      ],
-      "@lib/fdo-validator": [
-        "libs/fdo-validator/src"
-      ],
-      "@lib/fdo-validator/*": [
-        "libs/fdo-validator/src/*"
-      ]
+      "@lib/fdo-database": ["libs/fdo-database/src"],
+      "@lib/fdo-database/*": ["libs/fdo-database/src/*"],
+      "@lib/fdo-graphql": ["libs/fdo-graphql/src"],
+      "@lib/fdo-graphql/*": ["libs/fdo-graphql/src/*"],
+      "@lib/fdo-logger": ["libs/fdo-logger/src"],
+      "@lib/fdo-logger/*": ["libs/fdo-logger/src/*"],
+      "@lib/fdo-domain": ["libs/fdo-domain/src"],
+      "@lib/fdo-domain/*": ["libs/fdo-domain/src/*"],
+      "@lib/fdo-utils": ["libs/fdo-utils/src"],
+      "@lib/fdo-utils/*": ["libs/fdo-utils/src/*"],
+      "@lib/fdo-validator": ["libs/fdo-validator/src"],
+      "@lib/fdo-validator/*": ["libs/fdo-validator/src/*"]
     }
   }
 }

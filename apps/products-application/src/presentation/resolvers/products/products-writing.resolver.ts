@@ -1,0 +1,43 @@
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Observable } from 'rxjs';
+import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
+
+import { ProductCreateInput } from '~/facade/dtos/products/inputs/product-create.input';
+import { ProductUpdateInput } from '~/facade/dtos/products/inputs/product-update.input';
+import { ProductDto } from '~/facade/dtos/products/product.dto';
+import { ProductsManagementFacade } from '~/facade/frontoffice/products-management.facade';
+import { User } from '@nestjs-cognito/auth';
+
+@Resolver(() => ProductDto)
+@Authorization({
+  requiredGroups: ['User'],
+})
+export class ProductsWritingResolver {
+  constructor(
+    private readonly productsManagementFacade: ProductsManagementFacade,
+  ) {}
+
+  @Mutation(() => ProductDto, { name: `createProduct`, nullable: true })
+  create(
+    @CurrentUser() cognitoUser: User,
+    @Args('payload')
+    payload: ProductCreateInput,
+  ): Observable<ProductDto> {
+    return this.productsManagementFacade.createProduct(
+      cognitoUser.username,
+      payload,
+    );
+  }
+
+  @Mutation(() => ProductDto, { name: `updateProduct` })
+  update(
+    @CurrentUser() cognitoUser: User,
+    @Args('payload')
+    payload: ProductUpdateInput,
+  ): Observable<ProductDto> {
+    return this.productsManagementFacade.updateProduct(
+      cognitoUser.username,
+      payload,
+    );
+  }
+}

@@ -1,5 +1,4 @@
-import { Property, Setting } from '~/domain/entities';
-import { PropertyKeyEnum, SettingCodeEnum } from '../../domain/enums';
+import { Property, PropertyKeyEnum, Setting, SettingCodeEnum } from '~/domain';
 import { ProductSettingsUseCase } from './product-settings.use-case';
 
 describe('ProductUseCase', () => {

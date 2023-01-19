@@ -2,11 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { map, Observable, switchMap } from 'rxjs';
 
 import { UseCaseException } from '@lib/fdo-domain';
-import { SettingCriteria } from '~/domain/criterias/setting.criteria';
-import { Property } from '~/domain/entities/property.entity';
-import { Setting } from '~/domain/entities/setting.entity';
-import { PropertyEnum } from '~/domain/enums/property.enum';
-import { SettingEnum } from '~/domain/enums/setting.enum';
+import {
+  Property,
+  PropertyEnum,
+  Setting,
+  SettingCriteria,
+  SettingEnum,
+} from '~/domain';
 import { ProductSettingsUseCase } from '../use-cases/product-settings.use-case';
 import { SettingsService } from './settings.service';
 

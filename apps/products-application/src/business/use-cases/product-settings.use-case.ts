@@ -1,7 +1,6 @@
 import { UseCaseException } from '@lib/fdo-domain';
 import { StringNumberUtils } from '@lib/fdo-utils';
-import { Property, Setting } from '~/domain/entities';
-import { PropertyKeyEnum, SettingCodeEnum } from '~/domain/enums';
+import { Property, PropertyKeyEnum, Setting, SettingCodeEnum } from '~/domain';
 
 export class ProductSettingsUseCase {
   public static buildCode(setting: Setting): string {

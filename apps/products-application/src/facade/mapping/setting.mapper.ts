@@ -1,10 +1,7 @@
 import { ArrayMapperWithCriteria } from '@lib/fdo-utils/mapper';
 import { Injectable } from '@nestjs/common';
-import { SettingCriteria } from '~/domain/criterias';
-import { ISetting, Setting } from '~/domain/entities';
-import { SettingCriteriaInput } from '../dtos/settings/inputs/setting-criteria.input';
-import { SettingInput } from '../dtos/settings/inputs/setting.input';
-import { SettingDto } from '../dtos/settings/setting.dto';
+import { ISetting, Setting, SettingCriteria } from '~/domain';
+import { SettingCriteriaInput, SettingDto, SettingInput } from '../dtos';
 import { PropertyMapper } from './property.mapper';
 
 @Injectable()

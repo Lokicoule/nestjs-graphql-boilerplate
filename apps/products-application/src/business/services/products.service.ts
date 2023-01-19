@@ -1,3 +1,5 @@
+import { duplicateRetryStrategy } from '@lib/fdo-database/mongodb/retry/duplicate-retry.strategy';
+import { TechnicalException, UseCaseException } from '@lib/fdo-domain';
 import { Injectable } from '@nestjs/common';
 import {
   defer,
@@ -8,15 +10,13 @@ import {
   tap,
   throwIfEmpty,
 } from 'rxjs';
-
-import { TechnicalException, UseCaseException } from '@lib/fdo-domain';
-
-import { ProductCriteria } from '~/domain/criterias/product.criteria';
-import { Product } from '~/domain/entities/product.entity';
-import { ProductsRepository } from '~/persistence/repositories/products.repository';
-import { SettingCriteria } from '~/domain/criterias/setting.criteria';
-import { SettingEnum } from '~/domain/enums/setting.enum';
-import { duplicateRetryStrategy } from '@lib/fdo-database/mongodb/retry/duplicate-retry.strategy';
+import {
+  Product,
+  ProductCriteria,
+  SettingCriteria,
+  SettingEnum,
+} from '~/domain';
+import { ProductsRepository } from '~/persistence';
 import { ProductSettingsService } from './product-settings.service';
 
 @Injectable()

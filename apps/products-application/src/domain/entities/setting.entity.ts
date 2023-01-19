@@ -3,7 +3,7 @@ import {
   IEntityModel,
 } from '@lib/fdo-database/mongodb/entity/entity.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SettingCodeEnum } from '../enums/setting.enum';
+import { SettingCodeEnum } from '../enums';
 import { Property, PropertySchema } from './property.entity';
 
 export interface ISetting extends IEntityModel {

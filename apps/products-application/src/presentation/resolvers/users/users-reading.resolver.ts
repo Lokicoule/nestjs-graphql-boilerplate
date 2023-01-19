@@ -1,11 +1,13 @@
 import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
-import { ProductDto } from '~/facade/dtos/products/product.dto';
-import { ProductsManagementFacade } from '~/facade/frontoffice/products-management.facade';
-import { SettingsManagementFacade } from '~/facade/frontoffice/settings-management.facade';
-import { UserDto } from '~/facade/dtos/users/user.dto';
-import { SettingDto } from '~/facade/dtos/settings/setting.dto';
+import {
+  ProductDto,
+  ProductsManagementFacade,
+  SettingDto,
+  SettingsManagementFacade,
+  UserDto,
+} from '~/facade';
 
 @Resolver((of) => UserDto)
 export class UsersReadingResolver {

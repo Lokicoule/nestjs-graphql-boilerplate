@@ -1,9 +1,7 @@
 import { ArrayMapper } from '@lib/fdo-utils';
 import { Injectable } from '@nestjs/common';
-import { Property } from '~/domain/entities';
-import { PropertyEnum } from '~/domain/enums';
-import { PropertyInput } from '../dtos/settings/inputs/property.input';
-import { PropertyDto } from '../dtos/settings/property.dto';
+import { Property, PropertyEnum } from '~/domain';
+import { PropertyDto, PropertyInput } from '../dtos';
 
 @Injectable()
 export class PropertyMapper extends ArrayMapper<

@@ -3,8 +3,7 @@ import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
-import { ProductDto } from '~/facade/dtos/products/product.dto';
-import { ProductsManagementFacade } from '~/facade/frontoffice/products-management.facade';
+import { ProductDto, ProductsManagementFacade } from '~/facade';
 
 @Authorization({
   requiredGroups: ['User'],

@@ -1,11 +1,6 @@
 import { DtoModel, IDtoModel } from '@lib/fdo-graphql';
-import {
-  Field,
-  ObjectType,
-  registerEnumType,
-  Directive,
-} from '@nestjs/graphql';
-import { PropertyEnum, PropertyKeyEnum } from '~/domain/enums/property.enum';
+import { Field, ObjectType, registerEnumType } from '@nestjs/graphql';
+import { PropertyEnum, PropertyKeyEnum } from '~/domain';
 
 registerEnumType(PropertyKeyEnum, {
   name: PropertyEnum.provider,

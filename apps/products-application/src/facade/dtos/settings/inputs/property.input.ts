@@ -1,5 +1,5 @@
 import { Field, ID, InputType } from '@nestjs/graphql';
-import { PropertyKeyEnum } from '~/domain/enums/property.enum';
+import { PropertyKeyEnum } from '~/domain';
 
 @InputType()
 export class PropertyInput {

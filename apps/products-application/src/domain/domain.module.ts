@@ -1,5 +1,5 @@
 import { Module } from '@nestjs/common';
-import { DataModule } from '~/data/data.module';
+import { DataModule } from '~/data';
 
 @Module({
   imports: [DataModule],

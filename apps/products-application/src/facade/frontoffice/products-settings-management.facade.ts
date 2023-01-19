@@ -1,10 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-import { ProductSettingsService } from '~/business/services/product-settings.service';
-import { ProductCodeSettingInput } from '../dtos/product-settings/inputs/product-code-setting.input';
-import { SettingDto } from '../dtos/settings/setting.dto';
-import { SettingMapper } from '../mapping/setting.mapper';
+import { ProductSettingsService } from '~/business';
+import { ProductCodeSettingInput, SettingDto } from '../dtos';
+import { SettingMapper } from '../mapping';
 
 @Injectable()
 export class ProductsSettingsManagementFacade {

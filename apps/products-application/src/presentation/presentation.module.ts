@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { FacadeModule } from '../facade/facade.module';
+import { FacadeModule } from '~/facade';
 import { AuthProviderModule } from './providers/auth.provider.module';
 import { GraphQLProviderModule } from './providers/graphql.provider.module';
 import { resolvers } from './resolvers';

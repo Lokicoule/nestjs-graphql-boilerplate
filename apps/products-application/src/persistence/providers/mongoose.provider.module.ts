@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { AppConfigService } from '~/data/config/app.config';
-import { DataModule } from '~/data/data.module';
+import { AppConfigService, DataModule } from '~/data';
 
 @Module({
   imports: [

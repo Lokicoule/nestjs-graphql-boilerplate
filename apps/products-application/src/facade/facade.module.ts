@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
-import { BusinessModule } from '~/business/business.module';
-import { ProductsManagementFacade } from './frontoffice/products-management.facade';
-import { ProductsSettingsManagementFacade } from './frontoffice/products-settings-management.facade';
-import { SettingsManagementFacade } from './frontoffice/settings-management.facade';
-import { ProductMapper } from './mapping/product.mapper';
-import { PropertyMapper } from './mapping/property.mapper';
-import { SettingMapper } from './mapping/setting.mapper';
+import { BusinessModule } from '~/business';
+import {
+  ProductsManagementFacade,
+  ProductsSettingsManagementFacade,
+  SettingsManagementFacade,
+} from './frontoffice';
+import { ProductMapper, PropertyMapper, SettingMapper } from './mapping';
 
 @Module({
   imports: [BusinessModule],

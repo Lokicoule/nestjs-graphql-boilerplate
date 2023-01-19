@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { registerAs } from '@nestjs/config';
-import { validate } from 'class-validator';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, validate } from 'class-validator';
 
 @Injectable()
 export class AppConfig {

@@ -1,9 +1,8 @@
 import { TechnicalException, UseCaseException } from '@lib/fdo-domain';
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { SettingCriteria } from '~/domain/criterias';
-import { Property, Setting } from '~/domain/entities';
-import { SettingsRepository } from '~/persistence/repositories/settings.repository';
+import { Property, Setting, SettingCriteria } from '~/domain';
+import { SettingsRepository } from '~/persistence';
 
 @Injectable()
 export class SettingsService {

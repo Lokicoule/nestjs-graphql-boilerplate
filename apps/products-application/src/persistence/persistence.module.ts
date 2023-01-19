@@ -1,11 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { DomainModule } from '~/domain/domain.module';
-import { Product, ProductSchema } from '~/domain/entities/product.entity';
-import { Setting, SettingSchema } from '~/domain/entities/setting.entity';
+import { DomainModule } from '~/domain';
+import {
+  Product,
+  ProductSchema,
+  Setting,
+  SettingSchema,
+} from '~/domain/entities';
 import { MongooseProviderModule } from './providers/mongoose.provider.module';
-import { ProductsRepository } from './repositories/products.repository';
-import { SettingsRepository } from './repositories/settings.repository';
+import { ProductsRepository, SettingsRepository } from './repositories';
 
 @Module({
   imports: [

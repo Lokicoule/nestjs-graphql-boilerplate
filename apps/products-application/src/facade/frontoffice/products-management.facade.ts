@@ -1,14 +1,16 @@
+import { User } from '@nestjs-cognito/auth';
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
-import { User } from '@nestjs-cognito/auth';
 
-import { ProductsService } from '~/business/services/products.service';
-import { ProductDto } from '../dtos/products/product.dto';
-import { ProductCreateInput } from '../dtos/products/inputs/product-create.input';
-import { ProductUpdateInput } from '../dtos/products/inputs/product-update.input';
-import { ProductMapper } from '../mapping/product.mapper';
-import { ProductCriteriaInput } from '../dtos/products/inputs/product-criteria.input';
-import { UserDto } from '../dtos/users/user.dto';
+import { ProductsService } from '~/business';
+import {
+  ProductCreateInput,
+  ProductCriteriaInput,
+  ProductDto,
+  ProductUpdateInput,
+  UserDto,
+} from '../dtos';
+import { ProductMapper } from '../mapping';
 
 @Injectable()
 export class ProductsManagementFacade {

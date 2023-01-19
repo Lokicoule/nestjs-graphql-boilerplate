@@ -2,9 +2,11 @@ import { User } from '@nestjs-cognito/auth';
 import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
-import { SettingDto } from '~/facade/dtos/settings/setting.dto';
-import { ProductCodeSettingInput } from '~/facade/dtos/product-settings/inputs/product-code-setting.input';
-import { ProductsSettingsManagementFacade } from '~/facade/frontoffice/products-settings-management.facade';
+import {
+  ProductCodeSettingInput,
+  ProductsSettingsManagementFacade,
+  SettingDto,
+} from '~/facade';
 
 @Authorization({
   requiredGroups: ['User'],

@@ -1,8 +1,7 @@
 import { CognitoAuthModule } from '@nestjs-cognito/auth';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { AppConfigService } from '~/data/config/app.config';
-import { DataModule } from '~/data/data.module';
+import { AppConfigService, DataModule } from '~/data';
+
 @Module({
   imports: [
     CognitoAuthModule.registerAsync({

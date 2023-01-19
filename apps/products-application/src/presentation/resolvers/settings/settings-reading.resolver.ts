@@ -2,10 +2,12 @@ import { User } from '@nestjs-cognito/auth';
 import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
-import { SettingCriteriaInput } from '~/facade/dtos/settings/inputs/setting-criteria.input';
-import { SettingDto } from '~/facade/dtos/settings/setting.dto';
-import { UserDto } from '~/facade/dtos/users/user.dto';
-import { SettingsManagementFacade } from '~/facade/frontoffice/settings-management.facade';
+import {
+  SettingCriteriaInput,
+  SettingDto,
+  SettingsManagementFacade,
+  UserDto,
+} from '~/facade';
 
 @Authorization({
   requiredGroups: ['User'],

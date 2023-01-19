@@ -1,6 +1,6 @@
 import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
-import { ProductDto } from '../products/product.dto';
-import { SettingDto } from '../settings/setting.dto';
+import { ProductDto } from '../../products';
+import { SettingDto } from '../../settings';
 
 interface IUserDto {
   id: string;

@@ -1,6 +1,6 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { ArrayUnique } from 'class-validator';
-import { SettingCodeEnum } from '~/domain/enums/setting.enum';
+import { SettingCodeEnum } from '~/domain';
 import { PropertyInput } from './property.input';
 
 @InputType()

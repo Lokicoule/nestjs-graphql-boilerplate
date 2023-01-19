@@ -1,12 +1,14 @@
+import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
-import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 
-import { ProductCreateInput } from '~/facade/dtos/products/inputs/product-create.input';
-import { ProductUpdateInput } from '~/facade/dtos/products/inputs/product-update.input';
-import { ProductDto } from '~/facade/dtos/products/product.dto';
-import { ProductsManagementFacade } from '~/facade/frontoffice/products-management.facade';
 import { User } from '@nestjs-cognito/auth';
+import {
+  ProductCreateInput,
+  ProductDto,
+  ProductsManagementFacade,
+  ProductUpdateInput,
+} from '~/facade';
 
 @Resolver(() => ProductDto)
 @Authorization({

@@ -1,8 +1,10 @@
 import { Module } from '@nestjs/common';
-import { PersistenceModule } from '../persistence/persistence.module';
-import { ProductSettingsService } from './services/product-settings.service';
-import { SettingsService } from './services/settings.service';
-import { ProductsService } from './services/products.service';
+import { PersistenceModule } from '~/persistence';
+import {
+  ProductSettingsService,
+  ProductsService,
+  SettingsService,
+} from './services';
 
 @Module({
   imports: [PersistenceModule],

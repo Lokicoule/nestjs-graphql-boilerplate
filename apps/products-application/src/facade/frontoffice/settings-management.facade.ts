@@ -1,13 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
-import { SettingsService } from '~/business/services/settings.service';
-import { SettingCriteria } from '~/domain/criterias/setting.criteria';
-import { Setting } from '~/domain/entities/setting.entity';
-import { SettingCriteriaInput } from '../dtos/settings/inputs/setting-criteria.input';
-import { SettingInput } from '../dtos/settings/inputs/setting.input';
-import { SettingDto } from '../dtos/settings/setting.dto';
-import { SettingMapper } from '../mapping/setting.mapper';
+import { SettingsService } from '~/business';
+import { Setting, SettingCriteria } from '~/domain';
+import { SettingCriteriaInput, SettingDto, SettingInput } from '../dtos';
+import { SettingMapper } from '../mapping';
 
 @Injectable()
 export class SettingsManagementFacade {

@@ -1,10 +1,7 @@
 import { ArrayMapperWithCriteria } from '@lib/fdo-utils';
 import { Injectable } from '@nestjs/common';
-import { ProductCriteria } from '~/domain/criterias';
-import { Product } from '~/domain/entities';
-import { ProductCriteriaInput } from '../dtos/products/inputs/product-criteria.input';
-import { ProductInput } from '../dtos/products/inputs/product.input';
-import { ProductDto } from '../dtos/products/product.dto';
+import { Product, ProductCriteria } from '~/domain';
+import { ProductCriteriaInput, ProductDto, ProductInput } from '../dtos';
 
 @Injectable()
 export class ProductMapper extends ArrayMapperWithCriteria<

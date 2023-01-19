@@ -6,7 +6,7 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { SettingCodeEnum, SettingEnum } from '~/domain';
-import { UserDto } from '../../users';
+import { UserDto } from '../users';
 import { PropertyDto } from './property.dto';
 
 registerEnumType(SettingCodeEnum, {

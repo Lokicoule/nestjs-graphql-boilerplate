@@ -1,6 +1,6 @@
 import { DtoModel, IDtoModel } from '@lib/fdo-graphql';
 import { Directive, Field, ObjectType } from '@nestjs/graphql';
-import { UserDto } from '../../users';
+import { UserDto } from '../users';
 
 interface IProductDto extends IDtoModel {
   code: string;

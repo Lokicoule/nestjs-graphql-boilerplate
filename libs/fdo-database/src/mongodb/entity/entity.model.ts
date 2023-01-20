@@ -1,5 +1,8 @@
 import { Prop } from '@nestjs/mongoose';
 import { ObjectId } from 'mongoose';
+import { Schema as MongooseSchema } from 'mongoose';
+
+export const BaseId = MongooseSchema.Types.ObjectId;
 
 export interface IEntityModel {
   _id?: ObjectId | string;

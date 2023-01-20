@@ -3,5 +3,5 @@ import { CustomerInput } from './customer.input';
 
 @InputType()
 export class CustomerCriteriaInput extends PartialType(
-  PickType(CustomerInput, ['id', 'code', 'label']),
+  PickType(CustomerInput, ['id', 'code', 'name']),
 ) {}

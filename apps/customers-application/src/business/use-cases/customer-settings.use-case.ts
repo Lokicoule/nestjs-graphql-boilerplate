@@ -73,7 +73,7 @@ export class CustomerSettingsUseCase {
         }),
         new Property({
           key: PropertyKeyEnum.SUFFIX,
-          value: 'P',
+          value: 'CL',
         }),
       ],
     });

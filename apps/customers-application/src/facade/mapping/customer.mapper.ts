@@ -17,7 +17,7 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
     return new CustomerCriteria({
       id: dto?.id,
       code: dto?.code,
-      label: dto?.label,
+      name: dto?.name,
       authorId: dto?.authorId,
     });
   }
@@ -27,7 +27,9 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
       id: entity?._id.toString(),
       authorId: entity?.authorId,
       code: entity.code,
-      label: entity.label,
+      name: entity.name,
+      email: entity.email,
+      phone: entity.phone,
       createdAt: entity?.createdAt,
       updatedAt: entity?.updatedAt,
     });
@@ -40,7 +42,9 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
       _id: dto?.id,
       authorId: dto.authorId,
       code: dto?.code,
-      label: dto.label,
+      name: dto?.name,
+      email: dto?.email,
+      phone: dto?.phone,
     });
   }
 }

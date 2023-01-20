@@ -5,5 +5,7 @@ import { CustomerInput } from './customer.input';
 export class CustomerUpdateInput extends PickType(CustomerInput, [
   'id',
   'code',
-  'label',
+  'name',
+  'email',
+  'phone',
 ]) {}

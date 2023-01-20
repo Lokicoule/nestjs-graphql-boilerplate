@@ -148,9 +148,11 @@ export class CustomersService {
       listErrors.push('CUSTOMER_CODE_IS_NULL');
     }
 
-    if (!Boolean(customer.label)) {
-      listErrors.push('CUSTOMER_LABEL_IS_NULL');
+    if (!Boolean(customer.name)) {
+      listErrors.push('CUSTOMER_NAME_IS_NULL');
     }
+
+    //TODO validate other fields here and add validation for email and phone
 
     if (listErrors.length > 0) {
       throw new UseCaseException(JSON.stringify(listErrors));

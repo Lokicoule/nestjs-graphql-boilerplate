@@ -33,10 +33,10 @@ class AuthorizationDataSource extends RemoteGraphQLDataSource {
                 name: 'users',
                 url: configService.get('USERS_APPLICATION_HTTP_URL'),
               },
-              /* {
+              {
                 name: 'customers',
                 url: configService.get('CUSTOMERS_APPLICATION_HTTP_URL'),
-              }, */
+              },
               /*   {
                 name: 'orders',
                 url: configService.get('ORDERS_APPLICATION_HTTP_URL'),

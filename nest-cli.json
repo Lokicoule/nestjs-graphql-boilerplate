@@ -17,40 +17,6 @@
         "tsConfigPath": "apps/fdo-gateway/tsconfig.app.json"
       }
     },
-    "fdo-customer": {
-      "type": "application",
-      "root": "apps/fdo-customer",
-      "entryFile": "main",
-      "sourceRoot": "apps/fdo-customer/src",
-      "compilerOptions": {
-        "assets": [
-          {
-            "include": "data/i18n/**/*",
-            "watchAssets": true,
-            "outDir": "dist/apps/fdo-customer"
-          }
-        ],
-        "tsConfigPath": "apps/fdo-customer/tsconfig.app.json"
-      }
-    },
-    "fdo-order": {
-      "type": "application",
-      "root": "apps/fdo-order",
-      "entryFile": "main",
-      "sourceRoot": "apps/fdo-order/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/fdo-order/tsconfig.app.json"
-      }
-    },
-    "fdo-product": {
-      "type": "application",
-      "root": "apps/fdo-product",
-      "entryFile": "main",
-      "sourceRoot": "apps/fdo-product/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/fdo-product/tsconfig.app.json"
-      }
-    },
     "fdo-db": {
       "type": "library",
       "root": "libs/fdo-db",
@@ -105,15 +71,6 @@
         "tsConfigPath": "libs/fdo-domain/tsconfig.lib.json"
       }
     },
-    "fdo-referential": {
-      "type": "library",
-      "root": "libs/fdo-referential",
-      "entryFile": "index",
-      "sourceRoot": "libs/fdo-referential/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/fdo-referential/tsconfig.lib.json"
-      }
-    },
     "fdo-utils": {
       "type": "library",
       "root": "libs/fdo-utils",
@@ -132,24 +89,6 @@
         "tsConfigPath": "libs/fdo-validator/tsconfig.lib.json"
       }
     },
-    "fdo-user": {
-      "type": "application",
-      "root": "apps/fdo-user",
-      "entryFile": "main",
-      "sourceRoot": "apps/fdo-user/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/fdo-user/tsconfig.app.json"
-      }
-    },
-    "test-app": {
-      "type": "application",
-      "root": "apps/test-app",
-      "entryFile": "main",
-      "sourceRoot": "apps/test-app/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/test-app/tsconfig.app.json"
-      }
-    },
     "users-application": {
       "type": "application",
       "root": "apps/users-application",
@@ -165,7 +104,16 @@
       "entryFile": "main",
       "sourceRoot": "apps/products-application/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/products-application/tsconfig.app.json"
+        "tsConfigPath": "apps/products-application/tsconfig.json"
+      }
+    },
+    "customers-application": {
+      "type": "application",
+      "root": "apps/customers-application",
+      "entryFile": "main",
+      "sourceRoot": "apps/customers-application/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/customers-application/tsconfig.json"
       }
     }
   }

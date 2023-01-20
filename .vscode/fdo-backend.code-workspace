@@ -1,0 +1,22 @@
+{
+  "folders": [
+    {
+      "name": "fdo-backend",
+      "path": ".."
+    },
+    {
+      "name": "apps/customers-application",
+      "path": "../apps/customers-application"
+    },
+    {
+      "name": "apps/products-application",
+      "path": "../apps/products-application"
+    }
+  ],
+  "settings": {
+    "jest.disabledWorkspaceFolders": [
+      "apps/products-application",
+      "apps/customers-application"
+    ]
+  }
+}

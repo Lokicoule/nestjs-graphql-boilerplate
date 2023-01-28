@@ -3,46 +3,46 @@ import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 import {
-  SettingCriteriaInput,
-  SettingDto,
+  SettingsQuery,
+  SettingOutput,
   SettingsManagementFacade,
-  UserDto,
+  UserOutput,
 } from '~/facade';
 
 @Authorization({
   requiredGroups: ['User'],
 })
-@Resolver(() => SettingDto)
+@Resolver(() => SettingOutput)
 export class SettingsReadingResolver {
   constructor(
     private readonly settingsManagementFacade: SettingsManagementFacade,
   ) {}
 
-  @Query(() => [SettingDto], {
-    name: `getSettings`,
+  @Query(() => [SettingOutput], {
+    name: `settings`,
     nullable: true,
   })
   findByCriteria(
     @CurrentUser() user: User,
-    @Args('criterias', { nullable: true })
-    criterias?: SettingCriteriaInput,
-  ): Observable<SettingDto[]> {
-    return this.settingsManagementFacade.findSettings(user.username, criterias);
+    @Args('criteria', { nullable: true })
+    criteria?: SettingsQuery,
+  ): Observable<SettingOutput[]> {
+    return this.settingsManagementFacade.findSettings(user.username, criteria);
   }
 
-  @Query(() => SettingDto, {
-    name: `getSetting`,
+  @Query(() => SettingOutput, {
+    name: `setting`,
     nullable: true,
   })
   findById(
     @CurrentUser() user: User,
     @Args('id', { type: () => String }) id: string,
-  ): Observable<SettingDto> {
+  ): Observable<SettingOutput> {
     return this.settingsManagementFacade.findSettingById(user.username, id);
   }
 
-  @ResolveField((of) => UserDto)
-  user(@Parent() setting: SettingDto): any {
+  @ResolveField((of) => UserOutput)
+  user(@Parent() setting: SettingOutput): any {
     console.log('setting.authorId', setting.authorId);
     return { __typename: 'User', id: setting.authorId };
   }

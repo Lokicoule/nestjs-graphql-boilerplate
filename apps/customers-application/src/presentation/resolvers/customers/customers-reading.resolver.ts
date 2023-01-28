@@ -3,13 +3,13 @@ import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 import {
-  CustomerCriteriaInput,
-  CustomerDto,
+  CustomersQuery,
+  CustomerOutput,
   CustomersManagementFacade,
-  UserDto,
+  UserOutput,
 } from '~/facade';
 
-@Resolver(() => CustomerDto)
+@Resolver(() => CustomerOutput)
 @Authorization({
   requiredGroups: ['User'],
 })
@@ -18,37 +18,37 @@ export class CustomersReadingResolver {
     private readonly customersManagementFacade: CustomersManagementFacade,
   ) {}
 
-  @Query(() => [CustomerDto], {
+  @Query(() => [CustomerOutput], {
     name: `customers`,
     nullable: true,
   })
   findByCriteria(
     @CurrentUser() cognitoUser: User,
-    @Args('criterions', { nullable: true })
-    criterions?: CustomerCriteriaInput,
-  ): Observable<CustomerDto[]> {
+    @Args('criteria', { nullable: true })
+    criteria?: CustomersQuery,
+  ): Observable<CustomerOutput[]> {
     return this.customersManagementFacade.findCustomers(
       cognitoUser.username,
-      criterions,
+      criteria,
     );
   }
 
-  @Query(() => CustomerDto, {
+  @Query(() => CustomerOutput, {
     name: `customer`,
     nullable: true,
   })
   findById(
     @CurrentUser() cognitoUser: User,
     @Args('id', { type: () => String }) id: string,
-  ): Observable<CustomerDto> {
+  ): Observable<CustomerOutput> {
     return this.customersManagementFacade.findCustomerById(
       cognitoUser.username,
       id,
     );
   }
 
-  @ResolveField((of) => UserDto)
-  user(@Parent() customer: CustomerDto): any {
+  @ResolveField((of) => UserOutput)
+  user(@Parent() customer: CustomerOutput): any {
     console.log('customer.authorId', customer.authorId);
     return { __typename: 'User', id: customer.authorId };
   }

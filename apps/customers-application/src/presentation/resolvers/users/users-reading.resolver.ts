@@ -2,27 +2,29 @@ import { Parent, ResolveField, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
 import {
-  CustomerDto,
+  CustomerOutput,
   CustomersManagementFacade,
-  SettingDto,
+  SettingOutput,
   SettingsManagementFacade,
-  UserDto,
+  UserOutput,
 } from '~/facade';
 
-@Resolver((of) => UserDto)
+@Resolver((of) => UserOutput)
 export class UsersReadingResolver {
   constructor(
     private readonly customersManagementFacade: CustomersManagementFacade,
     private readonly settingsManagementFacade: SettingsManagementFacade,
   ) {}
 
-  @ResolveField((of) => [CustomerDto])
-  public customers(@Parent() user: UserDto): Observable<CustomerDto[]> {
+  @ResolveField((of) => [CustomerOutput])
+  public customers(@Parent() user: UserOutput): Observable<CustomerOutput[]> {
     return this.customersManagementFacade.findCustomers(user.id);
   }
 
-  @ResolveField((of) => [SettingDto])
-  public settings(@Parent() user: UserDto): Observable<SettingDto[]> {
+  @ResolveField((of) => [SettingOutput])
+  public customersSettings(
+    @Parent() user: UserOutput,
+  ): Observable<SettingOutput[]> {
     return this.settingsManagementFacade.findSettings(user.id);
   }
 }

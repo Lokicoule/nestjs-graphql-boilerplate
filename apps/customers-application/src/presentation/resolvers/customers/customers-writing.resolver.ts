@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 
 import { User } from '@nestjs-cognito/auth';
 import {
-  CustomerCreateInput,
-  CustomerDto,
+  CreateCustomerMutation,
+  CustomerOutput,
   CustomersManagementFacade,
-  CustomerUpdateInput,
+  UpdateCustomerMutation,
 } from '~/facade';
 
-@Resolver(() => CustomerDto)
+@Resolver(() => CustomerOutput)
 @Authorization({
   requiredGroups: ['User'],
 })
@@ -19,24 +19,24 @@ export class CustomersWritingResolver {
     private readonly customersManagementFacade: CustomersManagementFacade,
   ) {}
 
-  @Mutation(() => CustomerDto, { name: `createCustomer`, nullable: true })
+  @Mutation(() => CustomerOutput, { name: `createCustomer`, nullable: true })
   create(
     @CurrentUser() cognitoUser: User,
     @Args('payload')
-    payload: CustomerCreateInput,
-  ): Observable<CustomerDto> {
+    payload: CreateCustomerMutation,
+  ): Observable<CustomerOutput> {
     return this.customersManagementFacade.createCustomer(
       cognitoUser.username,
       payload,
     );
   }
 
-  @Mutation(() => CustomerDto, { name: `updateCustomer` })
+  @Mutation(() => CustomerOutput, { name: `updateCustomer` })
   update(
     @CurrentUser() cognitoUser: User,
     @Args('payload')
-    payload: CustomerUpdateInput,
-  ): Observable<CustomerDto> {
+    payload: UpdateCustomerMutation,
+  ): Observable<CustomerOutput> {
     return this.customersManagementFacade.updateCustomer(
       cognitoUser.username,
       payload,

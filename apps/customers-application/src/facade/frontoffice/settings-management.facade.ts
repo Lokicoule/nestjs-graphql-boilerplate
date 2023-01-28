@@ -3,7 +3,7 @@ import { map, Observable } from 'rxjs';
 
 import { SettingsService } from '~/business';
 import { Setting, SettingCriteria } from '~/domain';
-import { SettingCriteriaInput, SettingDto, SettingInput } from '../dtos';
+import { SettingsQuery, SettingOutput, SettingInput } from '../dtos';
 import { SettingMapper } from '../mapping';
 
 @Injectable()
@@ -16,7 +16,7 @@ export class SettingsManagementFacade {
   public updateSetting(
     authorId: string,
     input: SettingInput | Setting,
-  ): Observable<SettingDto> {
+  ): Observable<SettingOutput> {
     return this.settingsService
       .updateSetting(this.getSetting(input, authorId))
       .pipe(map((dto) => this.settingMapper.toDto(dto)));
@@ -24,8 +24,8 @@ export class SettingsManagementFacade {
 
   public findSetting(
     authorId: string,
-    settingCriteria?: SettingCriteriaInput,
-  ): Observable<SettingDto> {
+    settingCriteria?: SettingsQuery,
+  ): Observable<SettingOutput> {
     return this.settingsService
       .findSetting(
         new SettingCriteria({
@@ -39,7 +39,7 @@ export class SettingsManagementFacade {
   public findSettingById(
     authorId: string,
     settingId: string,
-  ): Observable<SettingDto> {
+  ): Observable<SettingOutput> {
     return this.settingsService
       .findSetting(
         new SettingCriteria({
@@ -52,8 +52,8 @@ export class SettingsManagementFacade {
 
   public findSettings(
     authorId: string,
-    settingCriteria?: SettingCriteriaInput,
-  ): Observable<SettingDto[]> {
+    settingCriteria?: SettingsQuery,
+  ): Observable<SettingOutput[]> {
     return this.settingsService
       .findSettings(
         new SettingCriteria({

@@ -4,11 +4,11 @@ import { map, Observable } from 'rxjs';
 
 import { CustomersService } from '~/business';
 import {
-  CustomerCreateInput,
-  CustomerCriteriaInput,
-  CustomerDto,
-  CustomerUpdateInput,
-  UserDto,
+  CreateCustomerMutation,
+  CustomersQuery,
+  CustomerOutput,
+  UpdateCustomerMutation,
+  UserOutput,
 } from '../dtos';
 import { CustomerMapper } from '../mapping';
 
@@ -21,8 +21,8 @@ export class CustomersManagementFacade {
 
   public createCustomer(
     authorId: string,
-    input: CustomerCreateInput,
-  ): Observable<CustomerDto> {
+    input: CreateCustomerMutation,
+  ): Observable<CustomerOutput> {
     return this.customersService
       .createCustomer(
         this.customerMapper.toEntity({
@@ -35,8 +35,8 @@ export class CustomersManagementFacade {
 
   public updateCustomer(
     authorId: string,
-    input: CustomerUpdateInput,
-  ): Observable<CustomerDto> {
+    input: UpdateCustomerMutation,
+  ): Observable<CustomerOutput> {
     return this.customersService
       .updateCustomer(
         this.customerMapper.toEntity({
@@ -50,7 +50,7 @@ export class CustomersManagementFacade {
   public removeCustomerById(
     authorId: string,
     customerId: string,
-  ): Observable<CustomerDto> {
+  ): Observable<CustomerOutput> {
     return this.customersService
       .removeCustomerById(authorId, customerId)
       .pipe(map((dto) => this.customerMapper.toDto(dto)));
@@ -66,7 +66,7 @@ export class CustomersManagementFacade {
   public findCustomerById(
     authorId: string,
     customerId: string,
-  ): Observable<CustomerDto> {
+  ): Observable<CustomerOutput> {
     return this.customersService
       .findCustomerById(authorId, customerId)
       .pipe(map((dto) => this.customerMapper.toDto(dto)));
@@ -74,8 +74,8 @@ export class CustomersManagementFacade {
 
   public findCustomers(
     authorId: string,
-    customerCriteria?: CustomerCriteriaInput,
-  ): Observable<CustomerDto[]> {
+    customerCriteria?: CustomersQuery,
+  ): Observable<CustomerOutput[]> {
     return this.customersService
       .findCustomers(
         this.customerMapper.toCriteria({
@@ -86,7 +86,7 @@ export class CustomersManagementFacade {
       .pipe(map((dto) => this.customerMapper.toDtoArray(dto)));
   }
 
-  private getAuthorId(user: User | UserDto): string {
+  private getAuthorId(user: User | UserOutput): string {
     return user instanceof User ? user.username : user.id;
   }
 }

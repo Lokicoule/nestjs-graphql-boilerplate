@@ -6,9 +6,11 @@ import { StringValidationUtils } from '@lib/fdo-utils/string-validation.utils';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export interface IAddress extends IEntityModel {
-  address: string;
+  name: string;
+  phoneNumber: string;
+  addressLine1: string;
+  addressLine2?: string;
   city: string;
-  additionalAddress?: string;
   zipCode: string;
   country: string;
 }
@@ -17,36 +19,42 @@ export interface IAddress extends IEntityModel {
  * @class Address
  * @description Address class is used to represent an address.
  * @extends EntityModel
- * @property {string} address - The address.
- * @property {string} city - The city.
- * @property {string} additionalAddress - The additionalAddress.
- * @property {string} zipCode - The zip code.
- * @property {string} country - The country.
+ * @implements IAddress
+ * @see IAddress
+ * @see EntityModel
  */
 @Schema({ timestamps: true })
 export class Address extends EntityModel implements IAddress {
   @Prop({ required: true })
-  public address: string;
+  public readonly name: string;
+
+  @Prop({ required: true })
+  public readonly phoneNumber: string;
+
+  @Prop({ required: true })
+  public readonly addressLine1: string;
 
   @Prop({ required: false })
-  public additionalAddress: string;
+  public readonly addressLine2: string;
 
   @Prop({ required: true })
-  public city: string;
+  public readonly city: string;
 
   @Prop({ required: true })
-  public country: string;
+  public readonly country: string;
 
   @Prop({
     required: true,
     match: StringValidationUtils.PATTERNS.ZIP_CODE,
   })
-  public zipCode: string;
+  public readonly zipCode: string;
 
   constructor(data: IAddress) {
     super(data);
-    this.address = data.address;
-    this.additionalAddress = data.additionalAddress;
+    this.name = data.name;
+    this.phoneNumber = data.phoneNumber;
+    this.addressLine1 = data.addressLine1;
+    this.addressLine2 = data.addressLine2;
     this.city = data.city;
     this.country = data.country;
     this.zipCode = data.zipCode;

@@ -1,4 +1,4 @@
-import { DtoModel, IDtoModel } from '@lib/fdo-graphql';
+import { BaseOutput, IBaseOutput } from '@lib/fdo-graphql';
 import {
   Directive,
   Field,
@@ -6,36 +6,36 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { SettingCodeEnum, SettingEnum } from '~/domain';
-import { UserDto } from '../users';
-import { PropertyDto } from './property.dto';
+import { UserOutput } from '../users';
+import { PropertyOutput } from './property.output';
 
 registerEnumType(SettingCodeEnum, {
   name: SettingEnum.provider,
 });
 
-export interface ISettingDto extends IDtoModel {
+export interface ISettingOutput extends IBaseOutput {
   code: SettingCodeEnum;
-  properties: PropertyDto[];
+  properties: PropertyOutput[];
   authorId: string;
-  user?: UserDto;
+  user?: UserOutput;
 }
 
 @ObjectType()
 @Directive('@key(fields: "id")')
-export class SettingDto extends DtoModel {
+export class SettingOutput extends BaseOutput implements ISettingOutput {
   @Field(() => SettingCodeEnum, { name: 'code' })
   public readonly code: SettingCodeEnum;
 
-  @Field(() => [PropertyDto], { name: 'properties', nullable: true })
-  public readonly properties: PropertyDto[];
+  @Field(() => [PropertyOutput], { name: 'properties', nullable: true })
+  public readonly properties: PropertyOutput[];
 
   @Field((type) => String)
   public readonly authorId: string;
 
-  @Field((type) => UserDto)
-  public readonly user?: UserDto;
+  @Field((type) => UserOutput)
+  public readonly user?: UserOutput;
 
-  constructor(data: ISettingDto) {
+  constructor(data: ISettingOutput) {
     super(data);
     this.code = data.code;
     this.properties = data.properties;

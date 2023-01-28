@@ -3,24 +3,24 @@ import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
-import { CustomerDto, CustomersManagementFacade } from '~/facade';
+import { CustomerOutput, CustomersManagementFacade } from '~/facade';
 
 @Authorization({
   requiredGroups: ['User'],
 })
-@Resolver(() => CustomerDto)
+@Resolver(() => CustomerOutput)
 export class CustomersDeletingResolver {
   constructor(
     private readonly customersManagementFacade: CustomersManagementFacade,
   ) {}
 
-  @Mutation(() => CustomerDto, {
+  @Mutation(() => CustomerOutput, {
     name: `removeCustomer`,
   })
   deleteById(
     @CurrentUser() cognitoUser: User,
     @Args('id', { type: () => String }) id: string,
-  ): Observable<CustomerDto> {
+  ): Observable<CustomerOutput> {
     return this.customersManagementFacade.removeCustomerById(
       cognitoUser.username,
       id,

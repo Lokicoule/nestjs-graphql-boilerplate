@@ -1,22 +1,21 @@
 import {
+  BaseId,
   EntityModel,
   IEntityModel,
-  BaseId,
 } from '@lib/fdo-database/mongodb/entity/entity.model';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Address, AddressSchema } from './address.entity';
-import { Company, CompanySchema } from './company.entity';
 
 export interface ICustomer extends IEntityModel {
   code: string;
   name: string;
-  email: string;
-  phone: string;
+  email?: string;
+  phone?: string;
+  billingAddress?: Address;
+  deliveryAddress?: Address;
+  addresses: Address[];
+
   authorId: string;
-  /*   company?: Company;
-  billingAddress: Address;
-  deliveryAddress: Address;
-  addresses: Address[];*/
 }
 
 @Schema({ timestamps: true })
@@ -27,35 +26,31 @@ export class Customer extends EntityModel implements ICustomer {
   @Prop({ required: true })
   public readonly name: string;
 
-  @Prop({ required: true, lowercase: true })
+  @Prop({ required: false, lowercase: true })
   public readonly email: string;
 
-  @Prop({ required: true, lowercase: true })
+  @Prop({ required: false, lowercase: true })
   public readonly phone: string;
-
-  /* @Prop({
-    type: CompanySchema,
-  })
-  public readonly company?: Company;
 
   @Prop({
     type: BaseId,
     ref: Address.name,
-    required: true,
+    required: false,
   })
   public readonly billingAddress: Address;
 
   @Prop({
     type: BaseId,
     ref: Address.name,
-    required: true,
+    required: false,
   })
   public readonly deliveryAddress: Address;
 
   @Prop({
     type: [AddressSchema],
+    required: false,
   })
-  public readonly addresses: Address[]; */
+  public readonly addresses: Address[];
 
   @Prop({ type: String, required: true })
   public authorId: string;
@@ -66,11 +61,11 @@ export class Customer extends EntityModel implements ICustomer {
     this.name = data.name;
     this.email = data.email;
     this.phone = data.phone;
-    this.authorId = data.authorId;
-    /* this.company = data.company;
     this.billingAddress = data.billingAddress;
     this.deliveryAddress = data.deliveryAddress;
-    this.addresses = data.addresses;*/
+    this.addresses = data.addresses;
+
+    this.authorId = data.authorId;
   }
 }
 

@@ -3,26 +3,26 @@ import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 import {
-  SettingDto,
+  SettingOutput,
   SettingsManagementFacade,
-  SettingUpdateInput,
+  UpdateSettingMutation,
 } from '~/facade';
 
 @Authorization({
   requiredGroups: ['User'],
 })
-@Resolver(() => SettingDto)
+@Resolver(() => SettingOutput)
 export class SettingsWritingResolver {
   constructor(
     private readonly settingsManagementFacade: SettingsManagementFacade,
   ) {}
 
-  @Mutation(() => SettingDto, { name: `updateSetting` })
+  @Mutation(() => SettingOutput, { name: `updateSetting` })
   update(
     @CurrentUser() user: User,
-    @Args('updateSettingInput')
-    payload: SettingUpdateInput,
-  ): Observable<SettingDto> {
+    @Args('payload')
+    payload: UpdateSettingMutation,
+  ): Observable<SettingOutput> {
     return this.settingsManagementFacade.updateSetting(user.username, payload);
   }
 }

@@ -1,18 +1,19 @@
 import { ArrayMapperWithCriteria } from '@lib/fdo-utils';
 import { Injectable } from '@nestjs/common';
 import { Customer, CustomerCriteria } from '~/domain';
-import { CustomerCriteriaInput, CustomerDto, CustomerInput } from '../dtos';
+import { CustomersQuery, CustomerOutput, CustomerInput } from '../dtos';
+import { AddressMapper } from './address.mapper';
 
 @Injectable()
 export class CustomerMapper extends ArrayMapperWithCriteria<
-  CustomerDto,
+  CustomerOutput,
   Partial<CustomerInput> & Pick<Customer, 'authorId'>,
   Customer,
-  CustomerCriteriaInput & Pick<CustomerCriteria, 'authorId'>,
+  CustomersQuery & Pick<CustomerCriteria, 'authorId'>,
   CustomerCriteria
 > {
   public toCriteria(
-    dto: CustomerCriteriaInput & Pick<CustomerCriteria, 'authorId'>,
+    dto: CustomersQuery & Pick<CustomerCriteria, 'authorId'>,
   ): CustomerCriteria {
     return new CustomerCriteria({
       id: dto?.id,
@@ -22,14 +23,15 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
     });
   }
 
-  public toDto(entity: Customer): CustomerDto {
-    return new CustomerDto({
+  public toDto(entity: Customer): CustomerOutput {
+    return new CustomerOutput({
       id: entity?._id.toString(),
       authorId: entity?.authorId,
       code: entity.code,
       name: entity.name,
       email: entity.email,
       phone: entity.phone,
+      addresses: new AddressMapper().toDtoArray(entity.addresses),
       createdAt: entity?.createdAt,
       updatedAt: entity?.updatedAt,
     });
@@ -42,9 +44,10 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
       _id: dto?.id,
       authorId: dto.authorId,
       code: dto?.code,
-      name: dto?.name,
-      email: dto?.email,
-      phone: dto?.phone,
+      name: dto.name,
+      email: dto.email,
+      phone: dto.phone,
+      addresses: new AddressMapper().toEntityArray(dto.addresses),
     });
   }
 }

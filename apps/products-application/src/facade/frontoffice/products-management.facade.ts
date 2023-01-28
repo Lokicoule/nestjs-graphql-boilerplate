@@ -4,13 +4,15 @@ import { map, Observable } from 'rxjs';
 
 import { ProductsService } from '~/business';
 import {
-  ProductCreateInput,
-  ProductCriteriaInput,
-  ProductDto,
-  ProductUpdateInput,
-  UserDto,
+  CreateProductMutation,
+  ProductsQuery,
+  ProductOutput,
+  UpdateProductMutation,
+  UserOutput,
 } from '../dtos';
 import { ProductMapper } from '../mapping';
+import { DeleteProductsMutation } from '../dtos/products/mutations/delete-products.mutation';
+import { DeleteProductMutation } from '../dtos/products/mutations/delete-product.mutation';
 
 @Injectable()
 export class ProductsManagementFacade {
@@ -21,8 +23,8 @@ export class ProductsManagementFacade {
 
   public createProduct(
     authorId: string,
-    input: ProductCreateInput,
-  ): Observable<ProductDto> {
+    input: CreateProductMutation,
+  ): Observable<ProductOutput> {
     return this.productsService
       .createProduct(
         this.productMapper.toEntity({
@@ -35,8 +37,8 @@ export class ProductsManagementFacade {
 
   public updateProduct(
     authorId: string,
-    input: ProductUpdateInput,
-  ): Observable<ProductDto> {
+    input: UpdateProductMutation,
+  ): Observable<ProductOutput> {
     return this.productsService
       .updateProduct(
         this.productMapper.toEntity({
@@ -49,24 +51,24 @@ export class ProductsManagementFacade {
 
   public removeProductById(
     authorId: string,
-    productId: string,
-  ): Observable<ProductDto> {
+    payload: DeleteProductMutation,
+  ): Observable<ProductOutput> {
     return this.productsService
-      .removeProductById(authorId, productId)
+      .removeProductById(authorId, payload.id)
       .pipe(map((dto) => this.productMapper.toDto(dto)));
   }
 
   public removeProductsByIds(
     authorId: string,
-    productIds: string[],
+    payload: DeleteProductsMutation,
   ): Observable<boolean> {
-    return this.productsService.removeProductsByIds(authorId, productIds);
+    return this.productsService.removeProductsByIds(authorId, payload.ids);
   }
 
   public findProductById(
     authorId: string,
     productId: string,
-  ): Observable<ProductDto> {
+  ): Observable<ProductOutput> {
     return this.productsService
       .findProductById(authorId, productId)
       .pipe(map((dto) => this.productMapper.toDto(dto)));
@@ -74,8 +76,8 @@ export class ProductsManagementFacade {
 
   public findProducts(
     authorId: string,
-    productCriteria?: ProductCriteriaInput,
-  ): Observable<ProductDto[]> {
+    productCriteria?: ProductsQuery,
+  ): Observable<ProductOutput[]> {
     return this.productsService
       .findProducts(
         this.productMapper.toCriteria({
@@ -86,7 +88,7 @@ export class ProductsManagementFacade {
       .pipe(map((dto) => this.productMapper.toDtoArray(dto)));
   }
 
-  private getAuthorId(user: User | UserDto): string {
+  private getAuthorId(user: User | UserOutput): string {
     return user instanceof User ? user.username : user.id;
   }
 }

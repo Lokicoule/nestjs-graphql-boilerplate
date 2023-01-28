@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
 import { ProductSettingsService } from '~/business';
-import { ProductCodeSettingInput, SettingDto } from '../dtos';
+import { UpdateProductCodeSettingMutation, SettingOutput } from '../dtos';
 import { SettingMapper } from '../mapping';
 
 @Injectable()
@@ -14,8 +14,8 @@ export class ProductsSettingsManagementFacade {
 
   public updateSetting(
     authorId: string,
-    input: ProductCodeSettingInput,
-  ): Observable<SettingDto> {
+    input: UpdateProductCodeSettingMutation,
+  ): Observable<SettingOutput> {
     return this.productSettingsService
       .updateCodeGeneratorSetting(
         this.settingMapper.toEntity({

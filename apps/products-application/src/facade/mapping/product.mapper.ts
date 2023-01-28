@@ -1,18 +1,18 @@
 import { ArrayMapperWithCriteria } from '@lib/fdo-utils';
 import { Injectable } from '@nestjs/common';
 import { Product, ProductCriteria } from '~/domain';
-import { ProductCriteriaInput, ProductDto, ProductInput } from '../dtos';
+import { ProductsQuery, ProductOutput, ProductInput } from '../dtos';
 
 @Injectable()
 export class ProductMapper extends ArrayMapperWithCriteria<
-  ProductDto,
+  ProductOutput,
   Partial<ProductInput> & Pick<Product, 'authorId'>,
   Product,
-  ProductCriteriaInput & Pick<ProductCriteria, 'authorId'>,
+  ProductsQuery & Pick<ProductCriteria, 'authorId'>,
   ProductCriteria
 > {
   public toCriteria(
-    dto: ProductCriteriaInput & Pick<ProductCriteria, 'authorId'>,
+    dto: ProductsQuery & Pick<ProductCriteria, 'authorId'>,
   ): ProductCriteria {
     return new ProductCriteria({
       id: dto?.id,
@@ -22,8 +22,8 @@ export class ProductMapper extends ArrayMapperWithCriteria<
     });
   }
 
-  public toDto(entity: Product): ProductDto {
-    return new ProductDto({
+  public toDto(entity: Product): ProductOutput {
+    return new ProductOutput({
       id: entity?._id.toString(),
       authorId: entity?.authorId,
       code: entity.code,

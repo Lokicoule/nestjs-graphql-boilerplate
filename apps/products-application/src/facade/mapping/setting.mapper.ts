@@ -1,15 +1,15 @@
 import { ArrayMapperWithCriteria } from '@lib/fdo-utils/mapper';
 import { Injectable } from '@nestjs/common';
 import { ISetting, Setting, SettingCriteria } from '~/domain';
-import { SettingCriteriaInput, SettingDto, SettingInput } from '../dtos';
+import { SettingsQuery, SettingOutput, SettingInput } from '../dtos';
 import { PropertyMapper } from './property.mapper';
 
 @Injectable()
 export class SettingMapper extends ArrayMapperWithCriteria<
-  SettingDto,
+  SettingOutput,
   SettingInput & Pick<Setting, 'authorId'>,
   Setting,
-  SettingCriteriaInput & Pick<SettingCriteria, 'authorId'>,
+  SettingsQuery & Pick<SettingCriteria, 'authorId'>,
   SettingCriteria
 > {
   constructor(private readonly propertyMapper: PropertyMapper) {
@@ -25,7 +25,7 @@ export class SettingMapper extends ArrayMapperWithCriteria<
     });
   }
 
-  public toDto(data: ISetting): SettingDto {
+  public toDto(data: ISetting): SettingOutput {
     return {
       id: data?._id?.toString(),
       code: data?.code,
@@ -37,7 +37,7 @@ export class SettingMapper extends ArrayMapperWithCriteria<
   }
 
   public toCriteria(
-    data: SettingCriteriaInput & Pick<SettingCriteria, 'authorId'>,
+    data: SettingsQuery & Pick<SettingCriteria, 'authorId'>,
   ): SettingCriteria {
     return new SettingCriteria({
       authorId: data?.authorId,

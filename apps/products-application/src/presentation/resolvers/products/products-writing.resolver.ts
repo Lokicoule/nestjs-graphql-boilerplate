@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 
 import { User } from '@nestjs-cognito/auth';
 import {
-  ProductCreateInput,
-  ProductDto,
+  CreateProductMutation,
+  ProductOutput,
   ProductsManagementFacade,
-  ProductUpdateInput,
+  UpdateProductMutation,
 } from '~/facade';
 
-@Resolver(() => ProductDto)
+@Resolver(() => ProductOutput)
 @Authorization({
   requiredGroups: ['User'],
 })
@@ -19,24 +19,24 @@ export class ProductsWritingResolver {
     private readonly productsManagementFacade: ProductsManagementFacade,
   ) {}
 
-  @Mutation(() => ProductDto, { name: `createProduct`, nullable: true })
+  @Mutation(() => ProductOutput, { name: `createProduct`, nullable: true })
   create(
     @CurrentUser() cognitoUser: User,
     @Args('payload')
-    payload: ProductCreateInput,
-  ): Observable<ProductDto> {
+    payload: CreateProductMutation,
+  ): Observable<ProductOutput> {
     return this.productsManagementFacade.createProduct(
       cognitoUser.username,
       payload,
     );
   }
 
-  @Mutation(() => ProductDto, { name: `updateProduct` })
+  @Mutation(() => ProductOutput, { name: `updateProduct` })
   update(
     @CurrentUser() cognitoUser: User,
     @Args('payload')
-    payload: ProductUpdateInput,
-  ): Observable<ProductDto> {
+    payload: UpdateProductMutation,
+  ): Observable<ProductOutput> {
     return this.productsManagementFacade.updateProduct(
       cognitoUser.username,
       payload,

@@ -1,16 +1,16 @@
 import { ArrayMapper } from '@lib/fdo-utils';
 import { Injectable } from '@nestjs/common';
 import { Property, PropertyEnum } from '~/domain';
-import { PropertyDto, PropertyInput } from '../dtos';
+import { PropertyOutput, PropertyInput } from '../dtos';
 
 @Injectable()
 export class PropertyMapper extends ArrayMapper<
-  PropertyDto,
+  PropertyOutput,
   PropertyInput,
   Property
 > {
-  public toDto(entity: Property): PropertyDto {
-    return new PropertyDto({
+  public toDto(entity: Property): PropertyOutput {
+    return new PropertyOutput({
       id: entity?._id.toString(),
       key: PropertyEnum.getValue(entity.key),
       value: entity.value,

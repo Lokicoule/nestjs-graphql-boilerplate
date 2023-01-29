@@ -45,12 +45,12 @@ export class AddressOutput extends BaseOutput implements IAddressOutput {
 
   constructor(address: IAddressOutput) {
     super(address);
-    this.name = address.name;
-    this.phoneNumber = address.phoneNumber;
-    this.addressLine1 = address.addressLine1;
-    this.addressLine2 = address.addressLine2;
-    this.city = address.city;
-    this.country = address.country;
-    this.zipCode = address.zipCode;
+    this.name = address?.name;
+    this.phoneNumber = address?.phoneNumber;
+    this.addressLine1 = address?.addressLine1;
+    this.addressLine2 = address?.addressLine2;
+    this.city = address?.city;
+    this.country = address?.country;
+    this.zipCode = address?.zipCode;
   }
 }

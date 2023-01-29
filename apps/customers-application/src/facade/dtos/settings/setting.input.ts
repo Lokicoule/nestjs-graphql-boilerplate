@@ -20,7 +20,7 @@ export class SettingInput extends BaseInput implements ISettingInput {
 
   constructor(data: ISettingInput) {
     super(data);
-    this.code = data.code;
-    this.properties = data.properties;
+    this.code = data?.code;
+    this.properties = data?.properties;
   }
 }

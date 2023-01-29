@@ -18,8 +18,8 @@ export class BaseOutput implements IBaseOutput {
   public readonly updatedAt: Date;
 
   constructor(data: IBaseOutput) {
-    this.id = data.id;
-    this.createdAt = data.createdAt;
-    this.updatedAt = data.updatedAt;
+    this.id = data?.id;
+    this.createdAt = data?.createdAt;
+    this.updatedAt = data?.updatedAt;
   }
 }

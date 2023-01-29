@@ -10,6 +10,8 @@ import {
   UpdateCustomerMutation,
   UserOutput,
 } from '../dtos';
+import { DeleteCustomerMutation } from '../dtos/customers/mutations/delete-customer.mutation';
+import { DeleteCustomersMutation } from '../dtos/customers/mutations/delete-customers.mutation';
 import { CustomerMapper } from '../mapping';
 
 @Injectable()
@@ -49,18 +51,18 @@ export class CustomersManagementFacade {
 
   public removeCustomerById(
     authorId: string,
-    customerId: string,
+    payload: DeleteCustomerMutation,
   ): Observable<CustomerOutput> {
     return this.customersService
-      .removeCustomerById(authorId, customerId)
+      .removeCustomerById(authorId, payload.id)
       .pipe(map((dto) => this.customerMapper.toDto(dto)));
   }
 
   public removeCustomersByIds(
     authorId: string,
-    customerIds: string[],
+    payload: DeleteCustomersMutation,
   ): Observable<boolean> {
-    return this.customersService.removeCustomersByIds(authorId, customerIds);
+    return this.customersService.removeCustomersByIds(authorId, payload.ids);
   }
 
   public findCustomerById(

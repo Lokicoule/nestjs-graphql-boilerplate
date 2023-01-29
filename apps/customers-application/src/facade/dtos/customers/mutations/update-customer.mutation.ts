@@ -7,6 +7,6 @@ export class UpdateCustomerMutation extends PickType(CustomerInput, [
   'code',
   'name',
   'email',
-  'phone',
+  'phoneNumber',
   'addresses',
 ]) {}

@@ -1,4 +1,4 @@
-import { BaseInput, IBaseInput } from '@lib/fdo-graphql';
+import { IBaseInput } from '@lib/fdo-graphql';
 import { Field, InputType } from '@nestjs/graphql';
 import { PropertyKeyEnum } from '~/domain';
 
@@ -8,7 +8,10 @@ export interface IPropertyInput extends IBaseInput {
 }
 
 @InputType()
-export class PropertyInput extends BaseInput implements IPropertyInput {
+export class PropertyInput implements IPropertyInput {
+  @Field(() => String, { name: 'id', nullable: true })
+  public readonly id: string;
+
   @Field(() => PropertyKeyEnum, { name: 'key' })
   public readonly key: PropertyKeyEnum;
 
@@ -16,8 +19,8 @@ export class PropertyInput extends BaseInput implements IPropertyInput {
   public readonly value: string;
 
   constructor(data: IPropertyInput) {
-    super(data);
-    this.key = data.key;
-    this.value = data.value;
+    this.id = data?.id;
+    this.key = data?.key;
+    this.value = data?.value;
   }
 }

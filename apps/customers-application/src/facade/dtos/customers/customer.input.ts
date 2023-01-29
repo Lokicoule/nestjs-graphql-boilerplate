@@ -24,7 +24,7 @@ export class CustomerInput extends BaseInput implements ICustomerInput {
   public readonly email: string;
 
   @Field(() => String, { name: 'phoneNumber', nullable: true })
-  @IsPhoneNumber()
+  @IsPhoneNumber('FR', { message: "Le numéro de téléphone n'est pas valide." })
   public readonly phoneNumber: string;
 
   @Field(() => [AddressInput], { name: 'addresses', nullable: true })
@@ -32,10 +32,10 @@ export class CustomerInput extends BaseInput implements ICustomerInput {
 
   constructor(data: ICustomerInput) {
     super(data);
-    this.code = data.code;
-    this.name = data.name;
-    this.email = data.email;
-    this.phoneNumber = data.phoneNumber;
-    this.addresses = data.addresses;
+    this.code = data?.code;
+    this.name = data?.name;
+    this.email = data?.email;
+    this.phoneNumber = data?.phoneNumber;
+    this.addresses = data?.addresses;
   }
 }

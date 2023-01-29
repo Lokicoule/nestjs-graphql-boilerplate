@@ -21,7 +21,7 @@ export class PropertyOutput extends BaseOutput implements IPropertyOutput {
 
   constructor(data: IPropertyOutput) {
     super(data);
-    this.key = data.key;
-    this.value = data.value;
+    this.key = data?.key;
+    this.value = data?.value;
   }
 }

@@ -50,14 +50,14 @@ export class CustomerOutput extends BaseOutput implements ICustomerOutput {
 
   constructor(data: ICustomerOutput) {
     super(data);
-    this.code = data.code;
-    this.name = data.name;
-    this.email = data.email;
-    this.phoneNumber = data.phoneNumber;
-    this.billingAddress = data.billingAddress;
-    this.deliveryAddress = data.deliveryAddress;
-    this.addresses = data.addresses;
-    this.authorId = data.authorId;
-    this.user = data.user;
+    this.code = data?.code;
+    this.name = data?.name;
+    this.email = data?.email;
+    this.phoneNumber = data?.phoneNumber;
+    this.billingAddress = data?.billingAddress;
+    this.deliveryAddress = data?.deliveryAddress;
+    this.addresses = data?.addresses;
+    this.authorId = data?.authorId;
+    this.user = data?.user;
   }
 }

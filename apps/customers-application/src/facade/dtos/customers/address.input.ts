@@ -1,6 +1,6 @@
-import { BaseInput, IBaseInput } from '@lib/fdo-graphql';
+import { IBaseInput } from '@lib/fdo-graphql';
 import { Field, InputType } from '@nestjs/graphql';
-import { IsPhoneNumber, IsPostalCode } from 'class-validator';
+import { IsNotEmpty, IsPhoneNumber, IsPostalCode } from 'class-validator';
 
 export interface IAddressInput extends IBaseInput {
   name: string;
@@ -18,12 +18,16 @@ export interface IAddressInput extends IBaseInput {
  * @see AddressOutput
  */
 @InputType()
-export class AddressInput extends BaseInput implements IAddressInput {
+export class AddressInput implements IAddressInput {
+  @Field(() => String, { name: 'id', nullable: true })
+  public readonly id: string;
+
   @Field(() => String, { name: 'name' })
+  @IsNotEmpty()
   public readonly name: string;
 
   @Field(() => String, { name: 'phoneNumber' })
-  @IsPhoneNumber()
+  @IsPhoneNumber('FR', { message: 'Phone number is not valid' })
   public readonly phoneNumber: string;
 
   @Field(() => String, { name: 'addressLine1' })
@@ -43,13 +47,13 @@ export class AddressInput extends BaseInput implements IAddressInput {
   public readonly zipCode: string;
 
   constructor(data: IAddressInput) {
-    super(data);
-    this.name = data.name;
-    this.phoneNumber = data.phoneNumber;
-    this.addressLine1 = data.addressLine1;
-    this.addressLine2 = data.addressLine2;
-    this.city = data.city;
-    this.country = data.country;
-    this.zipCode = data.zipCode;
+    this.id = data?.id;
+    this.name = data?.name;
+    this.phoneNumber = data?.phoneNumber;
+    this.addressLine1 = data?.addressLine1;
+    this.addressLine2 = data?.addressLine2;
+    this.city = data?.city;
+    this.country = data?.country;
+    this.zipCode = data?.zipCode;
   }
 }

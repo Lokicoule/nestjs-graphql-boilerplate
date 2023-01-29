@@ -4,6 +4,8 @@ import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
 import { CustomerOutput, CustomersManagementFacade } from '~/facade';
+import { DeleteCustomerMutation } from '~/facade/dtos/customers/mutations/delete-customer.mutation';
+import { DeleteCustomersMutation } from '~/facade/dtos/customers/mutations/delete-customers.mutation';
 
 @Authorization({
   requiredGroups: ['User'],
@@ -15,28 +17,30 @@ export class CustomersDeletingResolver {
   ) {}
 
   @Mutation(() => CustomerOutput, {
-    name: `removeCustomer`,
+    name: `deleteCustomer`,
   })
   deleteById(
     @CurrentUser() cognitoUser: User,
-    @Args('id', { type: () => String }) id: string,
+    @Args('payload', { type: () => DeleteCustomerMutation })
+    payload: DeleteCustomerMutation,
   ): Observable<CustomerOutput> {
     return this.customersManagementFacade.removeCustomerById(
       cognitoUser.username,
-      id,
+      payload,
     );
   }
 
   @Mutation(() => Boolean, {
-    name: `removeCustomers`,
+    name: `deleteCustomers`,
   })
   deleteByIds(
     @CurrentUser() cognitoUser: User,
-    @Args('ids', { type: () => [String] }) ids: string[],
+    @Args('payload', { type: () => DeleteCustomersMutation })
+    payload: DeleteCustomersMutation,
   ): Observable<boolean> {
     return this.customersManagementFacade.removeCustomersByIds(
       cognitoUser.username,
-      ids,
+      payload,
     );
   }
 }

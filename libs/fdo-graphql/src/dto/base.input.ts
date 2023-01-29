@@ -10,6 +10,6 @@ export class BaseInput implements IBaseInput {
   public readonly id: string;
 
   constructor(data: IBaseInput) {
-    this.id = data.id;
+    this.id = data?.id;
   }
 }

@@ -10,11 +10,10 @@ export interface ICustomer extends IEntityModel {
   code: string;
   name: string;
   email?: string;
-  phone?: string;
+  phoneNumber?: string;
   billingAddress?: Address;
   deliveryAddress?: Address;
   addresses: Address[];
-
   authorId: string;
 }
 
@@ -30,7 +29,7 @@ export class Customer extends EntityModel implements ICustomer {
   public readonly email: string;
 
   @Prop({ required: false, lowercase: true })
-  public readonly phone: string;
+  public readonly phoneNumber: string;
 
   @Prop({
     type: BaseId,
@@ -60,7 +59,7 @@ export class Customer extends EntityModel implements ICustomer {
     this.code = data.code;
     this.name = data.name;
     this.email = data.email;
-    this.phone = data.phone;
+    this.phoneNumber = data.phoneNumber;
     this.billingAddress = data.billingAddress;
     this.deliveryAddress = data.deliveryAddress;
     this.addresses = data.addresses;

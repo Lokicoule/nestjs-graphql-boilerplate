@@ -30,7 +30,7 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
       code: entity.code,
       name: entity.name,
       email: entity.email,
-      phone: entity.phone,
+      phoneNumber: entity.phoneNumber,
       addresses: new AddressMapper().toDtoArray(entity.addresses),
       createdAt: entity?.createdAt,
       updatedAt: entity?.updatedAt,
@@ -46,7 +46,7 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
       code: dto?.code,
       name: dto.name,
       email: dto.email,
-      phone: dto.phone,
+      phoneNumber: dto.phoneNumber,
       addresses: new AddressMapper().toEntityArray(dto.addresses),
     });
   }

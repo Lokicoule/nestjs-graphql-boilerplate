@@ -6,8 +6,8 @@ import {
   registerEnumType,
 } from '@nestjs/graphql';
 import { SettingCodeEnum, SettingEnum } from '~/domain';
-import { UserOutput } from '../users';
 import { PropertyOutput } from './property.output';
+import { UserOutput } from '../users';
 
 registerEnumType(SettingCodeEnum, {
   name: SettingEnum.provider,
@@ -37,9 +37,9 @@ export class SettingOutput extends BaseOutput implements ISettingOutput {
 
   constructor(data: ISettingOutput) {
     super(data);
-    this.code = data.code;
-    this.properties = data.properties;
-    this.authorId = data.authorId;
-    this.user = data.user;
+    this.code = data?.code;
+    this.properties = data?.properties;
+    this.authorId = data?.authorId;
+    this.user = data?.user;
   }
 }

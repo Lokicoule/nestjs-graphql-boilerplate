@@ -1,6 +1,7 @@
 import { BaseInput, IBaseInput } from '@lib/fdo-graphql';
+import { IsOptionalEmail, IsOptionalPhoneNumber } from '@lib/fdo-validator';
 import { Field, InputType } from '@nestjs/graphql';
-import { IsPhoneNumber, IsEmail } from 'class-validator';
+import { IsPhoneNumber, IsEmail, IsOptional } from 'class-validator';
 import { AddressInput } from './address.input';
 
 export interface ICustomerInput extends IBaseInput {
@@ -9,6 +10,7 @@ export interface ICustomerInput extends IBaseInput {
   email?: string;
   phoneNumber?: string;
   addresses?: AddressInput[];
+  address?: AddressInput;
 }
 
 @InputType()
@@ -20,15 +22,18 @@ export class CustomerInput extends BaseInput implements ICustomerInput {
   public readonly name: string;
 
   @Field(() => String, { name: 'email', nullable: true })
-  @IsEmail()
-  public readonly email: string;
+  @IsOptionalEmail()
+  public readonly email?: string;
 
   @Field(() => String, { name: 'phoneNumber', nullable: true })
-  @IsPhoneNumber('FR', { message: "Le numéro de téléphone n'est pas valide." })
-  public readonly phoneNumber: string;
+  @IsOptionalPhoneNumber('FR')
+  public readonly phoneNumber?: string;
 
   @Field(() => [AddressInput], { name: 'addresses', nullable: true })
   public readonly addresses?: AddressInput[];
+
+  @Field(() => AddressInput, { name: 'address', nullable: true })
+  public readonly address?: AddressInput;
 
   constructor(data: ICustomerInput) {
     super(data);
@@ -37,5 +42,6 @@ export class CustomerInput extends BaseInput implements ICustomerInput {
     this.email = data?.email;
     this.phoneNumber = data?.phoneNumber;
     this.addresses = data?.addresses;
+    this.address = data?.address;
   }
 }

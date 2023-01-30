@@ -27,7 +27,7 @@ export class AddressMapper extends ArrayMapper<
     };
   }
 
-  public toEntity(param: AddressOutput): Address {
+  public toEntity(param: AddressInput): Address {
     return {
       _id: param.id,
       name: param.name,

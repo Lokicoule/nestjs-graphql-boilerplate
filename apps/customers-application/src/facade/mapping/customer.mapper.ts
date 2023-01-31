@@ -40,11 +40,11 @@ export class CustomerMapper extends ArrayMapperWithCriteria<
   public toEntity(
     dto: Partial<CustomerInput> & Pick<Customer, 'authorId'>,
   ): Customer {
-    const addresses = dto.addresses
+    const addresses = dto?.addresses
       ? new AddressMapper().toEntityArray(dto.addresses)
-      : dto.address
-      ? [new AddressMapper().toEntity(dto.address)]
-      : undefined;
+      : dto?.address
+      ? [new AddressMapper().toEntity(dto?.address)]
+      : [];
 
     return new Customer({
       _id: dto?.id,

@@ -14,7 +14,7 @@ export class IsOptionalPhoneNumberConstraint {
     const [isValid] = Reflect.getMetadata(
       '__validationMetadatas__',
       IsPhoneNumber,
-    ).filter((metadata) => metadata.propertyName === args.property);
+    )?.filter((metadata) => metadata.propertyName === args.property);
 
     return isValid.validate(value, args);
   }

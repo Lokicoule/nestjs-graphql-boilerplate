@@ -1,6 +1,6 @@
 import { IBaseInput } from '@lib/fdo-graphql';
 import { Field, InputType } from '@nestjs/graphql';
-import { IsNotEmpty, IsPhoneNumber, IsPostalCode } from 'class-validator';
+import { IsPhoneNumber, IsPostalCode } from 'class-validator';
 
 export interface IAddressInput extends IBaseInput {
   name: string;
@@ -23,7 +23,6 @@ export class AddressInput implements IAddressInput {
   public readonly id: string;
 
   @Field(() => String, { name: 'name' })
-  @IsNotEmpty()
   public readonly name: string;
 
   @Field(() => String, { name: 'phoneNumber' })

@@ -13,7 +13,7 @@ export interface ICustomer extends IEntityModel {
   phoneNumber?: string;
   billingAddress?: Address;
   deliveryAddress?: Address;
-  addresses: Address[];
+  addresses?: Address[];
   authorId: string;
 }
 
@@ -49,7 +49,7 @@ export class Customer extends EntityModel implements ICustomer {
     type: [AddressSchema],
     required: false,
   })
-  public readonly addresses: Address[];
+  public readonly addresses?: Address[];
 
   @Prop({ type: String, required: true })
   public authorId: string;
@@ -60,9 +60,9 @@ export class Customer extends EntityModel implements ICustomer {
     this.name = data.name;
     this.email = data.email;
     this.phoneNumber = data.phoneNumber;
-    this.billingAddress = data.billingAddress;
-    this.deliveryAddress = data.deliveryAddress;
-    this.addresses = data.addresses;
+    this.billingAddress = data?.billingAddress;
+    this.deliveryAddress = data?.deliveryAddress;
+    this.addresses = data?.addresses;
 
     this.authorId = data.authorId;
   }

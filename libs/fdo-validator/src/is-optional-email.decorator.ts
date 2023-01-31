@@ -14,7 +14,7 @@ export class IsOptionalEmailConstraint {
     const [isValid] = Reflect.getMetadata(
       '__validationMetadatas__',
       IsEmail,
-    ).filter((metadata) => metadata.propertyName === args.property);
+    )?.filter((metadata) => metadata.propertyName === args.property);
 
     return isValid.validate(value, args);
   }

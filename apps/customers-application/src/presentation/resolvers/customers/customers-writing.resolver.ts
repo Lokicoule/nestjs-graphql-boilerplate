@@ -1,8 +1,7 @@
-import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
+import { GqlAuthorization, GqlCognitoUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
-import { User } from '@nestjs-cognito/auth';
 import {
   CreateCustomerMutation,
   CustomerOutput,
@@ -11,7 +10,7 @@ import {
 } from '~/facade';
 
 @Resolver(() => CustomerOutput)
-@Authorization({
+@GqlAuthorization({
   requiredGroups: ['User'],
 })
 export class CustomersWritingResolver {
@@ -21,25 +20,19 @@ export class CustomersWritingResolver {
 
   @Mutation(() => CustomerOutput, { name: `createCustomer`, nullable: true })
   create(
-    @CurrentUser() cognitoUser: User,
+    @GqlCognitoUser('username') username: string,
     @Args('payload')
     payload: CreateCustomerMutation,
   ): Observable<CustomerOutput> {
-    return this.customersManagementFacade.createCustomer(
-      cognitoUser.username,
-      payload,
-    );
+    return this.customersManagementFacade.createCustomer(username, payload);
   }
 
   @Mutation(() => CustomerOutput, { name: `updateCustomer` })
   update(
-    @CurrentUser() cognitoUser: User,
+    @GqlCognitoUser('username') username: string,
     @Args('payload')
     payload: UpdateCustomerMutation,
   ): Observable<CustomerOutput> {
-    return this.customersManagementFacade.updateCustomer(
-      cognitoUser.username,
-      payload,
-    );
+    return this.customersManagementFacade.updateCustomer(username, payload);
   }
 }

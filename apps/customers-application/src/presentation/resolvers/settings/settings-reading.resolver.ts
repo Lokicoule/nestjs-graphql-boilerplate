@@ -1,15 +1,14 @@
-import { User } from '@nestjs-cognito/auth';
-import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
+import { GqlAuthorization, GqlCognitoUser } from '@nestjs-cognito/graphql';
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 import {
-  SettingsQuery,
   SettingOutput,
   SettingsManagementFacade,
+  SettingsQuery,
   UserOutput,
 } from '~/facade';
 
-@Authorization({
+@GqlAuthorization({
   requiredGroups: ['User'],
 })
 @Resolver(() => SettingOutput)
@@ -23,11 +22,11 @@ export class SettingsReadingResolver {
     nullable: true,
   })
   findByCriteria(
-    @CurrentUser() user: User,
+    @GqlCognitoUser('username') username: string,
     @Args('criteria', { nullable: true })
     criteria?: SettingsQuery,
   ): Observable<SettingOutput[]> {
-    return this.settingsManagementFacade.findSettings(user.username, criteria);
+    return this.settingsManagementFacade.findSettings(username, criteria);
   }
 
   @Query(() => SettingOutput, {
@@ -35,10 +34,10 @@ export class SettingsReadingResolver {
     nullable: true,
   })
   findById(
-    @CurrentUser() user: User,
+    @GqlCognitoUser('username') username: string,
     @Args('id', { type: () => String }) id: string,
   ): Observable<SettingOutput> {
-    return this.settingsManagementFacade.findSettingById(user.username, id);
+    return this.settingsManagementFacade.findSettingById(username, id);
   }
 
   @ResolveField((of) => UserOutput)

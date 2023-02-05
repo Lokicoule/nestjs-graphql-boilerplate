@@ -1,5 +1,4 @@
-import { User } from '@nestjs-cognito/auth';
-import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
+import { GqlAuthorization, GqlCognitoUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 
@@ -7,7 +6,7 @@ import { ProductOutput, ProductsManagementFacade } from '~/facade';
 import { DeleteProductMutation } from '../../../facade/dtos/products/mutations/delete-product.mutation';
 import { DeleteProductsMutation } from '../../../facade/dtos/products/mutations/delete-products.mutation';
 
-@Authorization({
+@GqlAuthorization({
   requiredGroups: ['User'],
 })
 @Resolver(() => ProductOutput)
@@ -20,27 +19,21 @@ export class ProductsDeletingResolver {
     name: `deleteProduct`,
   })
   deleteById(
-    @CurrentUser() cognitoUser: User,
+    @GqlCognitoUser('username') username: string,
     @Args('payload', { type: () => DeleteProductMutation })
     payload: DeleteProductMutation,
   ): Observable<ProductOutput> {
-    return this.productsManagementFacade.removeProductById(
-      cognitoUser.username,
-      payload,
-    );
+    return this.productsManagementFacade.removeProductById(username, payload);
   }
 
   @Mutation(() => Boolean, {
     name: `deleteProducts`,
   })
   deleteByIds(
-    @CurrentUser() cognitoUser: User,
+    @GqlCognitoUser('username') username: string,
     @Args('payload', { type: () => DeleteProductsMutation })
     payload: DeleteProductsMutation,
   ): Observable<boolean> {
-    return this.productsManagementFacade.removeProductsByIds(
-      cognitoUser.username,
-      payload,
-    );
+    return this.productsManagementFacade.removeProductsByIds(username, payload);
   }
 }

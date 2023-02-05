@@ -1,5 +1,5 @@
 import { User } from '@nestjs-cognito/auth';
-import { Authorization, CurrentUser } from '@nestjs-cognito/graphql';
+import { GqlAuthorization, GqlCognitoUser } from '@nestjs-cognito/graphql';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Observable } from 'rxjs';
 import {
@@ -8,7 +8,7 @@ import {
   SettingOutput,
 } from '~/facade';
 
-@Authorization({
+@GqlAuthorization({
   requiredGroups: ['User'],
 })
 @Resolver(() => SettingOutput)
@@ -19,12 +19,12 @@ export class ProductSettingsWritingResolver {
 
   @Mutation(() => SettingOutput, { name: `updateProductCodeSetting` })
   updateProductCodeSetting(
-    @CurrentUser() user: User,
+    @GqlCognitoUser('username') username: string,
     @Args('payload')
     payload: UpdateProductCodeSettingMutation,
   ): Observable<SettingOutput> {
     return this.productSettingsManagementFacade.updateSetting(
-      user.username,
+      username,
       payload,
     );
   }

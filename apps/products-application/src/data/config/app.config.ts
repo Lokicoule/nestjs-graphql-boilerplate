@@ -13,9 +13,10 @@ export class AppConfig {
   @IsNotEmpty()
   public readonly cognito: {
     region: string;
+    clientId: string;
     userPoolId: string;
-    accessKeyId: string;
-    secretAccessKey: string;
+    accessKeyId?: string;
+    secretAccessKey?: string;
   };
 
   @IsNotEmpty()
@@ -29,6 +30,7 @@ export class AppConfig {
       url: process.env.PRODUCTS_APPLICATION_HTTP_URL,
     };
     this.cognito = {
+      clientId: process.env.COGNITO_CLIENT_ID,
       region: process.env.COGNITO_REGION,
       userPoolId: process.env.COGNITO_USER_POOL_ID,
       accessKeyId: process.env.COGNITO_ACCESS_KEY_ID,

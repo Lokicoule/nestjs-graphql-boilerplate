@@ -14,6 +14,7 @@ export class AppConfig {
   public readonly cognito: {
     region: string;
     userPoolId: string;
+    clientId: string;
     accessKeyId: string;
     secretAccessKey: string;
   };
@@ -29,6 +30,7 @@ export class AppConfig {
       url: process.env.CUSTOMERS_APPLICATION_HTTP_URL,
     };
     this.cognito = {
+      clientId: process.env.COGNITO_CLIENT_ID,
       region: process.env.COGNITO_REGION,
       userPoolId: process.env.COGNITO_USER_POOL_ID,
       accessKeyId: process.env.COGNITO_ACCESS_KEY_ID,

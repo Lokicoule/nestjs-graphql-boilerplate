@@ -1,18 +1,16 @@
-import { User } from '@nestjs-cognito/auth';
 import { Injectable } from '@nestjs/common';
 import { map, Observable } from 'rxjs';
 
 import { ProductsService } from '~/business';
 import {
   CreateProductMutation,
-  ProductsQuery,
   ProductOutput,
+  ProductsQuery,
   UpdateProductMutation,
-  UserOutput,
 } from '../dtos';
-import { ProductMapper } from '../mapping';
-import { DeleteProductsMutation } from '../dtos/products/mutations/delete-products.mutation';
 import { DeleteProductMutation } from '../dtos/products/mutations/delete-product.mutation';
+import { DeleteProductsMutation } from '../dtos/products/mutations/delete-products.mutation';
+import { ProductMapper } from '../mapping';
 
 @Injectable()
 export class ProductsManagementFacade {
@@ -86,9 +84,5 @@ export class ProductsManagementFacade {
         }),
       )
       .pipe(map((dto) => this.productMapper.toDtoArray(dto)));
-  }
-
-  private getAuthorId(user: User | UserOutput): string {
-    return user instanceof User ? user.username : user.id;
   }
 }

@@ -7,10 +7,10 @@ import { AppConfigService, DataModule } from '~/data';
     CognitoAuthModule.registerAsync({
       imports: [DataModule],
       useFactory: (appConfigService: AppConfigService) => ({
-        region: appConfigService.cognito.region,
-        credentials: {
-          accessKeyId: appConfigService.cognito.accessKeyId,
-          secretAccessKey: appConfigService.cognito.secretAccessKey,
+        jwtVerifier: {
+          userPoolId: appConfigService.cognito.userPoolId,
+          clientId: appConfigService.cognito.clientId,
+          tokenUse: 'id',
         },
       }),
       inject: [AppConfigService],
